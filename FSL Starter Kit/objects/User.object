@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>FSK_FSL_Resource_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>FSL Resource Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Resource_Mobile</fullName>
+                    <default>false</default>
+                    <label>Resource (With Mobile)</label>
+                </value>
+                <value>
+                    <fullName>Resource</fullName>
+                    <default>false</default>
+                    <label>Resource (Without Mobile)</label>
+                </value>
+                <value>
+                    <fullName>Dispatcher</fullName>
+                    <default>false</default>
+                    <label>Dispatcher</label>
+                </value>
+                <value>
+                    <fullName>Resource_Dispatcher_Mobile</fullName>
+                    <default>false</default>
+                    <label>Resource &amp; Dispatcher (With Mobile) </label>
+                </value>
+                <value>
+                    <fullName>Resource_Dispatcher</fullName>
+                    <default>false</default>
+                    <label>Resource &amp; Dispatcher (Without Mobile) </label>
+                </value>
+                <value>
+                    <fullName>Community</fullName>
+                    <default>false</default>
+                    <label>Contractor Dispatcher (Community Dispatcher)</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <validationRules>
+        <fullName>FSK_User_Creation_Feature_Inactive</fullName>
+        <active>true</active>
+        <description>Preventing value change if the feature inactive.</description>
+        <errorConditionFormula>IF(AND(NOT($Setup.FSK_FSL_Starter_Kit__c.Create_FSL_Resource_From_User__c),
+			ISNEW(),
+			OR(TEXT(FSK_FSL_Resource_Type__c) == NULL,
+			   TEXT(FSK_FSL_Resource_Type__c) == &apos;&apos;)),
+	false,
+	IF(AND(ISCHANGED(FSK_FSL_Resource_Type__c),
+	   NOT($Setup.FSK_FSL_Starter_Kit__c.Create_FSL_Resource_From_User__c)),
+	   true,
+	   false)
+)</errorConditionFormula>
+        <errorDisplayField>FSK_FSL_Resource_Type__c</errorDisplayField>
+        <errorMessage>You cannot change the field value.
+The Feature is inactive, please activate the feature via custom settings or &apos;FSK Properties Selection&apos; screen flow</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>FSK_User_Type_Is_Not_Community</fullName>
+        <active>true</active>
+        <description>Preventing selection for community user type for standard user</description>
+        <errorConditionFormula>AND($Setup.FSK_FSL_Starter_Kit__c.Create_FSL_Resource_From_User__c,
+OR(
+TEXT(Profile.UserType) = &apos;CspLitePortal&apos;,
+TEXT(Profile.UserType) = &apos;PowerPartner&apos;,
+TEXT(Profile.UserType) = &apos;CustomerSuccess&apos;,
+TEXT(Profile.UserType) = &apos;PowerCustomerSuccess&apos;),
+ISPICKVAL(FSK_FSL_Resource_Type__c, &apos;Community&apos;))</errorConditionFormula>
+        <errorDisplayField>FSK_FSL_Resource_Type__c</errorDisplayField>
+        <errorMessage>You need a Community User In Order to create Community Dispatcher.
+Please select a Community User or choose another value</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>FSK_User_Type_Is_Not_Standard</fullName>
+        <active>true</active>
+        <description>Prevent selecting Standard User option for user type Community</description>
+        <errorConditionFormula>AND($Setup.FSK_FSL_Starter_Kit__c.Create_FSL_Resource_From_User__c,
+NOT(TEXT(Profile.UserType) = &apos;Standard&apos;),
+LEN(TEXT(FSK_FSL_Resource_Type__c)) &gt; 1,
+NOT(CONTAINS(TEXT(FSK_FSL_Resource_Type__c), &apos;Community&apos;))
+)</errorConditionFormula>
+        <errorDisplayField>FSK_FSL_Resource_Type__c</errorDisplayField>
+        <errorMessage>You need a Standard User In Order to create FSL User (either Resource or Technician)
+Please select a Community User or choose another value</errorMessage>
+    </validationRules>
+</CustomObject>
