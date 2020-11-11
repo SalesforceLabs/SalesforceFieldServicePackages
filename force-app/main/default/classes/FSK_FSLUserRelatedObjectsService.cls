@@ -74,6 +74,7 @@ public with sharing class FSK_FSLUserRelatedObjectsService {
 
             deleteExistingPermissionSetAssignment(oldItemsMap, usersList);
             createFSLUserRelatedObjects(usersList);
+
         } catch(Exception e) {
             System.debug(LoggingLevel.ERROR, e);
             System.debug(LoggingLevel.ERROR, e.getMessage());
@@ -102,24 +103,27 @@ public with sharing class FSK_FSLUserRelatedObjectsService {
     private void createFSLUserRelatedObjects(List<User> usersList) {
         List<ServiceResource> serviceResourceToInsert = new List<ServiceResource>();
         List<PermissionSetAssignment> permissionSetAssignmentToInsert = new List<PermissionSetAssignment>();
-
         Map<Id, ServiceResource> serviceResourcesByUserIdMap = getExistingServiceResources(usersList);
+        SObjectType permissionSetAssignmentToVerify = Schema.getGlobalDescribe().get('PermissionSetAssignment');
+        Map<String,Schema.SObjectField> permissionSetAssignmentToVerifyFields = permissionSetAssignmentToVerify.getDescribe().fields.getMap();
+        if (permissionSetAssignmentToVerifyFields.get('AssigneeId').getDescribe().isCreateable() && permissionSetAssignmentToVerifyFields.get('PermissionSetId').getDescribe().isCreateable()) {
 
-        for (User user : usersList) {
-            Set<String> fslRoleTypeSet = getFslRoleTypeSet(user);
-            createRelatedObjectsForRoleTypeList(fslRoleTypeSet, user, serviceResourcesByUserIdMap, permissionSetAssignmentToInsert, serviceResourceToInsert);
-        }
-
-        if (!permissionSetAssignmentToInsert.isEmpty()) {
-            insertObjects(permissionSetAssignmentToInsert, 'PermissionSetAssignment', errorList);
-            if (serviceResourceToInsert.isEmpty()) {
-                sendEmail(errorList, infoList);
+            for (User user : usersList) {
+                Set<String> fslRoleTypeSet = getFslRoleTypeSet(user);
+                createRelatedObjectsForRoleTypeList(fslRoleTypeSet, user, serviceResourcesByUserIdMap, permissionSetAssignmentToInsert, serviceResourceToInsert);
             }
-        }
 
-        if (!serviceResourceToInsert.isEmpty()) {
-            DelayedInsertSObjects insertObjectsQueue = new DelayedInsertSObjects(serviceResourceToInsert, 'ServiceResource', errorList, infoList);
-            System.enqueueJob(insertObjectsQueue);
+            if (!permissionSetAssignmentToInsert.isEmpty()) {
+                insertObjects(permissionSetAssignmentToInsert, 'PermissionSetAssignment', errorList);
+                if (serviceResourceToInsert.isEmpty()) {
+                    sendEmail(errorList, infoList);
+                }
+            }
+
+            if (!serviceResourceToInsert.isEmpty()) {
+                DelayedInsertSObjects insertObjectsQueue = new DelayedInsertSObjects(serviceResourceToInsert, 'ServiceResource', errorList, infoList);
+                System.enqueueJob(insertObjectsQueue);
+            }
         }
     }
 
@@ -162,7 +166,7 @@ public with sharing class FSK_FSLUserRelatedObjectsService {
             }
 
             if (!permissionSetLicenseAssignmentToDeleteList.isEmpty()) {
-                deleteObjects(permissionSetLicenseAssignmentToDeleteList, 'PermissionSetLicenseAssignment');
+                deleteObjects(permissionSetLicenseAssignmentToDeleteList, 'PermissionSetLicenseAssign');
             }
         }
     }
@@ -278,7 +282,9 @@ public with sharing class FSK_FSLUserRelatedObjectsService {
         for (String permissionName : permissionNameList) {
             PermissionSet permissionSet = (PermissionSet) groupsPermissionSetByNameMap.get(permissionName);
             PermissionSetAssignment permissionSetAssignment = createPermissionSetAssignment(user, permissionSet);
-            permissionSetAssignmentToInsert.add(permissionSetAssignment);
+            if(permissionSetAssignment != null) {
+                permissionSetAssignmentToInsert.add(permissionSetAssignment);
+            }
         }
 
         if (fslRoleType == 'Resource') {
@@ -377,6 +383,11 @@ public with sharing class FSK_FSLUserRelatedObjectsService {
      * @param objectName Sobject name
      */
     private void deleteObjects(List<SObject> sObjectList, String objectName) {
+        Schema.SObjectType targetType = Schema.getGlobalDescribe().get(objectName);
+        if(!targetType.getDescribe().isDeletable()) {
+            return;
+        }
+
         if(sObjectList.size() > 0) {
             List<Database.DeleteResult> deleteResults = Database.delete(sObjectList, false);
             for (Integer i = 0; i < deleteResults.size(); i++) {
@@ -424,10 +435,13 @@ public with sharing class FSK_FSLUserRelatedObjectsService {
         efa.setBody(Blob.valueOf(fileBody));
         mail.setFileAttachments(new Messaging.EmailFileAttachment[]{efa});
 
-        List<Messaging.SendEmailResult> sendEmailResultsList = Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail }, false);
-        for (Messaging.SendEmailResult result : sendEmailResultsList) {
-            if (!result.isSuccess()) {
-                System.debug(LoggingLevel.ERROR, result.errors);
+
+        if(Limits.getEmailInvocations() <= Limits.getLimitEmailInvocations()) {
+            List<Messaging.SendEmailResult> sendEmailResultsList = Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail }, false);
+            for (Messaging.SendEmailResult result : sendEmailResultsList) {
+                if (!result.isSuccess()) {
+                    System.debug(LoggingLevel.ERROR, result.errors);
+                }
             }
         }
 
