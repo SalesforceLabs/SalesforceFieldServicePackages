@@ -13,11 +13,13 @@ private class FSK_FSLUserRelatedObjectsServiceTest {
 
     @IsTest
     static void insertNewResourceUser_Success() {
+        insertFSLPermissionSets();
+
         User user = FSK_TestFactory.createUser('userT', 'System Administrator', 'Resource');
 
-        Test.startTest();
+        System.Test.startTest();
         insert user;
-        Test.stopTest();
+        System.Test.stopTest();
 
         FSK_FSLUserRelatedObjectsService service = FSK_FSLUserRelatedObjectsService.getInstance();
 
@@ -40,14 +42,16 @@ private class FSK_FSLUserRelatedObjectsServiceTest {
 
     @IsTest
     static void updateResourceUser_Success() {
+        insertFSLPermissionSets();
+
         User user = FSK_TestFactory.createUser('userT', 'System Administrator', null);
         insert user;
 
         System.runAs(user) {
-            Test.startTest();
+            System.Test.startTest();
             user.FSK_FSL_Resource_Type__c = 'Resource_Mobile';
             update user;
-            Test.stopTest();
+            System.Test.stopTest();
         }
 
         FSK_FSLUserRelatedObjectsService service = FSK_FSLUserRelatedObjectsService.getInstance();
@@ -67,14 +71,16 @@ private class FSK_FSLUserRelatedObjectsServiceTest {
 
     @IsTest
     static void updateDispatcherToResourceUser_Success() {
+        insertFSLPermissionSets();
+
         User user = FSK_TestFactory.createUser('userT', 'System Administrator', 'Dispatcher');
         insert user;
 
         System.runAs(user) {
-            Test.startTest();
+            System.Test.startTest();
             user.FSK_FSL_Resource_Type__c = 'Resource';
             update user;
-            Test.stopTest();
+            System.Test.stopTest();
         }
 
         FSK_FSLUserRelatedObjectsService service = FSK_FSLUserRelatedObjectsService.getInstance();
@@ -119,9 +125,9 @@ private class FSK_FSLUserRelatedObjectsServiceTest {
         update settings;
 
         try {
-            Test.startTest();
+            System.Test.startTest();
             insert user;
-            Test.stopTest();
+            System.Test.stopTest();
         }
         catch(DmlException ex) {
             System.debug(LoggingLevel.INFO, 'Feature is inactive');
@@ -146,6 +152,7 @@ private class FSK_FSLUserRelatedObjectsServiceTest {
 
     @IsTest
     static void updateResourceUser_withExistingServiceResource() {
+
         User user = FSK_TestFactory.createUser('userT', 'System Administrator', null);
         insert user;
 
@@ -153,10 +160,12 @@ private class FSK_FSLUserRelatedObjectsServiceTest {
         insert serviceResource;
 
         System.runAs(user) {
-            Test.startTest();
+            insertFSLPermissionSets();
+
+            System.Test.startTest();
             user.FSK_FSL_Resource_Type__c = 'Resource';
             update user;
-            Test.stopTest();
+            System.Test.stopTest();
         }
 
         FSK_FSLUserRelatedObjectsService service = FSK_FSLUserRelatedObjectsService.getInstance();
@@ -175,5 +184,33 @@ private class FSK_FSLUserRelatedObjectsServiceTest {
         List<ServiceResource> serviceResources = [SELECT Id, ResourceType, IsActive FROM ServiceResource WHERE RelatedRecordId = :user.Id];
         System.assertEquals(1, serviceResources.size());
         System.assertEquals(serviceResource.Id, serviceResources[0].Id);
+    }
+
+    static void insertFSLPermissionSets() {
+        Set<String> fslPermissionSets = getRequiredFSLPermissionSets();
+
+        List<PermissionSet> psList = new List<PermissionSet>();
+        for( String permissionSet : fslPermissionSets) {
+            PermissionSet ps = new PermissionSet(Name = permissionSet, Label = permissionSet);
+            psList.add(ps);
+        }
+
+        List<Database.SaveResult> saveResults = Database.insert(psList, false);
+        for (Database.SaveResult saveResult : saveResults) {
+            if(!saveResult.isSuccess()) {
+                System.debug(LoggingLevel.ERROR, saveResult.errors);
+            }
+        }
+    }
+
+    static Set<String> getRequiredFSLPermissionSets() {
+        Set<String> psList = new Set<String>();
+        FSK_FSLUserRelatedObjectsService service = FSK_FSLUserRelatedObjectsService.getInstance();
+        List<Set<String>> permissionSetNames = service.permissionSetByRoleTypeMap.values();
+        for(Set<String> permissionSetName : permissionSetNames) {
+            psList.addAll(permissionSetName);
+        }
+
+        return psList;
     }
 }

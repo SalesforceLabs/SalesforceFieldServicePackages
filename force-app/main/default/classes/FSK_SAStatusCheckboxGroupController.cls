@@ -8,9 +8,16 @@ public with sharing class FSK_SAStatusCheckboxGroupController {
      */
     @AuraEnabled
     public static List<PicklistValue> getAppointmentStatus(List<String> excludeCategories) {
-        List<ServiceAppointmentStatus> statuses = [SELECT Id, MasterLabel,ApiName,StatusCode FROM ServiceAppointmentStatus WHERE StatusCode NOT IN :excludeCategories];
-
+        Set<String> statusCodes = new Set<String>{'Scheduled','Dispatched', 'InProgress', 'CannotComplete', 'Completed', 'Canceled', 'None'};
+        Set<String> statusCodesToExclude = new Set<String>();
+        for (String status : statusCodes) {
+            if (excludeCategories.contains(status)) {
+                statusCodesToExclude.add(status);
+            }
+        }
+        List<ServiceAppointmentStatus> statuses = [SELECT Id, MasterLabel,ApiName,StatusCode FROM ServiceAppointmentStatus WHERE StatusCode NOT IN :statusCodesToExclude];
         List<PicklistValue> values = new List<PicklistValue>();
+
         for(ServiceAppointmentStatus status : statuses) {
             values.add(new PicklistValue(status.MasterLabel, status.ApiName));
         }
