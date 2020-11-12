@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <description>Identify if the action updates start time or end time</description>
+        <name>Start_Or_End</name>
+        <label>Start Or End</label>
+        <locationX>743</locationX>
+        <locationY>52</locationY>
+        <defaultConnector>
+            <targetReference>Set_Actual_End_on_Scheduled_End</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Start_Time</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>IsStart</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Actual_Start_on_Scheduled_Start</targetReference>
+            </connector>
+            <label>Is Start Time</label>
+        </rules>
+    </decisions>
+    <description>This flow sets the actual times on the service appointments Scheduled field in order to reflect the actual times on the Gantt</description>
+    <formulas>
+        <name>NewScheduledEndOnStartEvent</name>
+        <dataType>DateTime</dataType>
+        <expression>IF(ISBLANK({!RecordDurationInMinutes}), {!RecordSchedEndTime}, (NOW()+({!RecordDurationInMinutes}/1440)))</expression>
+    </formulas>
+    <formulas>
+        <description>This formula returns the current time as date/time</description>
+        <name>NOW</name>
+        <dataType>DateTime</dataType>
+        <expression>NOW()</expression>
+    </formulas>
+    <interviewLabel>Reflect Actual Times on Gantt {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
+    <label>Reflect Actual Times on Gantt</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Service_Appointment</name>
+        <label>Get Service Appointment</label>
+        <locationX>390</locationX>
+        <locationY>50</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Planned_Date</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </filters>
+        <object>ServiceAppointment</object>
+        <outputAssignments>
+            <assignToReference>RecordDurationInMinutes</assignToReference>
+            <field>FSL__Duration_In_Minutes__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>RecordSchedEndTime</assignToReference>
+            <field>SchedEndTime</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>RecordSchedStartTime</assignToReference>
+            <field>SchedStartTime</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordUpdates>
+        <description>Set the value of the Actual Start on the Scheduled Start in order to reflect it on the Gantt</description>
+        <name>Set_Actual_End_on_Scheduled_End</name>
+        <label>Set Actual End on Scheduled End</label>
+        <locationX>752</locationX>
+        <locationY>242</locationY>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>SchedEndTime</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ServiceAppointment</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Set the value of the Actual Start on the Scheduled Start in order to reflect it on the Gantt</description>
+        <name>Set_Actual_Start_on_Scheduled_Start</name>
+        <label>Set Actual Start on Scheduled Start</label>
+        <locationX>944</locationX>
+        <locationY>47</locationY>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>SchedEndTime</field>
+            <value>
+                <elementReference>NewScheduledEndOnStartEvent</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SchedStartTime</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ServiceAppointment</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Setting the planned dates field to avoid data loss</description>
+        <name>Set_Planned_Date</name>
+        <label>Set Planned Date</label>
+        <locationX>536</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Start_Or_End</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>FSK_Planned_Scheduled_End__c</field>
+            <value>
+                <elementReference>RecordSchedEndTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FSK_Planned_Scheduled_Start__c</field>
+            <value>
+                <elementReference>RecordSchedStartTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ServiceAppointment</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Get_Service_Appointment</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>A flag that mark start time process</description>
+        <name>IsStart</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>RecordDurationInMinutes</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
+    </variables>
+    <variables>
+        <description>This variable stores the Service Appointment Id as text</description>
+        <name>RecordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>The Service Appointment Scheduled End Time</description>
+        <name>RecordSchedEndTime</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>The Service Appointment Scheduled Start Time</description>
+        <name>RecordSchedStartTime</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

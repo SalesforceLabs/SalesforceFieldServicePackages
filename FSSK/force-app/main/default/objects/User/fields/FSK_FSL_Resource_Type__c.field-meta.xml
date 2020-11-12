@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSK_FSL_Resource_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>FSL Resource Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Resource_Mobile</fullName>
+                <default>false</default>
+                <label>Resource (With Mobile)</label>
+            </value>
+            <value>
+                <fullName>Resource</fullName>
+                <default>false</default>
+                <label>Resource (Without Mobile)</label>
+            </value>
+            <value>
+                <fullName>Dispatcher</fullName>
+                <default>false</default>
+                <label>Dispatcher</label>
+            </value>
+            <value>
+                <fullName>Resource_Dispatcher_Mobile</fullName>
+                <default>false</default>
+                <label>Resource &amp; Dispatcher (With Mobile) </label>
+            </value>
+            <value>
+                <fullName>Resource_Dispatcher</fullName>
+                <default>false</default>
+                <label>Resource &amp; Dispatcher (Without Mobile) </label>
+            </value>
+            <value>
+                <fullName>Community</fullName>
+                <default>false</default>
+                <label>Contractor Dispatcher (Community Dispatcher)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

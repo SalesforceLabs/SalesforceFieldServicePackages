@@ -1,0 +1,35 @@
+{
+  "orgName": "ydror company",
+  "edition": "Enterprise",
+  "adminEmail": "ydror@salesforce.com",
+  "language": "en_US",
+  "hasSampleData": true,
+  "features": [
+    "Communities",
+    "ForceComPlatform",
+    "ServiceCloud",
+    "FieldService:25",
+    "FieldServiceDispatcherUser:25", 
+    "FieldServiceMobileUser:25", 
+    "FieldServiceSchedulingUser:25"
+  ],
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "communitiesSettings": {
+      "enableNetworksEnabled": true
+    },
+    "fieldServiceSettings": {
+      "fieldServiceOrgPref": true
+    },
+    "securitySettings": {
+      "passwordPolicies": {
+        "enableSetPasswordInApi": true
+      }
+    },
+    "mobileSettings": {
+      "enableS1EncryptedStoragePref2": false
+    }
+  }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Send mail to the user that preform creation or update of user record in case of error with the FSL permissions and licences assignment</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Automate FSL User Creation Email</name>
+    <style>none</style>
+    <subject>User Creation Error Report</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
