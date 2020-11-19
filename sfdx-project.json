@@ -1,0 +1,23 @@
+{
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "default": true,
+            "package": "Salesforce Field Service Starter Kit",
+            "versionName": "ver 1.0.2",
+            "versionNumber": "1.0.0.NEXT",
+            "dependencies": [
+              {
+                 "subscriberPackageVersionId" : "04t3y000001yoTW"
+               }
+            ]
+        }
+      ],
+    "namespace": "FSSK",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "50.0",
+    "packageAliases": {
+        "Salesforce Field Service Starter Kit": "0Ho4W00000000FJSAY",
+        "Salesforce Field Service Starter Kit@1.0.0-2": "04t4W000002fR46QAE"
+    }
+}

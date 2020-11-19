@@ -187,12 +187,14 @@ private class FSK_FSLUserRelatedObjectsServiceTest {
     }
 
     static void insertFSLPermissionSets() {
-        Set<String> fslPermissionSets = getRequiredFSLPermissionSets();
-
         List<PermissionSet> psList = new List<PermissionSet>();
-        for( String permissionSet : fslPermissionSets) {
-            PermissionSet ps = new PermissionSet(Name = permissionSet, Label = permissionSet);
-            psList.add(ps);
+        FSK_FSLUserRelatedObjectsService service = FSK_FSLUserRelatedObjectsService.getInstance();
+        List<Set<String>> permissionSetNames = service.permissionSetByRoleTypeMap.values();
+        for(Set<String> permissionSetName : permissionSetNames) {
+            for( String permissionSet : permissionSetName) {
+                PermissionSet ps = new PermissionSet(Name = permissionSet, Label = permissionSet);
+                psList.add(ps);
+            }
         }
 
         List<Database.SaveResult> saveResults = Database.insert(psList, false);
@@ -201,16 +203,5 @@ private class FSK_FSLUserRelatedObjectsServiceTest {
                 System.debug(LoggingLevel.ERROR, saveResult.errors);
             }
         }
-    }
-
-    static Set<String> getRequiredFSLPermissionSets() {
-        Set<String> psList = new Set<String>();
-        FSK_FSLUserRelatedObjectsService service = FSK_FSLUserRelatedObjectsService.getInstance();
-        List<Set<String>> permissionSetNames = service.permissionSetByRoleTypeMap.values();
-        for(Set<String> permissionSetName : permissionSetNames) {
-            psList.addAll(permissionSetName);
-        }
-
-        return psList;
     }
 }

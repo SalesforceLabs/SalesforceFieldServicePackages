@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <description>Decide if to Set Actual Start Or End</description>
+        <name>Set_Actual_Start_OR_Actual_End</name>
+        <label>Set Actual Start OR Actual End</label>
+        <locationX>394</locationX>
+        <locationY>70</locationY>
+        <defaultConnector>
+            <targetReference>Get_Service_Appointment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Actual_Start</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>IsStart</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Actual_Start</targetReference>
+            </connector>
+            <label>Actual Start</label>
+        </rules>
+    </decisions>
+    <description>This flow is part of the FSL Starter Kit.
+It contains all the processes relates to the Service Appointment Object</description>
+    <formulas>
+        <description>This formula calculates the delta between Actual Start to Actual End in order to set the field Actual Duration (Minutes)</description>
+        <name>CalculateDelta</name>
+        <dataType>Number</dataType>
+        <expression>IF (NOT(ISBLANK({!RecordActualStart})) &amp;&amp; (NOW() &gt; {!RecordActualStart}),
+(({!NOW} - {!RecordActualStart})*1440), 0)</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <description>This formula returns the current time as date/time</description>
+        <name>NOW</name>
+        <dataType>DateTime</dataType>
+        <expression>NOW()</expression>
+    </formulas>
+    <interviewLabel>This flow is part of FSL Starter Kit.
+This flow sets the actual start and actual end time according to custom setting object &apos;Actual Times Capturing&apos;</interviewLabel>
+    <isTemplate>true</isTemplate>
+    <label>Actual Times Capturing</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Get the service appointment to calculate the diff between end to start</description>
+        <name>Get_Service_Appointment</name>
+        <label>Get Service Appointment</label>
+        <locationX>402</locationX>
+        <locationY>259</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_Actual_End</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </filters>
+        <object>ServiceAppointment</object>
+        <outputAssignments>
+            <assignToReference>RecordActualEnd</assignToReference>
+            <field>ActualEndTime</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>RecordActualStart</assignToReference>
+            <field>ActualStartTime</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordUpdates>
+        <description>Set Actual End equal to NON()</description>
+        <name>Update_Actual_End</name>
+        <label>Update Actual End</label>
+        <locationX>658</locationX>
+        <locationY>259</locationY>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>ActualDuration</field>
+            <value>
+                <elementReference>CalculateDelta</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActualEndTime</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ServiceAppointment</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Set Actual Start equal to NON()</description>
+        <name>Update_Actual_Start</name>
+        <label>Update Actual Start</label>
+        <locationX>891</locationX>
+        <locationY>55</locationY>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>ActualStartTime</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ServiceAppointment</object>
+    </recordUpdates>
+    <start>
+        <locationX>48</locationX>
+        <locationY>49</locationY>
+        <connector>
+            <targetReference>Set_Actual_Start_OR_Actual_End</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Flag to identify if the update relates to actual start or actual end</description>
+        <name>IsStart</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>RecordActualEnd</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Service Appointment Actual Start</description>
+        <name>RecordActualStart</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>This variable stores the service appointment ID</description>
+        <name>RecordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>
