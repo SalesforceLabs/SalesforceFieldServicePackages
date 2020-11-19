@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSK_User_Creation_Feature_Inactive</fullName>
+    <active>true</active>
+    <description>Preventing value change if the feature inactive.</description>
+    <errorConditionFormula>IF(AND(NOT($Setup.FSK_FSL_Starter_Kit__c.Create_FSL_Resource_From_User__c),
+			ISNEW(),
+			OR(TEXT(FSK_FSL_Resource_Type__c) == NULL,
+			   TEXT(FSK_FSL_Resource_Type__c) == &apos;&apos;)),
+	false,
+	IF(AND(ISCHANGED(FSK_FSL_Resource_Type__c),
+	   NOT($Setup.FSK_FSL_Starter_Kit__c.Create_FSL_Resource_From_User__c)),
+	   true,
+	   false)
+)</errorConditionFormula>
+    <errorDisplayField>FSK_FSL_Resource_Type__c</errorDisplayField>
+    <errorMessage>You cannot change the field value.
+The Feature is inactive, please activate the feature via custom settings or &apos;FSK Properties Selection&apos; screen flow</errorMessage>
+</ValidationRule>
