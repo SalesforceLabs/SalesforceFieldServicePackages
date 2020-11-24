@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <apiVersion>49.0</apiVersion>
     <decisions>
         <name>Check_If_Record_Exist</name>
         <label>Check If Record Exist</label>
@@ -57,7 +58,7 @@
             <label>Invalid Status Selected</label>
         </rules>
     </decisions>
-    <description>This Flow is part of the FSL Starter Kit. It used as a User Interface for activating the package feature.</description>
+    <description>This is a deprecated Flow from the Field Service Starter Kit package</description>
     <dynamicChoiceSets>
         <name>Service_Appointment_Statues</name>
         <dataType>Picklist</dataType>
@@ -91,11 +92,17 @@ CONTAINS({!UserEndingStatusSelection}, &apos;Canceled&apos;))</expression>
     </formulas>
     <interviewLabel>FSK Properties Selection {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>FSL Starter Kit Properties Selection</label>
+    <label>deprecated FSSK flow</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -213,6 +220,7 @@ CONTAINS({!UserEndingStatusSelection}, &apos;Canceled&apos;))</expression>
         <connector>
             <targetReference>Update_Screen</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -392,7 +400,7 @@ CONTAINS({!UserEndingStatusSelection}, &apos;Canceled&apos;))</expression>
         </fields>
         <fields>
             <name>Select_Starting_Statuses</name>
-            <extensionName>FSSK:FSK_AppointmentStatusCheckboxGroup</extensionName>
+            <extensionName>c:FSK_AppointmentStatusCheckboxGroup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>groupLabel</name>
@@ -443,7 +451,7 @@ CONTAINS({!UserEndingStatusSelection}, &apos;Canceled&apos;))</expression>
         </fields>
         <fields>
             <name>Select_Ending_Statuses</name>
-            <extensionName>FSSK:FSK_AppointmentStatusCheckboxGroup</extensionName>
+            <extensionName>c:FSK_AppointmentStatusCheckboxGroup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>groupLabel</name>
@@ -518,7 +526,7 @@ CONTAINS({!UserEndingStatusSelection}, &apos;Canceled&apos;))</expression>
             <targetReference>Get_Custom_Settings_Values</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Obsolete</status>
     <variables>
         <name>CustomSettingId</name>
         <dataType>String</dataType>
