@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
-    <activeVersionNumber>1</activeVersionNumber>
-    <description>This flow is part of the Field Service Starter Kit.
-This Flow Remove Any Resource Permission Set and Permission Set Licence</description>
-    <masterLabel>Resource Deactivation</masterLabel>
-</FlowDefinition>
