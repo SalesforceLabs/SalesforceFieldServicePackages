@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
     <decisions>
         <description>Decide if to Set Actual Start Or End</description>
         <name>Set_Actual_Start_OR_Actual_End</name>
         <label>Set Actual Start OR Actual End</label>
-        <locationX>394</locationX>
-        <locationY>70</locationY>
+        <locationX>585</locationX>
+        <locationY>71</locationY>
         <defaultConnector>
-            <targetReference>Get_Service_Appointment</targetReference>
+            <targetReference>Values_Validation_for_End</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <defaultConnectorLabel>Actual End</defaultConnectorLabel>
         <rules>
             <name>Actual_Start</name>
             <conditionLogic>and</conditionLogic>
@@ -21,9 +22,87 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Update_Actual_Start</targetReference>
+                <targetReference>Values_Validation_for_Start</targetReference>
             </connector>
             <label>Actual Start</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Values_Validation_for_End</name>
+        <label>Values Validation for End</label>
+        <locationX>727</locationX>
+        <locationY>304</locationY>
+        <defaultConnector>
+            <targetReference>Set_Actual_End_With_Fixed_Values</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Incorrect Record Values</defaultConnectorLabel>
+        <rules>
+            <name>Correct_Values</name>
+            <conditionLogic>1 OR (2 AND 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>RecordActualStart</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <elementReference>RecordActualEnd</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>RecordActualStart</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>RecordActualStart</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Actual_End</targetReference>
+            </connector>
+            <label>Correct Values</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Values_Validation_for_Start</name>
+        <label>Values Validation for Start</label>
+        <locationX>971</locationX>
+        <locationY>69</locationY>
+        <defaultConnector>
+            <targetReference>Set_Actual_Start_With_Fixed_Values</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Incorrect Record Values</defaultConnectorLabel>
+        <rules>
+            <name>Correct_Values0</name>
+            <conditionLogic>1 OR (2 AND 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>RecordActualStart</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <elementReference>RecordActualEnd</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>RecordActualStart</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>RecordActualStart</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Actual_Start</targetReference>
+            </connector>
+            <label>Correct Values</label>
         </rules>
     </decisions>
     <description>This flow is part of the FSL Starter Kit.
@@ -35,6 +114,11 @@ It contains all the processes relates to the Service Appointment Object</descrip
         <expression>IF (NOT(ISBLANK({!RecordActualStart})) &amp;&amp; (NOW() &gt; {!RecordActualStart}),
 (({!NOW} - {!RecordActualStart})*1440), 0)</expression>
         <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>EmptyDate</name>
+        <dataType>DateTime</dataType>
+        <expression>DATETIMEVALUE(&quot;&quot;)</expression>
     </formulas>
     <formulas>
         <description>This formula returns the current time as date/time</description>
@@ -53,6 +137,12 @@ This flow sets the actual start and actual end time according to custom setting 
         </value>
     </processMetadataValues>
     <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
         <name>OriginBuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
@@ -63,12 +153,13 @@ This flow sets the actual start and actual end time according to custom setting 
         <description>Get the service appointment to calculate the diff between end to start</description>
         <name>Get_Service_Appointment</name>
         <label>Get Service Appointment</label>
-        <locationX>402</locationX>
-        <locationY>259</locationY>
+        <locationX>430</locationX>
+        <locationY>69</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Update_Actual_End</targetReference>
+            <targetReference>Set_Actual_Start_OR_Actual_End</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -87,11 +178,78 @@ This flow sets the actual start and actual end time according to custom setting 
         </outputAssignments>
     </recordLookups>
     <recordUpdates>
+        <name>Set_Actual_End_With_Fixed_Values</name>
+        <label>Set Actual End With Fixed Values</label>
+        <locationX>735</locationX>
+        <locationY>520</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>ActualDuration</field>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActualEndTime</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActualStartTime</field>
+            <value>
+                <elementReference>EmptyDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ServiceAppointment</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Set_Actual_Start_With_Fixed_Values</name>
+        <label>Set Actual Start With Fixed Values</label>
+        <locationX>1208</locationX>
+        <locationY>206</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>ActualDuration</field>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActualEndTime</field>
+            <value>
+                <elementReference>EmptyDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActualStartTime</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ServiceAppointment</object>
+    </recordUpdates>
+    <recordUpdates>
         <description>Set Actual End equal to NON()</description>
         <name>Update_Actual_End</name>
         <label>Update Actual End</label>
-        <locationX>658</locationX>
-        <locationY>259</locationY>
+        <locationX>960</locationX>
+        <locationY>345</locationY>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -117,8 +275,9 @@ This flow sets the actual start and actual end time according to custom setting 
         <description>Set Actual Start equal to NON()</description>
         <name>Update_Actual_Start</name>
         <label>Update Actual Start</label>
-        <locationX>891</locationX>
-        <locationY>55</locationY>
+        <locationX>1190</locationX>
+        <locationY>61</locationY>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -138,7 +297,7 @@ This flow sets the actual start and actual end time according to custom setting 
         <locationX>48</locationX>
         <locationY>49</locationY>
         <connector>
-            <targetReference>Set_Actual_Start_OR_Actual_End</targetReference>
+            <targetReference>Get_Service_Appointment</targetReference>
         </connector>
     </start>
     <status>Active</status>
