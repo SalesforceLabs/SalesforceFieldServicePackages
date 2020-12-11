@@ -20,7 +20,7 @@
         <actionName>FSK_Actual_Times_Capturing</actionName>
         <actionType>flow</actionType>
         <connector>
-            <targetReference>myDecision11</targetReference>
+            <targetReference>myDecision12</targetReference>
         </connector>
         <inputParameters>
             <processMetadataValues>
@@ -104,6 +104,48 @@
             <name>IsStart</name>
             <value>
                 <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>Boolean</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>MobileTimes</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Formula</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>MobileTimes</name>
+            <value>
+                <elementReference>formula_11_myRule_10_A1_1746699421</elementReference>
             </value>
         </inputParameters>
     </actionCalls>
@@ -120,14 +162,14 @@
                 <stringValue>Reflect Actual Times on Gantt</stringValue>
             </value>
         </processMetadataValues>
-        <name>myRule_12_A1</name>
+        <name>myRule_13_A1</name>
         <label>Reflect Actual Start on Gantt</label>
-        <locationX>1200</locationX>
+        <locationX>1300</locationX>
         <locationY>200</locationY>
         <actionName>FSK_Reflect_Actual_Times_on_Gantt</actionName>
         <actionType>flow</actionType>
         <connector>
-            <targetReference>myDecision13</targetReference>
+            <targetReference>myDecision15</targetReference>
         </connector>
         <inputParameters>
             <processMetadataValues>
@@ -213,34 +255,11 @@
                 <elementReference>myVariable_current.Id</elementReference>
             </value>
         </inputParameters>
-    </actionCalls>
-    <actionCalls>
-        <processMetadataValues>
-            <name>ActionCallType</name>
-            <value>
-                <stringValue>flow</stringValue>
-            </value>
-        </processMetadataValues>
-        <processMetadataValues>
-            <name>flowSelection</name>
-            <value>
-                <stringValue>Add Asset to Maintenance Plan</stringValue>
-            </value>
-        </processMetadataValues>
-        <name>myRule_14_A1</name>
-        <label>Add Asset to Maintenance Plan</label>
-        <locationX>1400</locationX>
-        <locationY>200</locationY>
-        <actionName>Add_Asset_to_Maintenance_Plan</actionName>
-        <actionType>flow</actionType>
-        <connector>
-            <targetReference>myDecision15</targetReference>
-        </connector>
         <inputParameters>
             <processMetadataValues>
                 <name>dataType</name>
                 <value>
-                    <stringValue>String</stringValue>
+                    <stringValue>Boolean</stringValue>
                 </value>
             </processMetadataValues>
             <processMetadataValues>
@@ -252,7 +271,7 @@
             <processMetadataValues>
                 <name>leftHandSideLabel</name>
                 <value>
-                    <stringValue>Parent_Record_Id</stringValue>
+                    <stringValue>MobileTimes</stringValue>
                 </value>
             </processMetadataValues>
             <processMetadataValues>
@@ -270,12 +289,12 @@
             <processMetadataValues>
                 <name>rightHandSideType</name>
                 <value>
-                    <stringValue>Reference</stringValue>
+                    <stringValue>Formula</stringValue>
                 </value>
             </processMetadataValues>
-            <name>Parent_Record_Id</name>
+            <name>MobileTimes</name>
             <value>
-                <elementReference>myVariable_current.ParentRecordId</elementReference>
+                <elementReference>formula_14_myRule_13_A1_4312652922</elementReference>
             </value>
         </inputParameters>
     </actionCalls>
@@ -299,7 +318,7 @@
         <actionName>FSK_Actual_Times_Capturing</actionName>
         <actionType>flow</actionType>
         <connector>
-            <targetReference>myDecision17</targetReference>
+            <targetReference>myDecision18</targetReference>
         </connector>
         <inputParameters>
             <processMetadataValues>
@@ -383,6 +402,48 @@
             <name>IsStart</name>
             <value>
                 <booleanValue>false</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>Boolean</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>MobileTimes</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Formula</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>MobileTimes</name>
+            <value>
+                <elementReference>formula_17_myRule_16_A1_4531612460</elementReference>
             </value>
         </inputParameters>
     </actionCalls>
@@ -399,14 +460,14 @@
                 <stringValue>Reflect Actual Times on Gantt</stringValue>
             </value>
         </processMetadataValues>
-        <name>myRule_18_A1</name>
+        <name>myRule_19_A1</name>
         <label>Reflect Actual End on Gantt</label>
-        <locationX>1800</locationX>
+        <locationX>1900</locationX>
         <locationY>200</locationY>
         <actionName>FSK_Reflect_Actual_Times_on_Gantt</actionName>
         <actionType>flow</actionType>
         <connector>
-            <targetReference>myDecision19</targetReference>
+            <targetReference>myDecision21</targetReference>
         </connector>
         <inputParameters>
             <processMetadataValues>
@@ -490,6 +551,48 @@
             <name>RecordId</name>
             <value>
                 <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>Boolean</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>MobileTimes</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Formula</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>MobileTimes</name>
+            <value>
+                <elementReference>formula_20_myRule_19_A1_0811197368</elementReference>
             </value>
         </inputParameters>
     </actionCalls>
@@ -555,6 +658,71 @@
             <name>RecordId</name>
             <value>
                 <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>ActionCallType</name>
+            <value>
+                <stringValue>flow</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>flowSelection</name>
+            <value>
+                <stringValue>Add Asset to Maintenance Plan</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_22_A1</name>
+        <label>Add Asset to Maintenance Plan</label>
+        <locationX>2200</locationX>
+        <locationY>200</locationY>
+        <actionName>Add_Asset_to_Maintenance_Plan</actionName>
+        <actionType>flow</actionType>
+        <connector>
+            <targetReference>myDecision23</targetReference>
+        </connector>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Parent_Record_Id</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>Parent_Record_Id</name>
+            <value>
+                <elementReference>myVariable_current.ParentRecordId</elementReference>
             </value>
         </inputParameters>
     </actionCalls>
@@ -833,7 +1001,7 @@
             </processMetadataValues>
             <name>Notification_Type_Id</name>
             <value>
-                <elementReference>formula_8_myRule_7_A1_8121607113</elementReference>
+                <elementReference>formula_8_myRule_7_A1_0792014369</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -878,6 +1046,90 @@
                 <elementReference>myVariable_current.Id</elementReference>
             </value>
         </inputParameters>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Service_Appointment_Number</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>Service_Appointment_Number</name>
+            <value>
+                <elementReference>myVariable_current.AppointmentNumber</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Service_Appointment_Subject</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>Service_Appointment_Subject</name>
+            <value>
+                <elementReference>myVariable_current.Subject</elementReference>
+            </value>
+        </inputParameters>
     </actionCalls>
     <apiVersion>50.0</apiVersion>
     <decisions>
@@ -918,26 +1170,26 @@
                 <numberValue>5.0</numberValue>
             </value>
         </processMetadataValues>
-        <name>myDecision11</name>
-        <label>myDecision11</label>
+        <name>myDecision12</name>
+        <label>myDecision12</label>
         <locationX>50</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>myDecision13</targetReference>
+            <targetReference>myDecision15</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>default</defaultConnectorLabel>
         <rules>
-            <name>myRule_12</name>
+            <name>myRule_13</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>formula_myRule_12</leftValueReference>
+                <leftValueReference>formula_myRule_13</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>myRule_12_A1</targetReference>
+                <targetReference>myRule_13_A1</targetReference>
             </connector>
             <label>Should Reflect Actual Start on Gantt</label>
         </rules>
@@ -949,43 +1201,12 @@
                 <numberValue>6.0</numberValue>
             </value>
         </processMetadataValues>
-        <name>myDecision13</name>
-        <label>myDecision13</label>
-        <locationX>50</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>myDecision15</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>default</defaultConnectorLabel>
-        <rules>
-            <name>myRule_14</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>formula_myRule_14</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>myRule_14_A1</targetReference>
-            </connector>
-            <label>Should Add Asset to Maintenance Plan</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <processMetadataValues>
-            <name>index</name>
-            <value>
-                <numberValue>7.0</numberValue>
-            </value>
-        </processMetadataValues>
         <name>myDecision15</name>
         <label>myDecision15</label>
         <locationX>50</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>myDecision17</targetReference>
+            <targetReference>myDecision18</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>default</defaultConnectorLabel>
         <rules>
@@ -1008,42 +1229,11 @@
         <processMetadataValues>
             <name>index</name>
             <value>
-                <numberValue>8.0</numberValue>
+                <numberValue>7.0</numberValue>
             </value>
         </processMetadataValues>
-        <name>myDecision17</name>
-        <label>myDecision17</label>
-        <locationX>50</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>myDecision19</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>default</defaultConnectorLabel>
-        <rules>
-            <name>myRule_18</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>formula_myRule_18</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>myRule_18_A1</targetReference>
-            </connector>
-            <label>Should Reflect Actual End on Gantt</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <processMetadataValues>
-            <name>index</name>
-            <value>
-                <numberValue>9.0</numberValue>
-            </value>
-        </processMetadataValues>
-        <name>myDecision19</name>
-        <label>myDecision19</label>
+        <name>myDecision18</name>
+        <label>myDecision18</label>
         <locationX>50</locationX>
         <locationY>0</locationY>
         <defaultConnector>
@@ -1051,19 +1241,19 @@
         </defaultConnector>
         <defaultConnectorLabel>default</defaultConnectorLabel>
         <rules>
-            <name>myRule_20</name>
+            <name>myRule_19</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>formula_myRule_20</leftValueReference>
+                <leftValueReference>formula_myRule_19</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>myRule_20_A1</targetReference>
+                <targetReference>myRule_19_A1</targetReference>
             </connector>
-            <label>Is Unscheduled OR Canceled</label>
+            <label>Should Reflect Actual End on Gantt</label>
         </rules>
     </decisions>
     <decisions>
@@ -1101,13 +1291,16 @@
         <processMetadataValues>
             <name>index</name>
             <value>
-                <numberValue>10.0</numberValue>
+                <numberValue>8.0</numberValue>
             </value>
         </processMetadataValues>
         <name>myDecision21</name>
         <label>myDecision21</label>
         <locationX>50</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision23</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>default</defaultConnectorLabel>
         <rules>
             <name>myRule_22</name>
@@ -1121,6 +1314,65 @@
             </conditions>
             <connector>
                 <targetReference>myRule_22_A1</targetReference>
+            </connector>
+            <label>Should Add Asset to Maintenance Plan</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>9.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision23</name>
+        <label>myDecision23</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision25</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_24</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_24</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_24_A1</targetReference>
+            </connector>
+            <label>Is Unscheduled OR Canceled</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>10.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision25</name>
+        <label>myDecision25</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_26</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_26</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_26_A1</targetReference>
             </connector>
             <label>Canceled/Unscheduled</label>
         </rules>
@@ -1199,7 +1451,7 @@
         <locationX>50</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>myDecision11</targetReference>
+            <targetReference>myDecision12</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>default</defaultConnectorLabel>
         <rules>
@@ -1223,10 +1475,54 @@
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
+                <stringValue>IF(ISCHANGED([ServiceAppointment].FSK_Mobile_Start_Time__c), true, false) </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_11_myRule_10_A1_1746699421</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISCHANGED({!myVariable_current.FSK_Mobile_Start_Time__c}), true, false)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(ISCHANGED([ServiceAppointment].FSK_Mobile_Start_Time__c), true, false) </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_14_myRule_13_A1_4312652922</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISCHANGED({!myVariable_current.FSK_Mobile_Start_Time__c}), true, false)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(ISCHANGED([ServiceAppointment].FSK_Mobile_End_Time__c ), true, false) </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_17_myRule_16_A1_4531612460</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISCHANGED({!myVariable_current.FSK_Mobile_End_Time__c} ), true, false)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(ISCHANGED([ServiceAppointment].FSK_Mobile_End_Time__c ), true, false) </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_20_myRule_19_A1_0811197368</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISCHANGED({!myVariable_current.FSK_Mobile_End_Time__c} ), true, false)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
                 <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Custom_Notification_Type_Id__c </stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_8_myRule_7_A1_8121607113</name>
+        <name>formula_8_myRule_7_A1_0792014369</name>
         <dataType>String</dataType>
         <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Custom_Notification_Type_Id__c}</expression>
     </formulas>
@@ -1291,7 +1587,7 @@ NOT(ISBLANK([ServiceAppointment].SchedStartTime ))
 </stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_myRule_12</name>
+        <name>formula_myRule_13</name>
         <dataType>Boolean</dataType>
         <expression>({!$Setup.FSK_FSL_Starter_Kit__c.Actual_Times_on_Gantt__c}
 &amp;&amp;
@@ -1300,25 +1596,6 @@ CONTAINS({!$Setup.FSK_FSL_Starter_Kit__c.StartingStatus__c}, TEXT({!myVariable_c
 ISCHANGED({!myVariable_current.Status})
 &amp;&amp;
 NOT(ISBLANK({!myVariable_current.SchedStartTime} ))</expression>
-    </formulas>
-    <formulas>
-        <processMetadataValues>
-            <name>originalFormula</name>
-            <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Add_Asset_to_Maintenance_Plan__c
-&amp;&amp;
-[ServiceAppointment].FSK_Add_Asset_to_Maintenance_Plan__c
-&amp;&amp;
-($Setup.FSK_FSL_Starter_Kit__c.Successful_Asset_Installation_Status__c == TEXT([ServiceAppointment].Status))</stringValue>
-            </value>
-        </processMetadataValues>
-        <name>formula_myRule_14</name>
-        <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Add_Asset_to_Maintenance_Plan__c}
-&amp;&amp;
-{!myVariable_current.FSK_Add_Asset_to_Maintenance_Plan__c}
-&amp;&amp;
-({!$Setup.FSK_FSL_Starter_Kit__c.Successful_Asset_Installation_Status__c} == TEXT({!myVariable_current.Status}))</expression>
     </formulas>
     <formulas>
         <processMetadataValues>
@@ -1356,7 +1633,7 @@ CONTAINS($Setup.FSK_FSL_Starter_Kit__c.EndingStatus__c , TEXT([ServiceAppointmen
 $Setup.FSK_FSL_Starter_Kit__c.Actual_Times_on_Gantt__c </stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_myRule_18</name>
+        <name>formula_myRule_19</name>
         <dataType>Boolean</dataType>
         <expression>ISCHANGED({!myVariable_current.Status})
 &amp;&amp;
@@ -1370,6 +1647,25 @@ CONTAINS({!$Setup.FSK_FSL_Starter_Kit__c.EndingStatus__c} , TEXT({!myVariable_cu
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
+                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Add_Asset_to_Maintenance_Plan__c
+&amp;&amp;
+[ServiceAppointment].FSK_Add_Asset_to_Maintenance_Plan__c
+&amp;&amp;
+($Setup.FSK_FSL_Starter_Kit__c.Successful_Asset_Installation_Status__c == TEXT([ServiceAppointment].Status))</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_22</name>
+        <dataType>Boolean</dataType>
+        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Add_Asset_to_Maintenance_Plan__c}
+&amp;&amp;
+{!myVariable_current.FSK_Add_Asset_to_Maintenance_Plan__c}
+&amp;&amp;
+({!$Setup.FSK_FSL_Starter_Kit__c.Successful_Asset_Installation_Status__c} == TEXT({!myVariable_current.Status}))</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
                 <stringValue>ISCHANGED([ServiceAppointment].Status)
 &amp;&amp;
 (ISPICKVAL([ServiceAppointment].Status, &apos;Canceled&apos;)
@@ -1378,7 +1674,7 @@ CONTAINS({!$Setup.FSK_FSL_Starter_Kit__c.EndingStatus__c} , TEXT({!myVariable_cu
 ISPICKVAL([ServiceAppointment].Status, &apos;None&apos;)))</stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_myRule_20</name>
+        <name>formula_myRule_24</name>
         <dataType>Boolean</dataType>
         <expression>ISCHANGED({!myVariable_current.Status})
 &amp;&amp;
@@ -1401,7 +1697,7 @@ ISCHANGED([ServiceAppointment].Status)
 ISPICKVAL([ServiceAppointment].Status, &apos;None&apos;)))</stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_myRule_22</name>
+        <name>formula_myRule_26</name>
         <dataType>Boolean</dataType>
         <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Assign_Resource_On_Service_Appointment__c} 
 &amp;&amp;
@@ -1459,6 +1755,9 @@ NOT(ISNEW())
             <value>
                 <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Mobile_Canned_Custom_Notification__c
 &amp;&amp;
+($Setup.FSK_FSL_Starter_Kit__c.Dispatched_Notification__c
+|| $Setup.FSK_FSL_Starter_Kit__c.Emergency_Dispatched_Notification__c)
+&amp;&amp;
 ISCHANGED([ServiceAppointment].Status)
 &amp;&amp;
 TEXT([ServiceAppointment].StatusCategory) = &apos;Dispatched&apos;
@@ -1471,6 +1770,9 @@ TEXT([ServiceAppointment].StatusCategory) = &apos;Dispatched&apos;
         <dataType>Boolean</dataType>
         <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Mobile_Canned_Custom_Notification__c}
 &amp;&amp;
+({!$Setup.FSK_FSL_Starter_Kit__c.Dispatched_Notification__c}
+|| {!$Setup.FSK_FSL_Starter_Kit__c.Emergency_Dispatched_Notification__c})
+&amp;&amp;
 ISCHANGED({!myVariable_current.Status})
 &amp;&amp;
 TEXT({!myVariable_current.StatusCategory}) = &apos;Dispatched&apos;
@@ -1478,7 +1780,7 @@ TEXT({!myVariable_current.StatusCategory}) = &apos;Dispatched&apos;
 ({!myVariable_current.SchedStartTime} &lt; 
 (NOW()+({!$Setup.FSK_FSL_Starter_Kit__c.Hours_for_Dispatched_Notification__c} /24) ))</expression>
     </formulas>
-    <interviewLabel>FSK_Service_Appointment-22_InterviewLabel</interviewLabel>
+    <interviewLabel>FSK_Service_Appointment-27_InterviewLabel</interviewLabel>
     <isTemplate>true</isTemplate>
     <label>FSK Service Appointment</label>
     <processMetadataValues>
@@ -1531,12 +1833,12 @@ TEXT({!myVariable_current.StatusCategory}) = &apos;Dispatched&apos;
         <processMetadataValues>
             <name>referenceTargetField</name>
         </processMetadataValues>
-        <name>myRule_20_A1</name>
+        <name>myRule_24_A1</name>
         <label>Revoke Actual Times</label>
-        <locationX>2000</locationX>
+        <locationX>2400</locationX>
         <locationY>200</locationY>
         <connector>
-            <targetReference>myDecision21</targetReference>
+            <targetReference>myDecision25</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -1651,6 +1953,72 @@ TEXT({!myVariable_current.StatusCategory}) = &apos;Dispatched&apos;
             </processMetadataValues>
             <field>ActualStartTime</field>
         </inputAssignments>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>DateTime</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Mobile End Time</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>GlobalConstant</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>FSK_Mobile_End_Time__c</field>
+        </inputAssignments>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>DateTime</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Mobile Start Time</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>GlobalConstant</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>FSK_Mobile_Start_Time__c</field>
+        </inputAssignments>
         <object>ServiceAppointment</object>
     </recordUpdates>
     <recordUpdates>
@@ -1678,9 +2046,9 @@ TEXT({!myVariable_current.StatusCategory}) = &apos;Dispatched&apos;
         <processMetadataValues>
             <name>referenceTargetField</name>
         </processMetadataValues>
-        <name>myRule_22_A1</name>
+        <name>myRule_26_A1</name>
         <label>Remove Assign Resource Value</label>
-        <locationX>2200</locationX>
+        <locationX>2600</locationX>
         <locationY>200</locationY>
         <filterLogic>and</filterLogic>
         <filters>

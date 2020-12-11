@@ -7,7 +7,7 @@
         <locationX>1063</locationX>
         <locationY>260</locationY>
         <defaultConnector>
-            <targetReference>Verify_Asset_Exists_on_Parent</targetReference>
+            <targetReference>Check_if_Asset_Does_Not_Already_Related_to_Maintenance_Plan</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Valid Maintenance Plan</defaultConnectorLabel>
         <rules>
@@ -61,25 +61,32 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Verify_Asset_Exists_on_Parent</name>
-        <label>Verify Asset Exists on Parent</label>
-        <locationX>1318</locationX>
-        <locationY>258</locationY>
-        <defaultConnectorLabel>Asset unavailable</defaultConnectorLabel>
+        <name>Verify_Asset_is_Valid</name>
+        <label>Verify Asset is Valid</label>
+        <locationX>1434</locationX>
+        <locationY>271</locationY>
+        <defaultConnectorLabel>Asset Invalid</defaultConnectorLabel>
         <rules>
-            <name>Asset_available</name>
+            <name>Asset_is_Valid</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Asser_Id</leftValueReference>
+                <leftValueReference>Asset_Id</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>MaintenanceAssetId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Add_Asset_to_Maintenance_Plan</targetReference>
             </connector>
-            <label>Asset available</label>
+            <label>Asset is Valid</label>
         </rules>
     </decisions>
     <formulas>
@@ -117,12 +124,12 @@
     <recordCreates>
         <name>Add_Asset_to_Maintenance_Plan</name>
         <label>Add Asset to Maintenance Plan</label>
-        <locationX>1568</locationX>
-        <locationY>258</locationY>
+        <locationX>1718</locationX>
+        <locationY>260</locationY>
         <inputAssignments>
             <field>AssetId</field>
             <value>
-                <elementReference>Asser_Id</elementReference>
+                <elementReference>Asset_Id</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -140,6 +147,36 @@
         <object>MaintenanceAsset</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
+    <recordLookups>
+        <name>Check_if_Asset_Does_Not_Already_Related_to_Maintenance_Plan</name>
+        <label>Check if Asset Does Not Already Related to Maintenance Plan</label>
+        <locationX>1241</locationX>
+        <locationY>271</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Verify_Asset_is_Valid</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>MaintenancePlanId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Maintenance_Plan_Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>AssetId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Asset_Id</elementReference>
+            </value>
+        </filters>
+        <object>MaintenanceAsset</object>
+        <outputAssignments>
+            <assignToReference>MaintenanceAssetId</assignToReference>
+            <field>Id</field>
+        </outputAssignments>
+    </recordLookups>
     <recordLookups>
         <name>Find_Valid_Maintenance_Plan</name>
         <label>Find Valid Maintenance Plan</label>
@@ -159,7 +196,14 @@
         </filters>
         <filters>
             <field>StartDate</field>
-            <operator>GreaterThanOrEqualTo</operator>
+            <operator>LessThanOrEqualTo</operator>
+            <value>
+                <elementReference>TODAY</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>EndDate</field>
+            <operator>GreaterThan</operator>
             <value>
                 <elementReference>TODAY</elementReference>
             </value>
@@ -193,7 +237,7 @@
             <field>AccountId</field>
         </outputAssignments>
         <outputAssignments>
-            <assignToReference>Asser_Id</assignToReference>
+            <assignToReference>Asset_Id</assignToReference>
             <field>AssetId</field>
         </outputAssignments>
     </recordLookups>
@@ -239,7 +283,7 @@
         </filters>
         <object>WorkOrderLineItem</object>
         <outputAssignments>
-            <assignToReference>Asser_Id</assignToReference>
+            <assignToReference>Asset_Id</assignToReference>
             <field>AssetId</field>
         </outputAssignments>
         <outputAssignments>
@@ -263,7 +307,7 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>Asser_Id</name>
+        <name>Asset_Id</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
@@ -271,6 +315,13 @@
     </variables>
     <variables>
         <name>Maintenance_Plan_Id</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>MaintenanceAssetId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
