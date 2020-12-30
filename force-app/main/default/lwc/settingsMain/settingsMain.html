@@ -1,0 +1,345 @@
+<template>
+        <div class="main"  onscroll={onScroll}>
+            <lightning-card class="bgGray">
+                <h2 class="slds-p-around_large slds-text-heading_large bigTitle" >
+                    FSL Starter Kit Properties Selection
+                </h2>
+            </lightning-card>
+            <br/>
+            <lightning-card>
+                <lightning-card class="borderCls" >
+                    <div class="slds-p-horizontal_x-large">
+                        <h2
+                            class="slds-text-heading_small slds-m-bottom_small slds-p-horizontal_x-large" >
+                            <b> Status Base</b>
+                        </h2>
+                    </div>
+                    <div  class="slds-p-horizontal_x-large" style="display:flex;">
+                        <div class ="slds-col slds-size_2-of-3
+                             slds-p-horizontal_x-large slds-p-bottom_large" >
+                            <div class="leftCLineSB">
+                
+                                <div class="leftCLine">
+                                    <lightning-input   checked={fl_cb_1}
+                                                        class="cb"
+                                                        type="checkbox" 
+                                                        disabled={cbx_cb_Dis_1}
+                                                        label="Field Service Mobile Status Transition"
+                                                        onchange={onSB1Change}>
+                                    </lightning-input>
+                                </div>
+                                <div style={rightCLine} class="lgc-bg">
+                                    <lightning-helptext
+                                     content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div  class="slds-p-around_small cLineStyle ">
+                
+                                <div class="leftCLine">
+                                    <lightning-input   checked={fl_cb_2}
+                                                        class="cb"
+                                                        type="checkbox" 
+                                                        disabled={cbx_cb_Dis_2}
+                                                        label="Automatically Update Actual Start and Actual End Fields"
+                                                        onchange={onSB2Change}>
+                                    </lightning-input>
+                                </div>
+                                <div class="lgc-bg rightCLine">
+                                    <lightning-helptext
+                                     content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div  class="slds-p-around_small cLineStyle ">
+                
+                                <div class="leftCLine">
+                                    <lightning-input   checked={fl_cb_3}
+                                                        class="cb"
+                                                        type="checkbox"
+                                                        disabled={cbx_cb_Dis_3}
+                                                        label="Automatically Update Scheduled Start and Scheduled End Fields"
+                                                        onchange={onSB3Change}>
+                                    </lightning-input>
+                                </div>
+                                <div style={rightCLine} class="lgc-bg">
+                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                        </div>
+                        <div  class ="slds-col slds-size_1-of-3 slds-p-horizontal_x-large" style="display: flex;">  
+                            <div class="rightCardStyle">
+        
+                                <lightning-checkbox-group name="Checkbox Group"
+                                                    class="cb-st"
+                                                    label="Select Starting Status"
+                                                    options={getStatusStartList}
+                                                    value={startStValues}
+                                                    onchange={handleStartStChange}>
+                                </lightning-checkbox-group>
+                            </div>
+                            <div class="slds-p-horizontal_medium rightCardStyle">
+                                <lightning-checkbox-group name="Checkbox Group"
+                                                    class="cb-st"
+                                                    label="Select End Status"
+                                                    options={getStatusEndList}
+                                                    value={endStValues}
+                                                    onchange={handleEndStChange}>
+                                </lightning-checkbox-group>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-card>
+                
+                <lightning-card class="borderCls" >
+                    <div  class="slds-col slds-size_2-of-3 slds-p-horizontal_x-large" style={cardHeaderStyle}>
+                        <div  style={titleHeaderleft}>
+                            <h2  style={titleStyle}
+                                class="slds-text-heading_small slds-m-bottom_small slds-p-horizontal_x-large" >
+                                <b>Mobile Notification</b>
+                            </h2>
+                        </div>
+                        <div class="headerRight">
+                            <div class ="slds-p-around_xx-small txt-numOf">Numbers of Hours: &nbsp;</div>
+                                <lightning-input 
+                                    class="general-inp-num"
+                                    type="number" 
+                                    name="input1"
+                                    value= {num_of_h_mn}
+                                    >
+                                    </lightning-input>
+                                <lightning-input  data-id="toggleInputAvailability" 
+                                    type="toggle" 
+                                    label=""
+                                    onchange = {toggleChange}
+                                    name="input2">
+                                </lightning-input>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_2-of-3 slds-p-left_x-large ">
+                        <div class="slds-p-horizontal_x-large">
+                            <div >
+                                <div  class="slds-p-right_large mn_line cLineStyle">
+                    
+                                    <div class="leftCLine">  
+                                        <lightning-input   checked={fl_cb_mn_1}
+                                                            class="cb"
+                                                            type="checkbox" label="Dispatched Notification"
+                                                            onchange={onMN1ChecboxChange}
+                                                            disabled={cbx_nm_Dis_1}>
+                                        </lightning-input>
+                                    </div>
+                                    <div style={rightCLine} class="lgc-bg">
+                                        <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                        </lightning-helptext>
+                                    </div>
+                                </div>
+                                <div  class="slds-p-around_small cLineStyle ">
+                    
+                                    <div class="leftCLine">
+                                        <lightning-input   checked={fl_cb_mn_2}
+                                                            class="cb"
+                                                            type="checkbox" 
+                                                            disabled={cbx_nm_Dis_2}
+                                                            label="Emergency Dispatched Notification"
+                                                            onchange={onMN2ChecboxChange}>
+                                        </lightning-input>
+                                    </div>
+                                    <div style={rightCLine} class="lgc-bg">
+                                        <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                        </lightning-helptext>
+                                    </div>
+                                </div>
+                                <div  class="slds-p-around_small cLineStyle">
+                    
+                                    <div class="leftCLine">
+                                        <lightning-input   checked={fl_cb_mn_3}
+                                                            class="cb"
+                                                            type="checkbox"
+                                                            disabled={cbx_nm_Dis_3} 
+                                                            label="Cancelation Notification"
+                                                            onchange={onMN3ChecboxChange}>
+                                        </lightning-input>
+                                    </div>
+                                    <div style={rightCLine} class="lgc-bg">
+                                        <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                        </lightning-helptext>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-p-horizontal_medium rightCardStyle">
+                                
+                            </div>
+                        </div> 
+                    </div>
+                   
+                </lightning-card>
+        
+                <lightning-card class="borderCls" style={headTitleStyle}>
+                    <div  class="slds-col slds-size_2-of-3 slds-p-horizontal_x-large" style={cardHeaderStyle}>
+                        <h2  style={titleStyle}
+                            class="slds-text-heading_small slds-m-bottom_small slds-p-horizontal_x-large" >
+                            <b>General</b>
+                        </h2>
+                    </div>
+                    <div  class="slds-col slds-size_2-of-3 slds-p-left_x-large">
+                        <div class="slds-p-horizontal_x-large">
+                            <div class="slds-p-around_small leftCLineM">
+                                <div class="leftCLineGeneral">
+                                        <lightning-input  
+                                            checked={cb_g__1}
+                                            class="cb"
+                                            type="checkbox" 
+                                            label="Add Asset to Account Maintenance Plan"
+                                            onchange={onG1ChecboxChange}>
+                                        </lightning-input>
+                                </div>
+                                <div class="lgc-bg rightCLineWTgl">
+                                    <div class="headerRight">
+                                        <div class ="slds-p-around_xx-small" style={fontS}>Numbers of Days: &nbsp;</div>
+                                                <lightning-input 
+                                                    class="general-inp-num"
+                                                    type="number" 
+                                                    name="input1"
+                                                    disabled={num_of_d_inp_Dis}
+                                                    value= {num_of_days_g}
+                                                    >
+                                            </lightning-input>
+                                        <lightning-combobox
+                                            class = "genCmbStyle"
+                                            style=" margin-right: 5%; margin-left: 5%;"
+                                            name="progress"
+                                            label=""
+                                            disabled={num_of_d_inp_Dis}
+                                            value={g_status_selected}
+                                            placeholder="Success Installation"
+                                            options={statusesComplete}
+                                            onchange={handleChangeCmbx} >
+                                        </lightning-combobox>
+                            
+                                        <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                        </lightning-helptext>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+           
+                            <div  class="slds-p-around_small cLineStyle ">
+                
+                                <div class="leftCLine">
+                                    <lightning-input   checked={cb_g__2}
+                                                        class="cb"
+                                                        type="checkbox" 
+                                                        label="Field Service User Automation"
+                                                        onchange={onG2ChecboxChange}>
+                                    </lightning-input>
+                                </div>
+                                <div style={rightCLine} class="lgc-bg">
+                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div  class="slds-p-around_small cLineStyle" >
+                
+                                <div class="leftCLine">
+                                    <lightning-input   checked={cb_g__3}
+                                                        class="cb"
+                                                        type="checkbox" 
+                                                        label="Exclude Service Resources on Service Appointment Rejection"
+
+                                                        onchange={onG3ChecboxChange}>
+                                    </lightning-input>
+                                </div>
+                                <div style={rightCLine} class="lgc-bg">
+                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div  class="slds-p-around_small  cLineStyle">
+                
+                                <div class="leftCLine">
+                                    <lightning-input   checked={cb_g__4}
+                                                        class="cb"
+                                                        type="checkbox" 
+                                                        label="Populate Custom Service Resource Lookup on the Service Appointment Record"
+
+                                                        onchange={onG4ChecboxChange}>
+                                    </lightning-input>
+                                </div>
+                                <div style={rightCLine} class="lgc-bg">
+                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div  class="slds-p-around_small  cLineStyle">
+                
+                                <div class="leftCLine">
+                                    <lightning-input   checked={cb_g__5}
+                                                        class="cb"
+                                                        type="checkbox"
+                                                        label="Populate Custom Work Order Lookup with the Service Appointment Parent ID"
+
+                                                        onchange={onG5ChecboxChange}>
+                                    </lightning-input>
+                                </div>
+                                <div style={rightCLine} class="lgc-bg">
+                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div  class="slds-p-around_small  cLineStyle">
+                
+                                <div class="leftCLine">
+                                    <lightning-input   checked={cb_g__6}
+                                                        class="cb"
+                                                        type="checkbox"
+                                                        label="Automatically Set the Gantt Label Field"
+                                                        onchange={onG6ChecboxChange}>
+                                    </lightning-input>
+                                </div>
+                                <div style={rightCLine} class="lgc-bg">
+                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                            <div  class="slds-p-around_small  cLineStyle">
+                
+                                <div class="leftCLine">
+                                    <lightning-input   checked={cb_g__7}
+                                                        class="cb"
+                                                        type="checkbox"
+                                                        label="Resource Deactivation"
+                                                        onchange={onG7ChecboxChange}>
+                                    </lightning-input>
+                                </div>
+                                <div style={rightCLine} class="lgc-bg">
+                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-p-horizontal_medium"  style={rightCardStyle}>
+                            
+                        </div>
+                    </div> 
+                </lightning-card>
+            </lightning-card>
+           
+        </div> 
+      
+            <div class="toTheTop">
+                <span>
+                    <button class="slds-button slds-button--neutral">
+                        Cancel</button>
+                    <button 
+                        class="slds-button slds-button--brand"
+                        onclick={saveData}>
+                        Save
+                    </button>
+                </span>     
+            </div>
+      
+</template>
