@@ -11,14 +11,15 @@ public with sharing class FSK_SettingsPageCtrlTest {
         
         Test.startTest();   
         FSK_FSL_Starter_Kit__c sk = FSK_FSL_Starter_Kit__c.getOrgDefaults();
-        FSK_FSL_Starter_Kit__c skTest = FSK_SettingsPageCtrl.getSK_SettingsCSFromOrg();
+        FSK_SettingsPageCtrl.SKsettingsWrapper skTest = FSK_SettingsPageCtrl.getSK_SettingsCSFromOrg();
         
         System.assertNotEquals(skTest, null);
-        skTest.Actual_Times_on_Gantt__c = true;
+        skTest.actualTimesOnGantt = true;
+        skTest.setGanttLabel = true;
         FSK_SettingsPageCtrl.saveSkSettings(skTest);   
-        FSK_FSL_Starter_Kit__c skTestUpdated = FSK_SettingsPageCtrl.getSK_SettingsCSFromOrg();
+        FSK_SettingsPageCtrl.SKsettingsWrapper skTestUpdated = FSK_SettingsPageCtrl.getSK_SettingsCSFromOrg();
 
-        System.assertEquals(skTest.Actual_Times_on_Gantt__c, skTestUpdated.Actual_Times_on_Gantt__c);
+        System.assertEquals(skTest.actualTimesOnGantt, skTestUpdated.actualTimesOnGantt);
 
         Test.stopTest();
 
