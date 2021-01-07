@@ -125,7 +125,7 @@
         <name>Add_Asset_to_Maintenance_Plan</name>
         <label>Add Asset to Maintenance Plan</label>
         <locationX>1718</locationX>
-        <locationY>260</locationY>
+        <locationY>261</locationY>
         <inputAssignments>
             <field>AssetId</field>
             <value>
@@ -203,7 +203,7 @@
         </filters>
         <filters>
             <field>EndDate</field>
-            <operator>GreaterThan</operator>
+            <operator>GreaterThanOrEqualTo</operator>
             <value>
                 <elementReference>TODAY</elementReference>
             </value>

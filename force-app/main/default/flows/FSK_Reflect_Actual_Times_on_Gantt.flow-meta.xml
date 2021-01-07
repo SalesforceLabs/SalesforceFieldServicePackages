@@ -99,7 +99,15 @@
         </outputAssignments>
         <outputAssignments>
             <assignToReference>RecordDurationInMinutes</assignToReference>
-            <field>FSL__Duration_In_Minutes__c</field>
+            <field>DurationInMinutes</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>Mobile_End_Time</assignToReference>
+            <field>FSK_Mobile_End_Time__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>Mobile_Start_Time</assignToReference>
+            <field>FSK_Mobile_Start_Time__c</field>
         </outputAssignments>
         <outputAssignments>
             <assignToReference>RecordSchedEndTime</assignToReference>
@@ -136,8 +144,8 @@
         <description>Set the value of the Actual Start on the Scheduled Start in order to reflect it on the Gantt</description>
         <name>Set_Actual_Start_on_Scheduled_Start</name>
         <label>Set Actual Start on Scheduled Start</label>
-        <locationX>1202</locationX>
-        <locationY>51</locationY>
+        <locationX>1430</locationX>
+        <locationY>50</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>

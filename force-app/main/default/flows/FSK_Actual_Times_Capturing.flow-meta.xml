@@ -30,7 +30,7 @@
     <decisions>
         <name>Values_Validation_for_End</name>
         <label>Values Validation for End</label>
-        <locationX>727</locationX>
+        <locationX>726</locationX>
         <locationY>304</locationY>
         <defaultConnector>
             <targetReference>Set_Actual_End_With_Fixed_Values</targetReference>
@@ -79,8 +79,8 @@
             <name>Correct_Values0</name>
             <conditionLogic>1 OR (2 AND 3)</conditionLogic>
             <conditions>
-                <leftValueReference>RecordActualStart</leftValueReference>
-                <operator>LessThan</operator>
+                <leftValueReference>NOW</leftValueReference>
+                <operator>GreaterThan</operator>
                 <rightValue>
                     <elementReference>RecordActualEnd</elementReference>
                 </rightValue>
@@ -108,9 +108,19 @@
     <description>This flow is part of the FSL Starter Kit.
 It contains all the processes relates to the Service Appointment Object</description>
     <formulas>
+        <name>Actual_End_for_Fixed_Start</name>
+        <dataType>DateTime</dataType>
+        <expression>{!Actual_Start_To_Set} + ({!Record_Diration_In_Minutes}/1440)</expression>
+    </formulas>
+    <formulas>
         <name>Actual_End_To_Set</name>
         <dataType>DateTime</dataType>
         <expression>IF({!MobileTimes}, {!Mobile_End_Time}, {!NOW})</expression>
+    </formulas>
+    <formulas>
+        <name>Actual_Start_for_Fixed_End</name>
+        <dataType>DateTime</dataType>
+        <expression>{!Actual_End_To_Set} - ({!Record_Diration_In_Minutes}/1440)</expression>
     </formulas>
     <formulas>
         <name>Actual_Start_To_Set</name>
@@ -194,12 +204,16 @@ This flow sets the actual start and actual end time according to custom setting 
             <assignToReference>Mobile_Start_Time</assignToReference>
             <field>FSK_Mobile_Start_Time__c</field>
         </outputAssignments>
+        <outputAssignments>
+            <assignToReference>Record_Diration_In_Minutes</assignToReference>
+            <field>FSL__Duration_In_Minutes__c</field>
+        </outputAssignments>
     </recordLookups>
     <recordUpdates>
         <name>Set_Actual_End_With_Fixed_Values</name>
         <label>Set Actual End With Fixed Values</label>
-        <locationX>735</locationX>
-        <locationY>520</locationY>
+        <locationX>736</locationX>
+        <locationY>519</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -223,7 +237,7 @@ This flow sets the actual start and actual end time according to custom setting 
         <inputAssignments>
             <field>ActualStartTime</field>
             <value>
-                <elementReference>EmptyDate</elementReference>
+                <elementReference>Actual_Start_for_Fixed_End</elementReference>
             </value>
         </inputAssignments>
         <object>ServiceAppointment</object>
@@ -231,8 +245,8 @@ This flow sets the actual start and actual end time according to custom setting 
     <recordUpdates>
         <name>Set_Actual_Start_With_Fixed_Values</name>
         <label>Set Actual Start With Fixed Values</label>
-        <locationX>1208</locationX>
-        <locationY>206</locationY>
+        <locationX>1210</locationX>
+        <locationY>214</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -250,7 +264,7 @@ This flow sets the actual start and actual end time according to custom setting 
         <inputAssignments>
             <field>ActualEndTime</field>
             <value>
-                <elementReference>EmptyDate</elementReference>
+                <elementReference>Actual_Start_for_Fixed_End</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -350,6 +364,14 @@ This flow sets the actual start and actual end time according to custom setting 
         <value>
             <booleanValue>false</booleanValue>
         </value>
+    </variables>
+    <variables>
+        <name>Record_Diration_In_Minutes</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
     </variables>
     <variables>
         <name>RecordActualEnd</name>
