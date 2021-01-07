@@ -90,6 +90,14 @@
         </filters>
         <object>ServiceAppointment</object>
         <outputAssignments>
+            <assignToReference>Mobile_End_Time</assignToReference>
+            <field>FSK_Mobile_End_Time__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>Mobile_Start_Time</assignToReference>
+            <field>FSK_Mobile_Start_Time__c</field>
+        </outputAssignments>
+        <outputAssignments>
             <assignToReference>RecordDurationInMinutes</assignToReference>
             <field>DurationInMinutes</field>
         </outputAssignments>

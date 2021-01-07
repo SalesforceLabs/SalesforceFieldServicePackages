@@ -136,6 +136,11 @@ It contains all the processes relates to the Service Appointment Object</descrip
         <scale>2</scale>
     </formulas>
     <formulas>
+        <name>EmptyDate</name>
+        <dataType>DateTime</dataType>
+        <expression>DATETIMEVALUE(&quot;&quot;)</expression>
+    </formulas>
+    <formulas>
         <description>This formula returns the current time as date/time</description>
         <name>NOW</name>
         <dataType>DateTime</dataType>
