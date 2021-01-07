@@ -20,8 +20,8 @@ export default class SettingsMain extends LightningElement {
     @track endStValues = [];
     @track h ;
     
-    @track  excludeCategoriesStart = ['Completed', 'CannotComplete'];
-    @track  excludeCategoriesEnd = ['Scheduled', 'Dispatched', 'InProgress'];
+    @track  excludeCategoriesStart = ['None', 'Canceled', 'Completed', 'CannotComplete'];
+    @track  excludeCategoriesEnd = ['None', 'Canceled', 'Scheduled', 'Dispatched', 'InProgress'];
     @track  excludeCategoriesComplete = ['None', 'Scheduled', 'Dispatched', 'InProgress',
                                         'Canceled','None' , 'CannotComplete'];
 
