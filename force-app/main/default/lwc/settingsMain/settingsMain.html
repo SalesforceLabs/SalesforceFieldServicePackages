@@ -1,8 +1,12 @@
 <template>
         <div class="main"  onscroll={onScroll}>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                </lightning-spinner>
+           </template>
             <lightning-card class="bgGray">
                 <h2 class="slds-p-around_large slds-text-heading_large bigTitle" >
-                    FSL Starter Kit Properties Selection
+                    Field Service Starter Kit Properties Selection
                 </h2>
             </lightning-card>
             <br/>
@@ -11,7 +15,7 @@
                     <div class="slds-p-horizontal_x-large">
                         <h2
                             class="slds-text-heading_small slds-m-bottom_small slds-p-horizontal_x-large" >
-                            <b> Status Base</b>
+                            <b> Status Based Flows</b>
                         </h2>
                     </div>
                     <div  class="slds-p-horizontal_x-large" style="display:flex;">
@@ -24,13 +28,13 @@
                                                         class="cb"
                                                         type="checkbox" 
                                                         disabled={cbx_cb_Dis_1}
-                                                        label="Field Service Mobile Status Transition"
+                                                        label="Status Transition (Field Service Mobile Flow)"
                                                         onchange={onSB1Change}>
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
                                     <lightning-helptext
-                                     content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                     content="A Field Salesforce Mobile flow that allows service resources to update the service appointment status field. This flow is a prerequisite for all other Status Based Flows in the package in case you want to have offline support.">
                                     </lightning-helptext>
                                 </div>
                             </div>
@@ -41,14 +45,14 @@
                                                         class="cb"
                                                         type="checkbox" 
                                                         disabled={cbx_cb_Dis_2}
-                                                        label="Automatically Update Actual Start and Actual End Fields"
+                                                        label="Automatically update the Actual Start and Actual End fields"
                                                         onchange={onSB2Change}>
                                     </lightning-input>
                                 </div>
                                 <div class="lgc-bg rightCLine">
                                     <lightning-helptext
-                                     content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
-                                    </lightning-helptext>
+                                    content="This flow updates the Actual Start and Actual End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                </lightning-helptext>
                                 </div>
                             </div>
                             <div  class="slds-p-around_small cLineStyle ">
@@ -58,31 +62,31 @@
                                                         class="cb"
                                                         type="checkbox"
                                                         disabled={cbx_cb_Dis_3}
-                                                        label="Automatically Update Scheduled Start and Scheduled End Fields"
+                                                        label="Automatically update the Scheduled Start and Scheduled End fields"
                                                         onchange={onSB3Change}>
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
-                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
-                                    </lightning-helptext>
+                                    <lightning-helptext 
+                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                </lightning-helptext>
                                 </div>
                             </div>
                         </div>
                         <div  class ="slds-col slds-size_1-of-3 slds-p-horizontal_x-large" style="display: flex;">  
                             <div class="rightCardStyle">
-        
                                 <lightning-checkbox-group name="Checkbox Group"
                                                     class="cb-st"
-                                                    label="Select Starting Status"
+                                                    label="Select starting status"
                                                     options={getStatusStartList}
                                                     value={startStValues}
                                                     onchange={handleStartStChange}>
                                 </lightning-checkbox-group>
                             </div>
-                            <div class="slds-p-horizontal_medium rightCardStyle">
+                            <div class="slds-p-horizontal_medium rightCardStyle"> 
                                 <lightning-checkbox-group name="Checkbox Group"
                                                     class="cb-st"
-                                                    label="Select End Status"
+                                                    label="Select ending status"
                                                     options={getStatusEndList}
                                                     value={endStValues}
                                                     onchange={handleEndStChange}>
@@ -97,23 +101,26 @@
                         <div  style={titleHeaderleft}>
                             <h2  style={titleStyle}
                                 class="slds-text-heading_small slds-m-bottom_small slds-p-horizontal_x-large" >
-                                <b>Mobile Notification</b>
+                                <b>Mobile Notifications</b>
                             </h2>
                         </div>
                         <div class="headerRight">
-                            <div class ="slds-p-around_xx-small txt-numOf">Numbers of Hours: &nbsp;</div>
-                                <lightning-input 
+                            <div class ="slds-p-around_xx-small txt-numOf">Hours before the appointment start time: &nbsp;</div>
+                            <lightning-input 
                                     class="general-inp-num"
                                     type="number" 
                                     name="input1"
-                                    value= {num_of_h_mn}
+                                    onchange={handleNumOfHChange}
+                                    value={num_of_h_mn}
+                                    disabled={cbx_nm_Dis_1}
                                     >
                                     </lightning-input>
                                 <lightning-input  data-id="toggleInputAvailability" 
                                     type="toggle" 
                                     label=""
                                     onchange = {toggleChange}
-                                    name="input2">
+                                    name="input2"
+                                    checked={mobileCannedCustomNotification}>
                                 </lightning-input>
                         </div>
                     </div>
@@ -131,7 +138,8 @@
                                         </lightning-input>
                                     </div>
                                     <div style={rightCLine} class="lgc-bg">
-                                        <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                        <lightning-helptext 
+                                        content="Push notifications should only be sent when they are relevant. This setting ensures that a push notification will only be sent to the mobile device if the appointment is scheduled to start before the specified number of hours.">
                                         </lightning-helptext>
                                     </div>
                                 </div>
@@ -141,13 +149,14 @@
                                         <lightning-input   checked={fl_cb_mn_2}
                                                             class="cb"
                                                             type="checkbox" 
-                                                            disabled={cbx_nm_Dis_2}
+                                                            disabled={cbx_nm_Dis_1}
                                                             label="Emergency Dispatched Notification"
                                                             onchange={onMN2ChecboxChange}>
                                         </lightning-input>
                                     </div>
                                     <div style={rightCLine} class="lgc-bg">
-                                        <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                        <lightning-helptext 
+                                        content="Push notifications should only be sent when they are relevant. This setting ensures that a push notification will only be sent to the mobile device if the appointment is scheduled to start before the specified number of hours.">
                                         </lightning-helptext>
                                     </div>
                                 </div>
@@ -157,13 +166,14 @@
                                         <lightning-input   checked={fl_cb_mn_3}
                                                             class="cb"
                                                             type="checkbox"
-                                                            disabled={cbx_nm_Dis_3} 
+                                                            disabled={cbx_nm_Dis_1} 
                                                             label="Cancelation Notification"
                                                             onchange={onMN3ChecboxChange}>
                                         </lightning-input>
                                     </div>
                                     <div style={rightCLine} class="lgc-bg">
-                                        <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                        <lightning-helptext
+                                        content="Push notifications should only be sent when they are relevant. This setting ensures that a push notification will only be sent to the mobile device if the appointment is scheduled to start before the specified number of hours.">
                                         </lightning-helptext>
                                     </div>
                                 </div>
@@ -205,6 +215,7 @@
                                                     name="input1"
                                                     disabled={num_of_d_inp_Dis}
                                                     value= {num_of_days_g}
+                                                    onchange={handleNumOfDaysChange}
                                                     >
                                             </lightning-input>
                                         <lightning-combobox
@@ -219,7 +230,8 @@
                                             onchange={handleChangeCmbx} >
                                         </lightning-combobox>
                             
-                                        <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
+                                        <lightning-helptext 
+                                        content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
                                         </lightning-helptext>
                                     </div>
                                     
@@ -237,8 +249,9 @@
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
-                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
-                                    </lightning-helptext>
+                                    <lightning-helptext
+                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                </lightning-helptext>
                                 </div>
                             </div>
                             <div  class="slds-p-around_small cLineStyle" >
@@ -253,8 +266,9 @@
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
-                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
-                                    </lightning-helptext>
+                                    <lightning-helptext 
+                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                </lightning-helptext>
                                 </div>
                             </div>
                             <div  class="slds-p-around_small  cLineStyle">
@@ -269,8 +283,9 @@
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
-                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
-                                    </lightning-helptext>
+                                    <lightning-helptext
+                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                </lightning-helptext>
                                 </div>
                             </div>
                             <div  class="slds-p-around_small  cLineStyle">
@@ -285,8 +300,9 @@
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
-                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
-                                    </lightning-helptext>
+                                    <lightning-helptext
+                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                </lightning-helptext>
                                 </div>
                             </div>
                             <div  class="slds-p-around_small  cLineStyle">
@@ -300,12 +316,12 @@
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
-                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
-                                    </lightning-helptext>
+                                    <lightning-helptext 
+                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                </lightning-helptext>
                                 </div>
                             </div>
                             <div  class="slds-p-around_small  cLineStyle">
-                
                                 <div class="leftCLine">
                                     <lightning-input   checked={cb_g__7}
                                                         class="cb"
@@ -315,14 +331,13 @@
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
-                                    <lightning-helptext content="Automatically update the Scheduled /End time fields which represent the start and end time of the Service Appointment on the Gantt Chart in the Dispatcher Console.">
-                                    </lightning-helptext>
+                                    <lightning-helptext 
+                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                </lightning-helptext>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="slds-p-horizontal_medium"  style={rightCardStyle}>
-                            
                         </div>
                     </div> 
                 </lightning-card>
@@ -332,8 +347,7 @@
       
             <div class="toTheTop">
                 <span>
-                    <button class="slds-button slds-button--neutral">
-                        Cancel</button>
+                    
                     <button 
                         class="slds-button slds-button--brand"
                         onclick={saveData}>

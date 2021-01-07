@@ -1,12 +1,17 @@
-import { LightningElement,track} from 'lwc';
+import { LightningElement,track,api} from 'lwc';
 import getStatuses from '@salesforce/apex/FSK_SAStatusCheckboxGroupController.getAppointmentStatus';
 import loadFSLSKSettings from '@salesforce/apex/FSK_SettingsPageCtrl.getSK_SettingsCSFromOrg';
 import saveSkSettingsData from '@salesforce/apex/FSK_SettingsPageCtrl.saveSkSettings';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
 
 import { loadStyle } from 'lightning/platformResourceLoader';
 import RewriteLWC from '@salesforce/resourceUrl/FSK_settingsMainExCss';
 
+//TODO:change name g_.
 export default class SettingsMain extends LightningElement {
+    @track isLoading = false;
+
     @track sk_cs_settings;
     @track sk_cs_settings_2;
     @track scrolled = 0;
@@ -15,8 +20,8 @@ export default class SettingsMain extends LightningElement {
     @track endStValues = [];
     @track h ;
     
-    @track  excludeCategoriesStart = ['Canceled','None' ,'Completed', 'CannotComplete'];
-    @track  excludeCategoriesEnd = ['None', 'Scheduled', 'Dispatched', 'InProgress'];
+    @track  excludeCategoriesStart = ['None', 'Canceled', 'Completed', 'CannotComplete'];
+    @track  excludeCategoriesEnd = ['None', 'Canceled', 'Scheduled', 'Dispatched', 'InProgress'];
     @track  excludeCategoriesComplete = ['None', 'Scheduled', 'Dispatched', 'InProgress',
                                         'Canceled','None' , 'CannotComplete'];
 
@@ -54,7 +59,7 @@ export default class SettingsMain extends LightningElement {
     @track cb_g__7;
 
     //combobox
-    @track g_status_selected;
+    @track g_status_selected = 'Completed';
 
     @track stEndValues = [];
     @track stStartValues = [];
@@ -118,11 +123,16 @@ export default class SettingsMain extends LightningElement {
     async getCS(){
         await this.getCustomSettingsSk(); 
         console.log('customSettingsSK == > ' + this.sk_cs_settings);
+        console.log('this.statusesStart == > ' + this.statusesStart);
+        console.log('this.statusesEnd == > ' + this.statusesEnd);
+
         try {
             if(this.statusesStart != null && this.statusesEnd != null ){
                await this.setSK_CSTOPage();
             }
         } catch (error) {
+            console.log('in error == > ' + JSON.parse(JSON.stringify(error.getMessage())));
+
             console.log(Error);
         } 
     }
@@ -131,7 +141,7 @@ export default class SettingsMain extends LightningElement {
        await loadFSLSKSettings().then(result => {
             this.sk_cs_settings = result;
             this.error = undefined;
-            console.log('statusesSsk_cs_settingstart ==> ' ,
+            console.log('statusesSsk_cs_settings ==> ' ,
              JSON.parse(JSON.stringify(this.sk_cs_settings))); 
              return result;   
         }).catch(error => {
@@ -140,56 +150,74 @@ export default class SettingsMain extends LightningElement {
         });
     }
     async setSK_CSTOPage(){
-        this.fl_cb_1 = this.sk_cs_settings.Mobile_Status_Satiation__c;
-        this.fl_cb_2 = this.sk_cs_settings.ActualTimes__c;
-        this.fl_cb_3= this.sk_cs_settings.Actual_Times_on_Gantt__c;
+        console.log('setSK_CSTOPage == > ' + JSON.stringify(this.sk_cs_settings) );
+
+        this.fl_cb_1 = this.sk_cs_settings.mobileStatusSatiation;
+        this.fl_cb_2 = this.sk_cs_settings.actualTimes;
+        this.fl_cb_3= this.sk_cs_settings.actualTimesOnGantt;
 
         //Statuses wired 2 + wired 1 
-        this.setStatusesOnStatusBase(this.sk_cs_settings.StartingStatus__c,'START');
-  
-        this.setStatusesOnStatusBase(this.sk_cs_settings.EndingStatus__c,'END');
+        if(this.sk_cs_settings.startingStatus != null ) {
+            this.setStatusesOnStatusBase(this.sk_cs_settings.startingStatus,'START');
+            }
+        if(this.sk_cs_settings.endingStatus != null){
+            this.setStatusesOnStatusBase(this.sk_cs_settings.endingStatus,'END');
+        }
 
         //Mobile notifictaion
-        this.num_of_h_mn = this.sk_cs_settings.Hours_for_Dispatched_Notification__c;
-        this.fl_cb_mn_1 = this.sk_cs_settings.Dispatched_Notification__c;
-        this.fl_cb_mn_2 = this.sk_cs_settings.Emergency_Dispatched_Notification__c;
-        this.fl_cb_mn_3 = this.sk_cs_settings.Cancelation_Notification__c;
+        this.mobileCannedCustomNotification = this.sk_cs_settings.mobileCannedCustomNotification;
+        this.cbx_nm_Dis_1 = !this.mobileCannedCustomNotification;
+        this.num_of_h_mn = this.sk_cs_settings.hoursforDispNotif;
+
+        this.fl_cb_mn_1 = this.sk_cs_settings.dispatchedNotification;
+        this.fl_cb_mn_2 = this.sk_cs_settings.emerDispatchedNotification;
+        this.fl_cb_mn_3 = this.sk_cs_settings.cancelationNotification;
 
         //General 
-        this.num_of_days_g = this.sk_cs_settings.Days_Until_First_Maintenance__c;
-        this.cb_g__1 = this.sk_cs_settings.Add_Asset_to_Maintenance_Plan__c;
+        this.num_of_days_g = this.sk_cs_settings.daysUntilFirstMain;
+        this.cb_g__1 = this.sk_cs_settings.addAssetToMaintenancePlan;
+        this.cb_g__2 = this.sk_cs_settings.createFSLResourceFromUser;
+        this.cb_g__3 = this.sk_cs_settings.excludedSROnSARejection;
+        this.cb_g__4 = this.sk_cs_settings.assignResourceOnServiceAppointment;
+        this.cb_g__5 = this.sk_cs_settings.populateWorkOrderLookup;
+        this.cb_g__6 = this.sk_cs_settings.setGanttLabel;
+        this.cb_g__7 = this.sk_cs_settings.removeLicensesOnDeactivation; 
         this.num_of_d_inp_Dis = !this.cb_g__1;
-        this.cb_g__2 = this.sk_cs_settings.Create_FSL_Resource_From_User__c;
-        this.cb_g__3 = this.sk_cs_settings.Excluded_SR_on_SA_Rejection__c;
-        this.cb_g__4 = this.sk_cs_settings.Excluded_SR_on_SA_Rejection__c;
-        this.cb_g__5 = this.sk_cs_settings.Populate_Work_Order_Lookup__c;
-        this.cb_g__6 = this.sk_cs_settings.Populate_Work_Order_Lookup__c;
-        this.cb_g__7 = this.sk_cs_settings.Set_Gantt_Label__c; 
     }
    
     async buildData(){
         //Clone for update
         this.sk_cs_settings_2 = JSON.parse(JSON.stringify(this.sk_cs_settings));
 
-        this.sk_cs_settings_2.Hours_for_Dispatched_Notification__c = this.num_of_h_mn;
-        this.sk_cs_settings_2.Mobile_Status_Satiation__c = this.fl_cb_1;
-        this.sk_cs_settings_2.ActualTimes__c = this.fl_cb_2;
-        this.sk_cs_settings_2.Actual_Times_on_Gantt__c = this.fl_cb_3;
+        this.sk_cs_settings_2.hoursforDispNotif = this.num_of_h_mn;
 
-        this.sk_cs_settings_2.Dispatched_Notification__c = this.fl_cb_mn_1;
-        this.sk_cs_settings_2.Emergency_Dispatched_Notification__c = this.fl_cb_mn_2;
-        this.sk_cs_settings_2.Cancelation_Notification__c = this.fl_cb_mn_3;
+        this.sk_cs_settings_2.mobileStatusSatiation = this.fl_cb_1;
+        this.sk_cs_settings_2.actualTimes = this.fl_cb_2;
+        this.sk_cs_settings_2.actualTimesOnGantt = this.fl_cb_3;
 
-        this.sk_cs_settings_2.Days_Until_First_Maintenance__c = this.num_of_days_g;
-        this.sk_cs_settings_2.Successful_Asset_Installation_Status__c = this.g_status_selected;
+        console.log('start st == > ' + this.startStValues.toString());
+        console.log('end st == > ' + this.endStValues.toString());
 
-        this.sk_cs_settings_2.Add_Asset_to_Maintenance_Plan__c = this.cb_g__1;
-        this.sk_cs_settings_2.Create_FSL_Resource_From_User__c = this.cb_g__2;
-        this.sk_cs_settings_2.Excluded_SR_on_SA_Rejection__c = this.cb_g__3;
-        this.sk_cs_settings_2.Populate_Work_Order_Lookup__c = this.cb_g__4;
-        this.sk_cs_settings_2.Populate_Work_Order_Lookup__c = this.cb_g__5;
-        this.sk_cs_settings_2.Set_Gantt_Label__c = this.cb_g__6;
-        console.log('data to save == >' +  JSON.stringify(this.sk_cs_settings_2));        
+        this.sk_cs_settings_2.startingStatus = this.startStValues.toString();
+        this.sk_cs_settings_2.endingStatus = this.endStValues.toString();
+
+        this.sk_cs_settings.mobileCannedCustomNotification = this.mobileCannedCustomNotification;
+        this.sk_cs_settings_2.dispatchedNotification = this.fl_cb_mn_1;
+        this.sk_cs_settings_2.emerDispatchedNotification = this.fl_cb_mn_2;
+        this.sk_cs_settings_2.cancelationNotification = this.fl_cb_mn_3;
+
+        this.sk_cs_settings_2.daysUntilFirstMain = this.num_of_days_g;
+        this.sk_cs_settings_2.successfulAssetInstallation = this.g_status_selected;
+
+        this.sk_cs_settings_2.addAssetToMaintenancePlan = this.cb_g__1;
+        this.sk_cs_settings_2.createFSLResourceFromUser = this.cb_g__2;
+        this.sk_cs_settings_2.excludedSROnSARejection = this.cb_g__3;
+        this.sk_cs_settings_2.assignResourceOnServiceAppointment = this.cb_g__4;
+        this.sk_cs_settings_2.populateWorkOrderLookup = this.cb_g__5;
+        this.sk_cs_settings_2.setGanttLabel = this.cb_g__6;
+        this.sk_cs_settings_2.removeLicensesOnDeactivation = this.cb_g__7;
+
+        console.log('data to save == >1' +  JSON.stringify(this.sk_cs_settings_2));        
     }
     async saveData(){
         await this.buildData();
@@ -197,7 +225,25 @@ export default class SettingsMain extends LightningElement {
     }
 
     async savePageSettings(){
-        await saveSkSettingsData({skToUpsert : this.sk_cs_settings_2});
+        this.isLoading = true;
+        console.log('data to save == >2' +  JSON.stringify(this.sk_cs_settings_2));        
+
+        await saveSkSettingsData({skWrapperObj : this.sk_cs_settings_2})
+        .then(result => {
+            console.log('result 44 == >' +JSON.stringify(result));
+            this.isLoading = false;
+            const event = new ShowToastEvent({
+                title: result.msg,
+                variant: result.status ? 'success' : 'error'
+            });
+            this.dispatchEvent(event);
+        })
+        .catch(error => {
+            console.log('error 44 == >' +JSON.stringify(error));
+
+            this.error = error;
+            this.isLoading = false;
+        });
     }
 
      setStatusesOnStatusBase(backendStatuses, token){  
@@ -230,10 +276,18 @@ export default class SettingsMain extends LightningElement {
     get getStatusStartList(){
         return this.statusesStart != ''? this.statusesStart : '';
     }
+    
+    handleNumOfHChange(e) {
+        this.num_of_h_mn = e.detail.value;
+    }
+    handleNumOfDaysChange(e) {
+        this.num_of_days_g = e.detail.value;
+    }
     toggleChange(){
+        this.mobileCannedCustomNotification = !this.mobileCannedCustomNotification;
         this.cbx_nm_Dis_1 = !this.cbx_nm_Dis_1; 
-        this.cbx_nm_Dis_2 = !this.cbx_nm_Dis_2; 
-        this.cbx_nm_Dis_3 = !this.cbx_nm_Dis_3; 
+        // this.cbx_nm_Dis_2 = !this.cbx_nm_Dis_2;
+        // this.cbx_nm_Dis_3 = !this.cbx_nm_Dis_3; 
     }
 
     //Mobile Notification
@@ -278,10 +332,10 @@ export default class SettingsMain extends LightningElement {
     }
 
     handleEndStChange(e) {
-        this.stEndValues = e.detail.value;
+        this.endStValues = e.detail.value;
     }
     handleStartStChange(e) {
-        this.stStartValues = e.detail.value;
+        this.startStValues = e.detail.value;
     }
 
     getStatusStart1(){
