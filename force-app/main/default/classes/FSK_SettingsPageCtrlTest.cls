@@ -15,14 +15,13 @@ public with sharing class FSK_SettingsPageCtrlTest {
         
         System.assertNotEquals(skTest, null);
         skTest.actualTimesOnGantt = true;
-        skTest.setGanttLabel = true;
+        skTest.removeLicensesOnDeactivation = true;
         FSK_SettingsPageCtrl.saveSettings(skTest);   
         FSK_SettingsWrapper skTestUpdated = FSK_SettingsPageCtrl.getSettings();
 
         System.assertEquals(skTest.actualTimesOnGantt, skTestUpdated.actualTimesOnGantt);
 
         Test.stopTest();
-
      }
     
 }
