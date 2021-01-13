@@ -4,93 +4,14 @@
  */
 public with sharing class FSK_SettingsPageCtrl {
 
-    public class SKsettingsWrapper{
-
-        @AuraEnabled public String Id {get;set;}
-
-        //First section -status Base Flow
-        @AuraEnabled public boolean mobileStatusSatiation {get;set;}
-        @AuraEnabled public boolean actualTimes {get;set;}
-        @AuraEnabled public boolean actualTimesOnGantt {get;set;}
-    
-        //First section  - Status 
-        @AuraEnabled public String startingStatus {get;set;}
-        @AuraEnabled public String endingStatus {get;set;}
-
-        //second section - Mobile notifications
-        @AuraEnabled public boolean mobileCannedCustomNotification {get;set;}
-        @AuraEnabled public Decimal hoursforDispNotif {get;set;}
-
-        @AuraEnabled public boolean dispatchedNotification {get;set;}
-        @AuraEnabled public boolean emerDispatchedNotification {get;set;}
-        @AuraEnabled public boolean cancelationNotification {get;set;}
-
-        //Third section General
-        @AuraEnabled public Decimal daysUntilFirstMain {get;set;}
-        @AuraEnabled public String successfulAssetInstallation {get;set;}
-
-        @AuraEnabled public boolean addAssetToMaintenancePlan {get;set;}
-        @AuraEnabled public boolean createFSLResourceFromUser {get;set;}
-        @AuraEnabled public boolean excludedSROnSARejection {get;set;}
-        @AuraEnabled public boolean assignResourceOnServiceAppointment {get;set;}
-        @AuraEnabled public boolean populateWorkOrderLookup {get;set;}
-        @AuraEnabled public boolean setGanttLabel {get;set;}
-        @AuraEnabled public boolean removeLicensesOnDeactivation {get;set;}
-
-        public SKsettingsWrapper(){
-            this.Id = null;
-            this.mobileStatusSatiation = false;
-            this.actualTimes = false;
-            this.actualTimesOnGantt = false;
-
-            //First section  - Status 
-            this.startingStatus = '';
-            this.endingStatus = '';
-
-            //second section - Mobile notifications
-            this.hoursforDispNotif = 0;
-
-            this.dispatchedNotification = false;
-            this.emerDispatchedNotification = false;
-            this.cancelationNotification = false;
-
-            //Third section General
-            this.daysUntilFirstMain= 0;
-            this.successfulAssetInstallation = '';
-
-            this.addAssetToMaintenancePlan = false;
-            this.createFSLResourceFromUser = false;
-            this.excludedSROnSARejection = false;
-            this.assignResourceOnServiceAppointment = false;
-            this.populateWorkOrderLookup = false;
-            this.setGanttLabel = false;
-            this.removeLicensesOnDeactivation = false;
-        }
-        
-    }
-
-    public class ResponseMsg{
-
-        @AuraEnabled
-        public boolean status;
-
-        @AuraEnabled
-        public String msg;
-
-        public ResponseMsg(){
-            status = false;
-            msg = '';
-        }
-    }
-
     @AuraEnabled
-    public static SKsettingsWrapper getSK_SettingsCSFromOrg() {
+    public static FSK_SettingsWrapper getSettings() {
         FSK_FSL_Starter_Kit__c sk = FSK_FSL_Starter_Kit__c.getOrgDefaults();
-        System.debug('sk ON LOAD == > ' +sk );
+        System.debug('sk ON LOAD == > ' +sk);
         //Take fields of custom settings and build custom settings object wrapper.
-        SKsettingsWrapper  skObj = new SKsettingsWrapper();
-        if(sk.Id != null ){
-            skObj.Id = sk.Id;
+        FSK_SettingsWrapper  skObj = new FSK_SettingsWrapper();
+        if(sk.Id != null){
+            skObj.id = sk.Id;
         }
 
         //First section -status Base Flow
@@ -133,44 +54,44 @@ public with sharing class FSK_SettingsPageCtrl {
 //TODO: FSK_Response_error_msg => settings page repsonse 
 
     @AuraEnabled
-    public static ResponseMsg saveSkSettings(SKsettingsWrapper skWrapperObj) {
-
-        System.debug('skWrapperObj == >' + skWrapperObj);
-
-        //Check if the Custom settings exsits, if not create an instanse. 
-        FSK_FSL_Starter_Kit__c skToSave = FSK_FSL_Starter_Kit__c.getOrgDefaults();
-        if(skToSave == NULL){
-            skToSave = new FSK_FSL_Starter_Kit__c();
-        }
-        
-        //Take fields from wrapper - UI and insert those fields to the skToSave which we want to update/create.
-        skToSave.ActualTimes__c =  skWrapperObj.actualTimes;
-        skToSave.Actual_Times_on_Gantt__c =  skWrapperObj.actualTimesOnGantt;
-
-        skToSave.StartingStatus__c =  skWrapperObj.startingStatus;
-        skToSave.EndingStatus__c =  skWrapperObj.endingStatus;
-
-        skToSave.Mobile_Canned_Custom_Notification__c = skWrapperObj.mobileCannedCustomNotification;
-        skToSave.Hours_for_Dispatched_Notification__c =  skWrapperObj.hoursforDispNotif;
-
-        skToSave.Dispatched_Notification__c =  skWrapperObj.dispatchedNotification;
-        skToSave.Emergency_Dispatched_Notification__c =  skWrapperObj.emerDispatchedNotification;
-        skToSave.Cancelation_Notification__c =  skWrapperObj.cancelationNotification;
-
-        skToSave.Days_Until_First_Maintenance__c =  skWrapperObj.daysUntilFirstMain;
-        skToSave.Mobile_Status_Satiation__c =  skWrapperObj.mobileStatusSatiation;
-        skToSave.Successful_Asset_Installation_Status__c =  skWrapperObj.successfulAssetInstallation;
-
-        skToSave.Add_Asset_to_Maintenance_Plan__c =  skWrapperObj.addAssetToMaintenancePlan;
-        skToSave.Create_FSL_Resource_From_User__c =  skWrapperObj.createFSLResourceFromUser;
-        skToSave.Excluded_SR_on_SA_Rejection__c =  skWrapperObj.excludedSROnSARejection;
-        skToSave.Assign_Resource_On_Service_Appointment__c =  skWrapperObj.assignResourceOnServiceAppointment;
-        skToSave.Set_Gantt_Label__c =  skWrapperObj.setGanttLabel;
-        skToSave.Remove_Licenses_on_Deactivation__c =  skWrapperObj.removeLicensesOnDeactivation;
-
+    public static ResponseMsg saveSettings(FSK_SettingsWrapper skWrapperObj) {
         ResponseMsg resp = new ResponseMsg();
-        System.debug('skToSave == > ' + JSON.serialize(skToSave));
-        try {            
+        try {
+            System.debug('skWrapperObj == >' + skWrapperObj);
+
+            //Check if the Custom settings exsits, if not create an instanse. 
+            FSK_FSL_Starter_Kit__c skToSave = FSK_FSL_Starter_Kit__c.getOrgDefaults();
+            if(skToSave == NULL){
+                skToSave = new FSK_FSL_Starter_Kit__c();
+            }
+            
+            //Take fields from wrapper - UI and insert those fields to the skToSave which we want to update/create.
+            skToSave.ActualTimes__c =  skWrapperObj.actualTimes;
+            skToSave.Actual_Times_on_Gantt__c =  skWrapperObj.actualTimesOnGantt;
+
+            skToSave.StartingStatus__c =  skWrapperObj.startingStatus;
+            skToSave.EndingStatus__c =  skWrapperObj.endingStatus;
+
+            skToSave.Mobile_Canned_Custom_Notification__c = skWrapperObj.mobileCannedCustomNotification;
+            skToSave.Hours_for_Dispatched_Notification__c =  skWrapperObj.hoursforDispNotif;
+
+            skToSave.Dispatched_Notification__c =  skWrapperObj.dispatchedNotification;
+            skToSave.Emergency_Dispatched_Notification__c =  skWrapperObj.emerDispatchedNotification;
+            skToSave.Cancelation_Notification__c =  skWrapperObj.cancelationNotification;
+
+            skToSave.Days_Until_First_Maintenance__c =  skWrapperObj.daysUntilFirstMain;
+            skToSave.Mobile_Status_Satiation__c =  skWrapperObj.mobileStatusSatiation;
+            skToSave.Successful_Asset_Installation_Status__c =  skWrapperObj.successfulAssetInstallation;
+
+            skToSave.Add_Asset_to_Maintenance_Plan__c =  skWrapperObj.addAssetToMaintenancePlan;
+            skToSave.Create_FSL_Resource_From_User__c =  skWrapperObj.createFSLResourceFromUser;
+            skToSave.Excluded_SR_on_SA_Rejection__c =  skWrapperObj.excludedSROnSARejection;
+            skToSave.Assign_Resource_On_Service_Appointment__c =  skWrapperObj.assignResourceOnServiceAppointment;
+            skToSave.Set_Gantt_Label__c =  skWrapperObj.setGanttLabel;
+            skToSave.Remove_Licenses_on_Deactivation__c =  skWrapperObj.removeLicensesOnDeactivation;
+
+            System.debug('skToSave == > ' + JSON.serialize(skToSave));
+                    
             if(skToSave.Set_Gantt_Label__c == true){
 
                 //update PermissionSetLicense
@@ -206,9 +127,9 @@ public with sharing class FSK_SettingsPageCtrl {
                 psNames.add('FSL_Community_Dispatcher_Permissions');
 
                 Map<String,String> psNameToIdPlMap = new Map<String,String>();
-                List<PermissionSet>  psList = [ SELECT Id ,name
+                List<PermissionSet>  psList = [ SELECT Id ,Name
                                                 FROM PermissionSet
-                                                WHERE name IN: psNames];
+                                                WHERE Name IN: psNames];
                 for(PermissionSet ps : psList){
                     psNameToIdPlMap.put(ps.Name,ps.Id);
                 }
@@ -222,17 +143,32 @@ public with sharing class FSK_SettingsPageCtrl {
             }
 
             upsert skToSave;
-            resp.status = true;
+            resp.isSuccess = true;
             resp.msg = Label.FSK_Settings_Page_Success_Response;
 
-        } catch(DmlException e) {
-
-            resp.status = false;
+        } catch(Exception e) {
+            resp.isSuccess = false;
             resp.msg = Label.FSK_Settings_Page_Error_Response;
+            resp.error = e.getMessage() + '\n ' + e.getCause() + '\n ' + e.getStackTraceString();
             System.debug('The following exception has occurred: ' + e.getMessage());
         }
         return resp;
-
     }
 
+    public class ResponseMsg{
+
+        @AuraEnabled
+        public boolean isSuccess {get; set;}
+
+        @AuraEnabled
+        public String msg {get; set;}
+
+        @AuraEnabled
+        public String error {get; set;}
+
+        public ResponseMsg(){
+            isSuccess = false;
+            msg = '';
+        }
+    }
 }

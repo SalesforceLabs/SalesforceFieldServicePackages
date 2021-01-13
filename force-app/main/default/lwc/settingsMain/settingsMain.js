@@ -1,7 +1,7 @@
 import { LightningElement,track,api} from 'lwc';
 import getStatuses from '@salesforce/apex/FSK_SAStatusCheckboxGroupController.getAppointmentStatus';
-import loadFSLSKSettings from '@salesforce/apex/FSK_SettingsPageCtrl.getSK_SettingsCSFromOrg';
-import saveSkSettingsData from '@salesforce/apex/FSK_SettingsPageCtrl.saveSkSettings';
+import loadFSLSKSettings from '@salesforce/apex/FSK_SettingsPageCtrl.getSettings';
+import saveSkSettingsData from '@salesforce/apex/FSK_SettingsPageCtrl.saveSettings';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 
@@ -138,13 +138,16 @@ export default class SettingsMain extends LightningElement {
     }
     
     async getCustomSettingsSk(){
-       await loadFSLSKSettings().then(result => {
+        this.isLoading = true;
+        await loadFSLSKSettings().then(result => {
+            this.isLoading = false;
             this.sk_cs_settings = result;
             this.error = undefined;
             console.log('statusesSsk_cs_settings ==> ' ,
              JSON.parse(JSON.stringify(this.sk_cs_settings))); 
              return result;   
         }).catch(error => {
+            this.isLoading = false;
             this.error = error;
             this.sk_cs_settings = undefined;
         });
@@ -234,7 +237,7 @@ export default class SettingsMain extends LightningElement {
             this.isLoading = false;
             const event = new ShowToastEvent({
                 title: result.msg,
-                variant: result.status ? 'success' : 'error'
+                variant: result.isSuccess ? 'success' : 'error'
             });
             this.dispatchEvent(event);
         })
