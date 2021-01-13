@@ -132,14 +132,14 @@
                                     <div class="leftCLine">  
                                         <lightning-input   checked={fl_cb_mn_1}
                                                             class="cb"
-                                                            type="checkbox" label="Dispatched Notification"
+                                                            type="checkbox" label="Notification of appointment dispatching"
                                                             onchange={onMN1ChecboxChange}
                                                             disabled={cbx_nm_Dis_1}>
                                         </lightning-input>
                                     </div>
                                     <div style={rightCLine} class="lgc-bg">
                                         <lightning-helptext 
-                                        content="Push notifications should only be sent when they are relevant. This setting ensures that a push notification will only be sent to the mobile device if the appointment is scheduled to start before the specified number of hours.">
+                                        content="Notify the assigned resource when the service appointment status is updated and the status category is Dispatched.">
                                         </lightning-helptext>
                                     </div>
                                 </div>
@@ -150,13 +150,13 @@
                                                             class="cb"
                                                             type="checkbox" 
                                                             disabled={cbx_nm_Dis_1}
-                                                            label="Emergency Dispatched Notification"
+                                                            label="Notification of emergency appointment dispatching"
                                                             onchange={onMN2ChecboxChange}>
                                         </lightning-input>
                                     </div>
                                     <div style={rightCLine} class="lgc-bg">
                                         <lightning-helptext 
-                                        content="Push notifications should only be sent when they are relevant. This setting ensures that a push notification will only be sent to the mobile device if the appointment is scheduled to start before the specified number of hours.">
+                                        content="Notify the assigned resource by sending a push notification for emergency appointments when the service appointment status is updated and the status category is Dispatched.">
                                         </lightning-helptext>
                                     </div>
                                 </div>
@@ -167,13 +167,13 @@
                                                             class="cb"
                                                             type="checkbox"
                                                             disabled={cbx_nm_Dis_1} 
-                                                            label="Cancelation Notification"
+                                                            label="Notification of appointment cancellation"
                                                             onchange={onMN3ChecboxChange}>
                                         </lightning-input>
                                     </div>
                                     <div style={rightCLine} class="lgc-bg">
                                         <lightning-helptext
-                                        content="Push notifications should only be sent when they are relevant. This setting ensures that a push notification will only be sent to the mobile device if the appointment is scheduled to start before the specified number of hours.">
+                                        content="Notify the previously assigned resource that the appointment is cancelled when the appointment status is changed and the status category is Cancelled">
                                         </lightning-helptext>
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@
                     <div  class="slds-col slds-size_2-of-3 slds-p-horizontal_x-large" style={cardHeaderStyle}>
                         <h2  style={titleStyle}
                             class="slds-text-heading_small slds-m-bottom_small slds-p-horizontal_x-large" >
-                            <b>General</b>
+                            <b>General Flows</b>
                         </h2>
                     </div>
                     <div  class="slds-col slds-size_2-of-3 slds-p-left_x-large">
@@ -202,13 +202,13 @@
                                             checked={cb_g__1}
                                             class="cb"
                                             type="checkbox" 
-                                            label="Add Asset to Account Maintenance Plan"
+                                            label="Add asset to account maintenance plan upon installation"
                                             onchange={onG1ChecboxChange}>
                                         </lightning-input>
                                 </div>
                                 <div class="lgc-bg rightCLineWTgl">
                                     <div class="headerRight">
-                                        <div class ="slds-p-around_xx-small" style={fontS}>Numbers of Days: &nbsp;</div>
+                                        <div class ="slds-p-around_xx-small" style={fontS}>Number of days for work order creation:</div>
                                                 <lightning-input 
                                                     class="general-inp-num"
                                                     type="number" 
@@ -225,13 +225,13 @@
                                             label=""
                                             disabled={num_of_d_inp_Dis}
                                             value={g_status_selected}
-                                            placeholder="Success Installation"
+                                            placeholder="Select completion / installation status"
                                             options={statusesComplete}
                                             onchange={handleChangeCmbx} >
                                         </lightning-combobox>
                             
                                         <lightning-helptext 
-                                        content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                        content="This flow adds an asset from the parent Work order or Work Order Line item to the account maintenance plan. The logic is based on a checkbox field on the Service Appointment record. Use your own logic to check the checkbox field for relevant Service Appointment records.">
                                         </lightning-helptext>
                                     </div>
                                     
@@ -244,13 +244,13 @@
                                     <lightning-input   checked={cb_g__2}
                                                         class="cb"
                                                         type="checkbox" 
-                                                        label="Field Service User Automation"
+                                                        label="Field Service users automation"
                                                         onchange={onG2ChecboxChange}>
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
                                     <lightning-helptext
-                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                    content="Automatically assign relevant permissions to the user based on their Field Service role and automatically create a service resource record as needed">
                                 </lightning-helptext>
                                 </div>
                             </div>
@@ -260,14 +260,13 @@
                                     <lightning-input   checked={cb_g__3}
                                                         class="cb"
                                                         type="checkbox" 
-                                                        label="Exclude Service Resources on Service Appointment Rejection"
-
+                                                        label="Exclude service resources upon service appointment rejection"
                                                         onchange={onG3ChecboxChange}>
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
                                     <lightning-helptext 
-                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                    content="When the assignment is rejected by Resources, add a Resource Preference of type Excluded. The flow ensures that the service resource will no longer be considered a candidate for the service appointment.">
                                 </lightning-helptext>
                                 </div>
                             </div>
@@ -277,14 +276,13 @@
                                     <lightning-input   checked={cb_g__4}
                                                         class="cb"
                                                         type="checkbox" 
-                                                        label="Populate Custom Service Resource Lookup on the Service Appointment Record"
-
+                                                        label="Populate the custom Service Resource Lookup field on the Service Appointment Record."
                                                         onchange={onG4ChecboxChange}>
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
                                     <lightning-helptext
-                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                    content="This flow copies the Service Resource ID from the Assigned Resources related list to a new lookup field on the Service Appointment object.">
                                 </lightning-helptext>
                                 </div>
                             </div>
@@ -294,14 +292,13 @@
                                     <lightning-input   checked={cb_g__5}
                                                         class="cb"
                                                         type="checkbox"
-                                                        label="Populate Custom Work Order Lookup with the Service Appointment Parent ID"
-
+                                                        label="Set a custom Work Order lookup field to the Service Appointment's Parent ID."
                                                         onchange={onG5ChecboxChange}>
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
                                     <lightning-helptext
-                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                    content="This flow populates a custom Work Order lookup field with the parent ID if the parent is a Work Order.">
                                 </lightning-helptext>
                                 </div>
                             </div>
@@ -311,13 +308,13 @@
                                     <lightning-input   checked={cb_g__6}
                                                         class="cb"
                                                         type="checkbox"
-                                                        label="Automatically Set the Gantt Label Field"
+                                                        label="Automatically set the Gantt Label field"
                                                         onchange={onG6ChecboxChange}>
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
                                     <lightning-helptext 
-                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                    content="Auto Set Gantt Label value by concatenation of the Account and Work Type fields. You can change the concatenation string and change the Gantt Label text via the Flow definition in the Salesforce Setup menu.">
                                 </lightning-helptext>
                                 </div>
                             </div>
@@ -326,13 +323,13 @@
                                     <lightning-input   checked={cb_g__7}
                                                         class="cb"
                                                         type="checkbox"
-                                                        label="Resource Deactivation"
+                                                        label="Service Resource deactivation automation"
                                                         onchange={onG7ChecboxChange}>
                                     </lightning-input>
                                 </div>
                                 <div style={rightCLine} class="lgc-bg">
                                     <lightning-helptext 
-                                    content="This flow updates the Scheduled Start and Scheduled End fields on the service appointment based on changes to the service appointment Status field. Use the checkboxes on the right to select the status values that indicates when the work starts and the values that indicate when the work is completed.">
+                                    content="This flow removes all Field Service permission set licenses and all relevant permission sets from the associated user record upon Service Resource deactivation.">
                                 </lightning-helptext>
                                 </div>
                             </div>
