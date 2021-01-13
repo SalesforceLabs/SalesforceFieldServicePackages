@@ -2,28 +2,34 @@
   width: 50%;
   padding-bottom: 1%;
 }
+
 .bigTitle{
   font-weight: bold;
   color: #16325C;
 }
+
 .txt-numOf{
   font-size:12dp;
   padding-top:1%;
 }
+
 .rightCardStyle{
   width:50%; 
 }
+
 .headerRight{
   display: flex;
   width: 100%;
   justify-content: flex-end; 
 }
+
 .leftCLineWtgle{
   width:50%;
   background:#F3F2F2;
   opacity:#F3F2F2;
   Display:flex;
 }
+
 .leftCLineGeneral{
   Display:flex;
   width: 60%;
@@ -34,11 +40,13 @@
   Display:flex;
   border-bottom: 1px solid #DDDBDA;
 }
+
 .cLineStyle{
   padding:1%;
   display:flex;
   border-bottom: 1px solid #DDDBDA;
 }
+
 .leftCLineSB {
   padding:1%;
   display:flex;
@@ -46,6 +54,7 @@
   background:#F3F2F2;
   color:#0070D2;
 }
+
 .leftCLine {
   width:100%;
   padding-bottom:1%;
@@ -53,19 +62,21 @@
 .cardBodyStyle {
   display:flex;
 }
+
 .general-inp-num {
   width: 12%;
 }
 
 .scrollArea {
-    position: fixed;
-    /*border: 1px solid red;*/
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0; 
-    overflow: auto;
+  position: fixed;
+  /*border: 1px solid red;*/
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; 
+  overflow: auto;
 }
+
 .toTheTop {
   position: fixed;
   right: 20px;
@@ -75,10 +86,13 @@
   background: #f7f9fb;
   text-align: right;
   padding: 0.5%;
+  z-index: 999;
 }
+
 .scrollArea {
   position: relative;
 }
+
 .cb{
   color:#0070D2;
   font-size: 16pt;
