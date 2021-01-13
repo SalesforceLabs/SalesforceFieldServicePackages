@@ -93,7 +93,7 @@ public with sharing class FSK_SettingsPageCtrl {
 
             System.debug('skToSave == > ' + JSON.serialize(skToSave));
                     
-            if(skToSave.Set_Gantt_Label__c){
+            if(skToSave.Remove_Licenses_on_Deactivation__c){
 
                 //update PermissionSetLicense
                 Set<String> devNames = new Set<String>();
