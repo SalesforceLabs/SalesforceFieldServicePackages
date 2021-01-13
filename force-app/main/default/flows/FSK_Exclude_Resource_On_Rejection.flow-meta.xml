@@ -64,6 +64,32 @@
         </connector>
     </assignments>
     <decisions>
+        <description>Validate that no Crew or Crew Member has any preference on this work order</description>
+        <name>Check_related_preference</name>
+        <label>Check related preference</label>
+        <locationX>1238</locationX>
+        <locationY>471</locationY>
+        <defaultConnector>
+            <targetReference>Service_Appointment_Handler</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>There are related resources preferences</defaultConnectorLabel>
+        <rules>
+            <name>No_relevant_Related_Record</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Resources_Preferences</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Exclude_Assigned_Service_Resources</targetReference>
+            </connector>
+            <label>No relevant Related Record</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Check_Service_Appointment_Parent_Record_Type</name>
         <label>Check Service Appointment Parent Record Type</label>
         <locationX>429</locationX>
@@ -126,14 +152,17 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Values_Are_Not_Null</name>
-        <label>Values Are Not Null</label>
-        <locationX>1254</locationX>
-        <locationY>80</locationY>
+        <name>Values_Are_Valid</name>
+        <label>Values Are Valid</label>
+        <locationX>1519</locationX>
+        <locationY>73</locationY>
+        <defaultConnector>
+            <targetReference>Service_Appointment_Handler</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Valid_Values</name>
-            <conditionLogic>or</conditionLogic>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Work_Order_Id</leftValueReference>
                 <operator>IsNull</operator>
@@ -142,10 +171,17 @@
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Assigned_Service_Resources</leftValueReference>
+                <leftValueReference>Assigned_Service_Resource</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>ServiceResourcePreference</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -160,7 +196,7 @@
     <loops>
         <name>Prepare_to_Exclude_Assigned_Resources</name>
         <label>Prepare to Exclude Assigned Resources</label>
-        <locationX>880</locationX>
+        <locationX>881</locationX>
         <locationY>593</locationY>
         <collectionReference>Assigned_Service_Resources</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -168,7 +204,7 @@
             <targetReference>Set_Collection_Record</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Exclude_Assigned_Service_Resources</targetReference>
+            <targetReference>Get_Related_Resources_Preferances</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -193,8 +229,8 @@
     <recordCreates>
         <name>Exclude_Assigned_Resource</name>
         <label>Exclude Assigned Resource</label>
-        <locationX>1514</locationX>
-        <locationY>79</locationY>
+        <locationX>1691</locationX>
+        <locationY>68</locationY>
         <connector>
             <targetReference>Remove_Assigned_Resource</targetReference>
         </connector>
@@ -222,8 +258,8 @@
     <recordCreates>
         <name>Exclude_Assigned_Service_Resources</name>
         <label>Exclude Assigned Service Resources</label>
-        <locationX>1221</locationX>
-        <locationY>589</locationY>
+        <locationX>1585</locationX>
+        <locationY>598</locationY>
         <connector>
             <targetReference>Service_Appointment_Handler</targetReference>
         </connector>
@@ -242,11 +278,11 @@
     <recordLookups>
         <name>Get_Assigned_Resource</name>
         <label>Get Assigned Resource</label>
-        <locationX>1106</locationX>
-        <locationY>80</locationY>
+        <locationX>1143</locationX>
+        <locationY>74</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Values_Are_Not_Null</targetReference>
+            <targetReference>Get_Related_Resource_Preferences</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -264,7 +300,7 @@
     <recordLookups>
         <name>Get_Assigned_Resources</name>
         <label>Get Assigned Resources</label>
-        <locationX>878</locationX>
+        <locationX>879</locationX>
         <locationY>414</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -282,6 +318,59 @@
         <outputReference>Assigned_Service_Resources</outputReference>
         <queriedFields>Id</queriedFields>
         <queriedFields>ServiceCrewId</queriedFields>
+        <queriedFields>ServiceResourceId</queriedFields>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Related_Resource_Preferences</name>
+        <label>Get Related Resource Preferences</label>
+        <locationX>1369</locationX>
+        <locationY>71</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Values_Are_Valid</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>RelatedRecordId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Work_Order_Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>ServiceResourceId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Assigned_Service_Resource.ServiceResourceId</elementReference>
+            </value>
+        </filters>
+        <object>ResourcePreference</object>
+        <outputReference>ServiceResourcePreference</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>ServiceResourceId</queriedFields>
+        <queriedFields>PreferenceType</queriedFields>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Related_Resources_Preferances</name>
+        <label>Get Related Resources Preferances</label>
+        <locationX>1166</locationX>
+        <locationY>601</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_related_preference</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>RelatedRecordId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Work_Order_Id</elementReference>
+            </value>
+        </filters>
+        <object>ResourcePreference</object>
+        <outputReference>Resources_Preferences</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>PreferenceType</queriedFields>
         <queriedFields>ServiceResourceId</queriedFields>
     </recordLookups>
     <recordLookups>
@@ -336,7 +425,7 @@
         <inputAssignments>
             <field>Status</field>
             <value>
-                <stringValue/>
+                <stringValue>None</stringValue>
             </value>
         </inputAssignments>
         <object>ServiceAppointment</object>
@@ -374,6 +463,14 @@
         <objectType>ResourcePreference</objectType>
     </variables>
     <variables>
+        <name>Resources_Preferences</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ResourcePreference</objectType>
+    </variables>
+    <variables>
         <name>Resources_to_Exclude</name>
         <dataType>SObject</dataType>
         <isCollection>true</isCollection>
@@ -404,6 +501,14 @@
         <value>
             <booleanValue>false</booleanValue>
         </value>
+    </variables>
+    <variables>
+        <name>ServiceResourcePreference</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ResourcePreference</objectType>
     </variables>
     <variables>
         <name>Work_Order_Id</name>

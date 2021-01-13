@@ -268,7 +268,7 @@ ISBLANK({!Get_Related_Service_Appointment.Subject})), &quot;&quot;,&apos; - &apo
         <recordTriggerType>Delete</recordTriggerType>
         <triggerType>RecordBeforeDelete</triggerType>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>Assigned_Resource_User</name>
         <dataType>SObject</dataType>

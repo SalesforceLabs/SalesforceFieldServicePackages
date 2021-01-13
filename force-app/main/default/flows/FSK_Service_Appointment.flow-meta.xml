@@ -1085,6 +1085,90 @@
             </processMetadataValues>
             <name>Service_Appointment_Number</name>
             <value>
+                <elementReference>formula_8_myRule_7_A1_0792014369</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Service_Appointment_Subject</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>Service_Appointment_Subject</name>
+            <value>
+                <elementReference>myVariable_current.Subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Service_Appointment_Number</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>Service_Appointment_Number</name>
+            <value>
                 <elementReference>myVariable_current.AppointmentNumber</elementReference>
             </value>
         </inputParameters>
@@ -1758,6 +1842,9 @@ NOT(ISNEW())
 ($Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Dispatched_Notification__c
 || $Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Emergency_Dispatched_Notification__c)
 &amp;&amp;
+($Setup.FSK_FSL_Starter_Kit__c.Dispatched_Notification__c
+|| $Setup.FSK_FSL_Starter_Kit__c.Emergency_Dispatched_Notification__c)
+&amp;&amp;
 ISCHANGED([ServiceAppointment].Status)
 &amp;&amp;
 TEXT([ServiceAppointment].StatusCategory) = &apos;Dispatched&apos;
@@ -1772,6 +1859,9 @@ TEXT([ServiceAppointment].StatusCategory) = &apos;Dispatched&apos;
 &amp;&amp;
 ({!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Dispatched_Notification__c}
 || {!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Emergency_Dispatched_Notification__c})
+&amp;&amp;
+({!$Setup.FSK_FSL_Starter_Kit__c.Dispatched_Notification__c}
+|| {!$Setup.FSK_FSL_Starter_Kit__c.Emergency_Dispatched_Notification__c})
 &amp;&amp;
 ISCHANGED({!myVariable_current.Status})
 &amp;&amp;
