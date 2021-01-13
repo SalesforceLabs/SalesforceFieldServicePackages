@@ -1085,6 +1085,90 @@
             </processMetadataValues>
             <name>Service_Appointment_Number</name>
             <value>
+                <elementReference>formula_8_myRule_7_A1_0792014369</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Service_Appointment_Subject</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>Service_Appointment_Subject</name>
+            <value>
+                <elementReference>myVariable_current.Subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Service_Appointment_Number</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>Service_Appointment_Number</name>
+            <value>
                 <elementReference>myVariable_current.AppointmentNumber</elementReference>
             </value>
         </inputParameters>
@@ -1475,62 +1559,62 @@
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>IF(ISCHANGED([ServiceAppointment].FSK_Mobile_Start_Time__c), true, false) </stringValue>
+                <stringValue>IF(ISCHANGED([ServiceAppointment].FSSK__FSK_Mobile_Start_Time__c), true, false) </stringValue>
             </value>
         </processMetadataValues>
         <name>formula_11_myRule_10_A1_1746699421</name>
         <dataType>Boolean</dataType>
-        <expression>IF(ISCHANGED({!myVariable_current.FSK_Mobile_Start_Time__c}), true, false)</expression>
+        <expression>IF(ISCHANGED({!myVariable_current.FSSK__FSK_Mobile_Start_Time__c}), true, false)</expression>
     </formulas>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>IF(ISCHANGED([ServiceAppointment].FSK_Mobile_Start_Time__c), true, false) </stringValue>
+                <stringValue>IF(ISCHANGED([ServiceAppointment].FSSK__FSK_Mobile_Start_Time__c), true, false) </stringValue>
             </value>
         </processMetadataValues>
         <name>formula_14_myRule_13_A1_4312652922</name>
         <dataType>Boolean</dataType>
-        <expression>IF(ISCHANGED({!myVariable_current.FSK_Mobile_Start_Time__c}), true, false)</expression>
+        <expression>IF(ISCHANGED({!myVariable_current.FSSK__FSK_Mobile_Start_Time__c}), true, false)</expression>
     </formulas>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>IF(ISCHANGED([ServiceAppointment].FSK_Mobile_End_Time__c ), true, false) </stringValue>
+                <stringValue>IF(ISCHANGED([ServiceAppointment].FSSK__FSK_Mobile_End_Time__c ), true, false) </stringValue>
             </value>
         </processMetadataValues>
         <name>formula_17_myRule_16_A1_4531612460</name>
         <dataType>Boolean</dataType>
-        <expression>IF(ISCHANGED({!myVariable_current.FSK_Mobile_End_Time__c} ), true, false)</expression>
+        <expression>IF(ISCHANGED({!myVariable_current.FSSK__FSK_Mobile_End_Time__c} ), true, false)</expression>
     </formulas>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>IF(ISCHANGED([ServiceAppointment].FSK_Mobile_End_Time__c ), true, false) </stringValue>
+                <stringValue>IF(ISCHANGED([ServiceAppointment].FSSK__FSK_Mobile_End_Time__c ), true, false) </stringValue>
             </value>
         </processMetadataValues>
         <name>formula_20_myRule_19_A1_0811197368</name>
         <dataType>Boolean</dataType>
-        <expression>IF(ISCHANGED({!myVariable_current.FSK_Mobile_End_Time__c} ), true, false)</expression>
+        <expression>IF(ISCHANGED({!myVariable_current.FSSK__FSK_Mobile_End_Time__c} ), true, false)</expression>
     </formulas>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Custom_Notification_Type_Id__c </stringValue>
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Custom_Notification_Type_Id__c </stringValue>
             </value>
         </processMetadataValues>
         <name>formula_8_myRule_7_A1_0792014369</name>
         <dataType>String</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Custom_Notification_Type_Id__c}</expression>
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Custom_Notification_Type_Id__c}</expression>
     </formulas>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Populate_Work_Order_Lookup__c 
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Populate_Work_Order_Lookup__c 
 &amp;&amp;
 ISNEW()
 &amp;&amp;
@@ -1540,7 +1624,7 @@ BEGINS([ServiceAppointment].ParentRecordId, &apos;0WO&apos;)
         </processMetadataValues>
         <name>formula_myRule_1</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Populate_Work_Order_Lookup__c} 
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Populate_Work_Order_Lookup__c} 
 &amp;&amp;
 ISNEW()
 &amp;&amp;
@@ -1550,7 +1634,7 @@ BEGINS({!myVariable_current.ParentRecordId}, &apos;0WO&apos;)</expression>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.ActualTimes__c 
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__ActualTimes__c 
 &amp;&amp;
 ISCHANGED([ServiceAppointment].Status)
 &amp;&amp;
@@ -1558,12 +1642,12 @@ NOT(ISBLANK(TEXT([ServiceAppointment].Status)))
 &amp;&amp;
 NOT(ISBLANK([ServiceAppointment].SchedStartTime))
 &amp;&amp;
-(CONTAINS($Setup.FSK_FSL_Starter_Kit__c.StartingStatus__c, TEXT([ServiceAppointment].Status)))</stringValue>
+(CONTAINS($Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__StartingStatus__c, TEXT([ServiceAppointment].Status)))</stringValue>
             </value>
         </processMetadataValues>
         <name>formula_myRule_10</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.ActualTimes__c} 
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__ActualTimes__c} 
 &amp;&amp;
 ISCHANGED({!myVariable_current.Status})
 &amp;&amp;
@@ -1571,15 +1655,15 @@ NOT(ISBLANK(TEXT({!myVariable_current.Status})))
 &amp;&amp;
 NOT(ISBLANK({!myVariable_current.SchedStartTime}))
 &amp;&amp;
-(CONTAINS({!$Setup.FSK_FSL_Starter_Kit__c.StartingStatus__c}, TEXT({!myVariable_current.Status})))</expression>
+(CONTAINS({!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__StartingStatus__c}, TEXT({!myVariable_current.Status})))</expression>
     </formulas>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>($Setup.FSK_FSL_Starter_Kit__c.Actual_Times_on_Gantt__c
+                <stringValue>($Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Actual_Times_on_Gantt__c
 &amp;&amp;
-CONTAINS($Setup.FSK_FSL_Starter_Kit__c.StartingStatus__c, TEXT([ServiceAppointment].Status)))
+CONTAINS($Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__StartingStatus__c, TEXT([ServiceAppointment].Status)))
 &amp;&amp;
 ISCHANGED([ServiceAppointment].Status)
 &amp;&amp;
@@ -1589,9 +1673,9 @@ NOT(ISBLANK([ServiceAppointment].SchedStartTime ))
         </processMetadataValues>
         <name>formula_myRule_13</name>
         <dataType>Boolean</dataType>
-        <expression>({!$Setup.FSK_FSL_Starter_Kit__c.Actual_Times_on_Gantt__c}
+        <expression>({!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Actual_Times_on_Gantt__c}
 &amp;&amp;
-CONTAINS({!$Setup.FSK_FSL_Starter_Kit__c.StartingStatus__c}, TEXT({!myVariable_current.Status})))
+CONTAINS({!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__StartingStatus__c}, TEXT({!myVariable_current.Status})))
 &amp;&amp;
 ISCHANGED({!myVariable_current.Status})
 &amp;&amp;
@@ -1601,24 +1685,24 @@ NOT(ISBLANK({!myVariable_current.SchedStartTime} ))</expression>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.ActualTimes__c
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__ActualTimes__c
 &amp;&amp;
 ISCHANGED([ServiceAppointment].Status)
 &amp;&amp;
 NOT(ISBLANK([ServiceAppointment].SchedEndTime))
 &amp;&amp;
-CONTAINS($Setup.FSK_FSL_Starter_Kit__c.EndingStatus__c , TEXT([ServiceAppointment].Status))</stringValue>
+CONTAINS($Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__EndingStatus__c , TEXT([ServiceAppointment].Status))</stringValue>
             </value>
         </processMetadataValues>
         <name>formula_myRule_16</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.ActualTimes__c}
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__ActualTimes__c}
 &amp;&amp;
 ISCHANGED({!myVariable_current.Status})
 &amp;&amp;
 NOT(ISBLANK({!myVariable_current.SchedEndTime}))
 &amp;&amp;
-CONTAINS({!$Setup.FSK_FSL_Starter_Kit__c.EndingStatus__c} , TEXT({!myVariable_current.Status}))</expression>
+CONTAINS({!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__EndingStatus__c} , TEXT({!myVariable_current.Status}))</expression>
     </formulas>
     <formulas>
         <processMetadataValues>
@@ -1628,9 +1712,9 @@ CONTAINS({!$Setup.FSK_FSL_Starter_Kit__c.EndingStatus__c} , TEXT({!myVariable_cu
 &amp;&amp;
 NOT(ISBLANK([ServiceAppointment].SchedEndTime))
 &amp;&amp;
-CONTAINS($Setup.FSK_FSL_Starter_Kit__c.EndingStatus__c , TEXT([ServiceAppointment].Status))
+CONTAINS($Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__EndingStatus__c , TEXT([ServiceAppointment].Status))
 &amp;&amp;
-$Setup.FSK_FSL_Starter_Kit__c.Actual_Times_on_Gantt__c </stringValue>
+$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Actual_Times_on_Gantt__c </stringValue>
             </value>
         </processMetadataValues>
         <name>formula_myRule_19</name>
@@ -1639,28 +1723,28 @@ $Setup.FSK_FSL_Starter_Kit__c.Actual_Times_on_Gantt__c </stringValue>
 &amp;&amp;
 NOT(ISBLANK({!myVariable_current.SchedEndTime}))
 &amp;&amp;
-CONTAINS({!$Setup.FSK_FSL_Starter_Kit__c.EndingStatus__c} , TEXT({!myVariable_current.Status}))
+CONTAINS({!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__EndingStatus__c} , TEXT({!myVariable_current.Status}))
 &amp;&amp;
-{!$Setup.FSK_FSL_Starter_Kit__c.Actual_Times_on_Gantt__c}</expression>
+{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Actual_Times_on_Gantt__c}</expression>
     </formulas>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Add_Asset_to_Maintenance_Plan__c
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Add_Asset_to_Maintenance_Plan__c
 &amp;&amp;
-[ServiceAppointment].FSK_Add_Asset_to_Maintenance_Plan__c
+[ServiceAppointment].FSSK__FSK_Add_Asset_to_Maintenance_Plan__c
 &amp;&amp;
-($Setup.FSK_FSL_Starter_Kit__c.Successful_Asset_Installation_Status__c == TEXT([ServiceAppointment].Status))</stringValue>
+($Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Successful_Asset_Installation_Status__c == TEXT([ServiceAppointment].Status))</stringValue>
             </value>
         </processMetadataValues>
         <name>formula_myRule_22</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Add_Asset_to_Maintenance_Plan__c}
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Add_Asset_to_Maintenance_Plan__c}
 &amp;&amp;
-{!myVariable_current.FSK_Add_Asset_to_Maintenance_Plan__c}
+{!myVariable_current.FSSK__FSK_Add_Asset_to_Maintenance_Plan__c}
 &amp;&amp;
-({!$Setup.FSK_FSL_Starter_Kit__c.Successful_Asset_Installation_Status__c} == TEXT({!myVariable_current.Status}))</expression>
+({!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Successful_Asset_Installation_Status__c} == TEXT({!myVariable_current.Status}))</expression>
     </formulas>
     <formulas>
         <processMetadataValues>
@@ -1687,7 +1771,7 @@ ISPICKVAL({!myVariable_current.Status}, &apos;None&apos;)))</expression>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Assign_Resource_On_Service_Appointment__c 
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Assign_Resource_On_Service_Appointment__c 
 &amp;&amp;
 ISCHANGED([ServiceAppointment].Status)
 &amp;&amp;
@@ -1699,7 +1783,7 @@ ISPICKVAL([ServiceAppointment].Status, &apos;None&apos;)))</stringValue>
         </processMetadataValues>
         <name>formula_myRule_26</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Assign_Resource_On_Service_Appointment__c} 
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Assign_Resource_On_Service_Appointment__c} 
 &amp;&amp;
 ISCHANGED({!myVariable_current.Status})
 &amp;&amp;
@@ -1712,7 +1796,7 @@ ISPICKVAL({!myVariable_current.Status}, &apos;None&apos;)))</expression>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Set_Gantt_Label__c
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Set_Gantt_Label__c
 &amp;&amp;
 ISNEW()
 </stringValue>
@@ -1720,7 +1804,7 @@ ISNEW()
         </processMetadataValues>
         <name>formula_myRule_3</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Set_Gantt_Label__c}
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Set_Gantt_Label__c}
 &amp;&amp;
 ISNEW()</expression>
     </formulas>
@@ -1728,11 +1812,11 @@ ISNEW()</expression>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Excluded_SR_on_SA_Rejection__c
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Excluded_SR_on_SA_Rejection__c
 &amp;&amp;
 NOT(ISNEW())
 &amp;&amp;
-[ServiceAppointment].FSK_Reject_Service_Appointment__c
+[ServiceAppointment].FSSK__FSK_Reject_Service_Appointment__c
 &amp;&amp;
 (BEGINS([ServiceAppointment].ParentRecordId, &apos;0WO&apos;)
 || BEGINS([ServiceAppointment].ParentRecordId, &apos;1WL&apos;))</stringValue>
@@ -1740,11 +1824,11 @@ NOT(ISNEW())
         </processMetadataValues>
         <name>formula_myRule_5</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Excluded_SR_on_SA_Rejection__c}
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Excluded_SR_on_SA_Rejection__c}
 &amp;&amp;
 NOT(ISNEW())
 &amp;&amp;
-{!myVariable_current.FSK_Reject_Service_Appointment__c}
+{!myVariable_current.FSSK__FSK_Reject_Service_Appointment__c}
 &amp;&amp;
 (BEGINS({!myVariable_current.ParentRecordId}, &apos;0WO&apos;)
 || BEGINS({!myVariable_current.ParentRecordId}, &apos;1WL&apos;))</expression>
@@ -1753,7 +1837,10 @@ NOT(ISNEW())
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Mobile_Canned_Custom_Notification__c
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Mobile_Canned_Custom_Notification__c
+&amp;&amp;
+($Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Dispatched_Notification__c
+|| $Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Emergency_Dispatched_Notification__c)
 &amp;&amp;
 ($Setup.FSK_FSL_Starter_Kit__c.Dispatched_Notification__c
 || $Setup.FSK_FSL_Starter_Kit__c.Emergency_Dispatched_Notification__c)
@@ -1763,12 +1850,15 @@ ISCHANGED([ServiceAppointment].Status)
 TEXT([ServiceAppointment].StatusCategory) = &apos;Dispatched&apos;
 &amp;&amp;
 ([ServiceAppointment].SchedStartTime &lt; 
-(NOW()+($Setup.FSK_FSL_Starter_Kit__c.Hours_for_Dispatched_Notification__c /24) ))</stringValue>
+(NOW()+($Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Hours_for_Dispatched_Notification__c /24) ))</stringValue>
             </value>
         </processMetadataValues>
         <name>formula_myRule_7</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Mobile_Canned_Custom_Notification__c}
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Mobile_Canned_Custom_Notification__c}
+&amp;&amp;
+({!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Dispatched_Notification__c}
+|| {!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Emergency_Dispatched_Notification__c})
 &amp;&amp;
 ({!$Setup.FSK_FSL_Starter_Kit__c.Dispatched_Notification__c}
 || {!$Setup.FSK_FSL_Starter_Kit__c.Emergency_Dispatched_Notification__c})
@@ -1778,7 +1868,7 @@ ISCHANGED({!myVariable_current.Status})
 TEXT({!myVariable_current.StatusCategory}) = &apos;Dispatched&apos;
 &amp;&amp;
 ({!myVariable_current.SchedStartTime} &lt; 
-(NOW()+({!$Setup.FSK_FSL_Starter_Kit__c.Hours_for_Dispatched_Notification__c} /24) ))</expression>
+(NOW()+({!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Hours_for_Dispatched_Notification__c} /24) ))</expression>
     </formulas>
     <interviewLabel>FSK_Service_Appointment-27_InterviewLabel</interviewLabel>
     <isTemplate>true</isTemplate>
@@ -1984,7 +2074,7 @@ TEXT({!myVariable_current.StatusCategory}) = &apos;Dispatched&apos;
                     <stringValue>GlobalConstant</stringValue>
                 </value>
             </processMetadataValues>
-            <field>FSK_Mobile_End_Time__c</field>
+            <field>FSSK__FSK_Mobile_End_Time__c</field>
         </inputAssignments>
         <inputAssignments>
             <processMetadataValues>
@@ -2017,7 +2107,7 @@ TEXT({!myVariable_current.StatusCategory}) = &apos;Dispatched&apos;
                     <stringValue>GlobalConstant</stringValue>
                 </value>
             </processMetadataValues>
-            <field>FSK_Mobile_Start_Time__c</field>
+            <field>FSSK__FSK_Mobile_Start_Time__c</field>
         </inputAssignments>
         <object>ServiceAppointment</object>
     </recordUpdates>
@@ -2095,7 +2185,7 @@ TEXT({!myVariable_current.StatusCategory}) = &apos;Dispatched&apos;
                     <stringValue>GlobalConstant</stringValue>
                 </value>
             </processMetadataValues>
-            <field>FSK_Assigned_Service_Resource__c</field>
+            <field>FSSK__FSK_Assigned_Service_Resource__c</field>
         </inputAssignments>
         <object>ServiceAppointment</object>
     </recordUpdates>
