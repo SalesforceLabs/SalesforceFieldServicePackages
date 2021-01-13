@@ -79,13 +79,12 @@
 
 .toTheTop {
   position: fixed;
-  right: 20px;
-  top: 100%;
+  right: 0px;
+  bottom: 0px;
   width: 100%;
-  margin-top: -3.5em;
   background: #f7f9fb;
   text-align: right;
-  padding: 0.5%;
+  padding: 15px;
   z-index: 999;
 }
 
