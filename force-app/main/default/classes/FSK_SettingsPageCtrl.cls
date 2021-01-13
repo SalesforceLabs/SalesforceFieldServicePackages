@@ -89,10 +89,11 @@ public with sharing class FSK_SettingsPageCtrl {
             skToSave.Assign_Resource_On_Service_Appointment__c =  skWrapperObj.assignResourceOnServiceAppointment;
             skToSave.Set_Gantt_Label__c =  skWrapperObj.setGanttLabel;
             skToSave.Remove_Licenses_on_Deactivation__c =  skWrapperObj.removeLicensesOnDeactivation;
+            skToSave.Populate_Work_Order_Lookup__c = skWrapperObj.populateWorkOrderLookup;
 
             System.debug('skToSave == > ' + JSON.serialize(skToSave));
                     
-            if(skToSave.Set_Gantt_Label__c == true){
+            if(skToSave.Set_Gantt_Label__c){
 
                 //update PermissionSetLicense
                 Set<String> devNames = new Set<String>();
@@ -127,7 +128,7 @@ public with sharing class FSK_SettingsPageCtrl {
                 psNames.add('FSL_Community_Dispatcher_Permissions');
 
                 Map<String,String> psNameToIdPlMap = new Map<String,String>();
-                List<PermissionSet>  psList = [ SELECT Id ,Name
+                List<PermissionSet>  psList = [ SELECT Id, Name
                                                 FROM PermissionSet
                                                 WHERE Name IN: psNames];
                 for(PermissionSet ps : psList){
@@ -139,7 +140,14 @@ public with sharing class FSK_SettingsPageCtrl {
                 skToSave.Resource_Permissions_ID__c = psNameToIdPlMap.get('FSL_Resource_Permissions');
                 skToSave.Mobile_License_Permission_ID__c = psNameToIdPlMap.get('FSL_Mobile_License');
                 skToSave.Community_Dispatcher_License__c = psNameToIdPlMap.get('FSL_Community_Dispatcher_License');
-                skToSave.Community_Dispatcher_License__c = psNameToIdPlMap.get('FSL_Community_Dispatcher_Permissions');         
+                skToSave.Community_Dispatcher_Permission__c = psNameToIdPlMap.get('FSL_Community_Dispatcher_Permissions');        
+            }
+
+            if(skToSave.Mobile_Canned_Custom_Notification__c) {
+                List<CustomNotificationType> customNotificationTypeList = [SELECT Id FROM CustomNotificationType WHERE DeveloperName = 'Starter_Kit_Notification_Settings'];
+                if(!customNotificationTypeList.isEmpty()) {
+                    skToSave.Custom_Notification_Type_Id__c = customNotificationTypeList[0].Id;
+                }
             }
 
             upsert skToSave;
