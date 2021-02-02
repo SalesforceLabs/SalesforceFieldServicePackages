@@ -1,4 +1,4 @@
-import { LightningElement,track,api} from 'lwc';
+import {LightningElement,track,api} from 'lwc';
 import getStatuses from '@salesforce/apex/FSK_SAStatusCheckboxGroupController.getAppointmentStatus';
 import loadFSLSKSettings from '@salesforce/apex/FSK_SettingsPageCtrl.getSettings';
 import saveSkSettingsData from '@salesforce/apex/FSK_SettingsPageCtrl.saveSettings';

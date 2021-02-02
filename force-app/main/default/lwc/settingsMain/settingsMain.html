@@ -104,16 +104,6 @@
                             </h2>
                         </div>
                         <div class="headerRight">
-                            <div class ="slds-p-around_xx-small txt-numOf">Hours before the appointment start time: &nbsp;</div>
-                            <lightning-input 
-                                    class="general-inp-num"
-                                    type="number" 
-                                    name="input1"
-                                    onchange={handleNumOfHChange}
-                                    value={num_of_h_mn}
-                                    disabled={cbx_nm_Dis_1}
-                                    >
-                                    </lightning-input>
                                 <lightning-input  data-id="toggleInputAvailability" 
                                     type="toggle" 
                                     label=""
@@ -123,7 +113,29 @@
                                 </lightning-input>
                         </div>
                     </div>
-                    <div class="slds-col slds-size_2-of-3 slds-p-left_x-large ">
+                    <div class="slds-col slds-size_2-of-3 slds-p-left_x-large ">                       
+                        <fieldset class="slds-form-element slds-form_horizontal slds-p-horizontal_x-large slds-size_4-of-5">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">Hours before the appointment start time:</label>
+                                            <div class="slds-form-element__control">
+                                                <lightning-input 
+                                                    type="number" 
+                                                    name="input1"
+                                                    onchange={handleNumOfHChange}
+                                                    value={num_of_h_mn}
+                                                    disabled={cbx_nm_Dis_1}
+                                                    >
+                                                </lightning-input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
                         <div class="slds-p-horizontal_x-large">
                             <div >
                                 <div  class="slds-p-right_large mn_line cLineStyle">
@@ -194,46 +206,57 @@
                         </h2>
                     </div>
                     <div  class="slds-col slds-size_2-of-3 slds-p-left_x-large">
-                        <div class="slds-p-horizontal_x-large">
+                        <div class="slds-p-horizontal_x-large">                           
                             <div class="slds-p-around_small cLineStyle">
                                 <div class="leftCLineGeneral">
-                                        <lightning-input  
-                                            checked={cb_g__1}
-                                            class="cb"
-                                            type="checkbox" 
-                                            label="Add asset to account maintenance plan upon installation"
-                                            onchange={onG1ChecboxChange}>
-                                        </lightning-input>
+                                    <lightning-input  
+                                        checked={cb_g__1}
+                                        class="cb"
+                                        type="checkbox" 
+                                        label="Add asset to account maintenance plan upon installation"
+                                        onchange={onG1ChecboxChange}>
+                                    </lightning-input>
+
+                                    <fieldset class="slds-form-element slds-form_horizontal slds-p-around_small slds-size_4-of-5">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__group">
+                                                <div class="slds-form-element__row">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label">Number of days for work order creation:</label>
+                                                        <div class="slds-form-element__control">
+                                                            <lightning-input 
+                                                                type="number" 
+                                                                name="input1"
+                                                                disabled={num_of_d_inp_Dis}
+                                                                value= {num_of_days_g}
+                                                                onchange={handleNumOfDaysChange}
+                                                                >
+                                                            </lightning-input>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-form-element__row">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label">Select completion / installation status:</label>
+                                                        <lightning-combobox
+                                                            name="progress"
+                                                            label=""
+                                                            disabled={num_of_d_inp_Dis}
+                                                            value={g_status_selected}
+                                                            placeholder="Select completion / installation status"
+                                                            options={statusesComplete}
+                                                            onchange={handleChangeCmbx} >
+                                                        </lightning-combobox>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                 </div>
-                                <div class="lgc-bg headerRight">
-                                    <div class="headerRight">
-                                        <div class ="slds-p-around_xx-small" style={fontS}>Number of days for work order creation:</div>
-                                                <lightning-input 
-                                                    class="general-inp-num"
-                                                    type="number" 
-                                                    name="input1"
-                                                    disabled={num_of_d_inp_Dis}
-                                                    value= {num_of_days_g}
-                                                    onchange={handleNumOfDaysChange}
-                                                    >
-                                            </lightning-input>
-                                        <lightning-combobox
-                                            class = "genCmbStyle"
-                                            style=" margin-right: 5%; margin-left: 5%;"
-                                            name="progress"
-                                            label=""
-                                            disabled={num_of_d_inp_Dis}
-                                            value={g_status_selected}
-                                            placeholder="Select completion / installation status"
-                                            options={statusesComplete}
-                                            onchange={handleChangeCmbx} >
-                                        </lightning-combobox>
-                            
+                                <div class="lgc-bg">
                                         <lightning-helptext 
                                         content="This flow adds an asset from the parent Work order or Work Order Line item to the account maintenance plan. The logic is based on a checkbox field on the Service Appointment record. Use your own logic to check the checkbox field for relevant Service Appointment records.">
-                                        </lightning-helptext>
-                                    </div>
-                                    
+                                        </lightning-helptext>                                    
                                 </div>
                             </div>
            
