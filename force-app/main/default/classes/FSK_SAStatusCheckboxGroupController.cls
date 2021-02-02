@@ -6,16 +6,23 @@ public with sharing class FSK_SAStatusCheckboxGroupController {
     /**
      * @return Returns all the service appointment statuses that are not related to status categories 'Canceled' or 'None'.
      */
-    @AuraEnabled
+
+    @AuraEnabled(cacheable=true)
     public static List<PicklistValue> getAppointmentStatus(List<String> excludeCategories) {
-        Set<String> statusCodes = new Set<String>{'Scheduled','Dispatched', 'InProgress', 'CannotComplete', 'Completed', 'Canceled', 'None'};
+        System.debug('excludeCategories == >' + excludeCategories);
+ 
+        Set<String> statusCodes = new Set<String>{'Scheduled','Dispatched', 'InProgress', 'CannotComplete', 
+                                                     'Completed', 'Canceled', 'None'};
         Set<String> statusCodesToExclude = new Set<String>();
         for (String status : statusCodes) {
             if (excludeCategories.contains(status)) {
                 statusCodesToExclude.add(status);
             }
         }
-        List<ServiceAppointmentStatus> statuses = [SELECT Id, MasterLabel,ApiName,StatusCode FROM ServiceAppointmentStatus WHERE StatusCode NOT IN :statusCodesToExclude];
+        List<ServiceAppointmentStatus> statuses = [SELECT Id, MasterLabel,ApiName,StatusCode 
+                                                    FROM ServiceAppointmentStatus 
+                                                    WHERE StatusCode NOT IN :statusCodesToExclude];
+        System.debug('statuses == >' + JSON.serializePretty(statuses));
         List<PicklistValue> values = new List<PicklistValue>();
 
         for(ServiceAppointmentStatus status : statuses) {

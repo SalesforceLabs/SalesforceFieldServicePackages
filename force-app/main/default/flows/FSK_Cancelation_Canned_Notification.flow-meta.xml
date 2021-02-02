@@ -51,6 +51,20 @@
                 <elementReference>Recipient_Id</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Cancelation_Notification_Title</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>NotificationTitleMergedFields</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Cancelation_Notification_Body</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>NotificationBodyMergedFields</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Notify_Resource_about_Appointment_Cancelation</targetReference>
         </connector>
@@ -100,6 +114,20 @@
         </rules>
     </decisions>
     <formulas>
+        <name>NotificationBodyMergedFields</name>
+        <dataType>String</dataType>
+        <expression>{!Get_Related_Service_Appointment.AppointmentNumber} &amp; &apos; is canceled. &apos;
+&amp; IF(ISBLANK({!Get_Related_Service_Appointment.Account.Name}), &quot;&quot;, {!Get_Related_Service_Appointment.Account.Name})
+&amp; IF(OR(ISBLANK({!Get_Related_Service_Appointment.Account.Name}),
+ISBLANK({!Get_Related_Service_Appointment.Subject})), &quot;&quot;,&apos; - &apos;)
+&amp;IF(ISBLANK({!Get_Related_Service_Appointment.Subject}), &quot;&quot;, {!Get_Related_Service_Appointment.Subject})</expression>
+    </formulas>
+    <formulas>
+        <name>NotificationTitleMergedFields</name>
+        <dataType>String</dataType>
+        <expression>{!Get_Related_Service_Appointment.AppointmentNumber} &amp;&quot;has been canceled&quot;</expression>
+    </formulas>
+    <formulas>
         <name>NOW</name>
         <dataType>DateTime</dataType>
         <expression>NOW()</expression>
@@ -138,6 +166,13 @@
         <filterLogic>and</filterLogic>
         <filters>
             <field>Mobile_Canned_Custom_Notification__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Cancelation_Notification__c</field>
             <operator>EqualTo</operator>
             <value>
                 <booleanValue>true</booleanValue>
@@ -249,9 +284,6 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
-        <value>
-            <stringValue>This is the Cancelation Body</stringValue>
-        </value>
     </variables>
     <variables>
         <description>Limited to 250 characters</description>
@@ -291,5 +323,16 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Time_Zone_Offset</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
     </variables>
 </Flow>
