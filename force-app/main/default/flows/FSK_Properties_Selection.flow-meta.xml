@@ -58,7 +58,7 @@
             <label>Invalid Status Selected</label>
         </rules>
     </decisions>
-    <description>This Flow is part of the FSL Starter Kit. It used as a User Interface for activating the package feature.</description>
+    <description>This is a deprecated Flow from the Field Service Starter Kit package</description>
     <dynamicChoiceSets>
         <name>Service_Appointment_Statues</name>
         <dataType>Picklist</dataType>
@@ -92,7 +92,7 @@ CONTAINS({!UserEndingStatusSelection}, &apos;Canceled&apos;))</expression>
     </formulas>
     <interviewLabel>FSK Properties Selection {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>FSK Properties Selection Deprecated</label>
+    <label>deprecated FSSK flow</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
