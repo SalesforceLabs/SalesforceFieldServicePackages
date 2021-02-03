@@ -3,8 +3,8 @@
     <actionCalls>
         <name>Dispatched_Notification</name>
         <label>Dispatched Notification</label>
-        <locationX>1282</locationX>
-        <locationY>59</locationY>
+        <locationX>1418</locationX>
+        <locationY>50</locationY>
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
         <inputParameters>
@@ -89,6 +89,34 @@
                 <elementReference>Recipient_Id</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Dispatched_Notification_Title</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>DispatchedNotificationTitleMergedFields</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Dispatched_Notification_Body</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>DispatchedNotificationBodyMergedFields</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Emergency_Dispatched_Notification_Title</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmergencyNotificationTitleMergedFields</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Emergency_Dispatched_Notification_Body</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmergencyNotificationBodyMergedFields</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Check_Dispatched_Type</targetReference>
         </connector>
@@ -118,6 +146,29 @@
             <label>Emergency</label>
         </rules>
     </decisions>
+    <formulas>
+        <name>DispatchedNotificationBodyMergedFields</name>
+        <dataType>String</dataType>
+        <expression>&apos;Hi  &apos; &amp; {!Service_Resource_Name}
+&amp; &apos;. you have been assigned to a service appointment: &apos;
+&amp; {!Service_Appointment_Number} &amp; &apos; check your calendar for more details&apos;</expression>
+    </formulas>
+    <formulas>
+        <name>DispatchedNotificationTitleMergedFields</name>
+        <dataType>String</dataType>
+        <expression>{!Service_Appointment_Number} &amp; &apos; has been dispatched to you.&apos;</expression>
+    </formulas>
+    <formulas>
+        <name>EmergencyNotificationBodyMergedFields</name>
+        <dataType>String</dataType>
+        <expression>{!Service_Resource_Name} &amp; &apos;, you have been assigned to an emergency!!! please check your calendar for &apos;
+&amp; {!Service_Appointment_Number} &amp; &apos; to get more details. the response is needed ASAP!&apos;</expression>
+    </formulas>
+    <formulas>
+        <name>EmergencyNotificationTitleMergedFields</name>
+        <dataType>String</dataType>
+        <expression>&apos;*** Emergency!***   Attention: &apos; &amp; {!Service_Appointment_Subject}</expression>
+    </formulas>
     <interviewLabel>Canned Notification {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
     <label>Canned Notification Dispatched</label>
@@ -181,6 +232,10 @@
             </value>
         </filters>
         <object>ServiceResource</object>
+        <outputAssignments>
+            <assignToReference>Service_Resource_Name</assignToReference>
+            <field>Name</field>
+        </outputAssignments>
         <outputAssignments>
             <assignToReference>Recipient_Id</assignToReference>
             <field>RelatedRecordId</field>
@@ -274,7 +329,28 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
+        <name>Service_Appointment_Number</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Service_Appointment_Subject</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
         <name>Service_Resource_Id</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Service_Resource_Name</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>

@@ -62,6 +62,7 @@
             </value>
         </inputParameters>
     </actionCalls>
+    <apiVersion>49.0</apiVersion>
     <decisions>
         <processMetadataValues>
             <name>index</name>
@@ -95,7 +96,7 @@
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Set_Gantt_Label__c
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Set_Gantt_Label__c
 &amp;&amp;
 (ISCHANGED([WorkOrder].AccountId)
 || ISCHANGED([WorkOrder].WorkTypeId))</stringValue>
@@ -103,7 +104,7 @@
         </processMetadataValues>
         <name>formula_myRule_1</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Set_Gantt_Label__c}
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Set_Gantt_Label__c}
 &amp;&amp;
 (ISCHANGED({!myVariable_current.AccountId})
 || ISCHANGED({!myVariable_current.WorkTypeId}))</expression>

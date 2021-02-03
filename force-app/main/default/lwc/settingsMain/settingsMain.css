@@ -1,0 +1,121 @@
+.left-cline-gen{
+  width: 50%;
+  padding-bottom: 1%;
+}
+
+.bigTitle{
+  font-weight: bold;
+  color: #16325C;
+}
+
+.txt-numOf{
+  font-size:12dp;
+  padding-top:1%;
+}
+
+.rightCardStyle{
+  width:50%; 
+}
+
+.txt-style{
+  width:70%;
+}
+
+.headerRight{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end; 
+}
+
+.number-of-hours-sec{
+  display: flex;
+  justify-content: flex-end; 
+  width:100%;
+}
+
+.hours-style{
+  display: flex;
+  width: 100%;
+}
+
+.leftCLineWtgle{
+  width:50%;
+  background:#F3F2F2;
+  opacity:#F3F2F2;
+  Display:flex;
+}
+
+.leftCLineGeneral{
+  width: 100%;
+}
+
+.leftCLineM {
+  width:100%; 
+  Display:flex;
+  border-bottom: 1px solid #DDDBDA;
+}
+
+.cLineStyle{
+  padding:1%;
+  display:flex;
+  border-bottom: 1px solid #DDDBDA;
+}
+
+.leftCLineSB {
+  padding:1%;
+  display:flex;
+  width:100%;
+  background:#F3F2F2;
+  color:#0070D2;
+}
+
+.leftCLine {
+  width:100%;
+  padding-bottom:1%;
+}
+.cardBodyStyle {
+  display:flex;
+}
+
+.general-inp-num {
+  width: 12%;
+}
+
+.general-inp-num-hours {
+  width: 4%;
+  margin-top: -1%;
+}
+.general-inp-num-days {
+  width: 13%;
+  margin-top: -3.5%;
+}
+
+.scrollArea {
+  position: fixed;
+  /*border: 1px solid red;*/
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; 
+  overflow: auto;
+}
+
+.toTheTop {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  background: #f7f9fb;
+  text-align: right;
+  padding: 15px;
+  z-index: 999;
+}
+
+.scrollArea {
+  position: relative;
+}
+
+.cb{
+  color:#0070D2;
+  font-size: 16pt;
+}

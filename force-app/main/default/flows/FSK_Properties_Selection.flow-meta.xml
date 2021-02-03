@@ -400,7 +400,7 @@ CONTAINS({!UserEndingStatusSelection}, &apos;Canceled&apos;))</expression>
         </fields>
         <fields>
             <name>Select_Starting_Statuses</name>
-            <extensionName>FSSK:FSK_AppointmentStatusCheckboxGroup</extensionName>
+            <extensionName>c:FSK_AppointmentStatusCheckboxGroup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>groupLabel</name>
@@ -451,7 +451,7 @@ CONTAINS({!UserEndingStatusSelection}, &apos;Canceled&apos;))</expression>
         </fields>
         <fields>
             <name>Select_Ending_Statuses</name>
-            <extensionName>FSSK:FSK_AppointmentStatusCheckboxGroup</extensionName>
+            <extensionName>c:FSK_AppointmentStatusCheckboxGroup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>groupLabel</name>
