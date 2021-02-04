@@ -6,7 +6,7 @@
             "package": "Salesforce Field Service Starter Kit",
             "versionName": "SFS Starter Kit V1.11",
             "versionNumber": "3.5.0.NEXT",
-            "ancestorversion": "3.4.0.0",
+            "ancestorVersion": "3.4.0.0",
             "dependencies": [
               {
                  "subscriberPackageVersionId" : "04t3y000001yoTW"
