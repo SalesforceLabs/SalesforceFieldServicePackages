@@ -55,8 +55,17 @@
 }
 
 .cLineStyle{
-  padding:1%;
+  /*padding:1%;*/
   display:flex;
+  border-bottom: 1px solid #DDDBDA;
+}
+
+.featureSettingRowStyle{
+  /*padding:1%;*/
+  display:flex;
+}
+
+.cLine{
   border-bottom: 1px solid #DDDBDA;
 }
 
@@ -99,7 +108,7 @@
 }
 
 .toTheTop {
-  position: fixed;
+  position: sticky;
   right: 0px;
   bottom: 0px;
   width: 100%;
