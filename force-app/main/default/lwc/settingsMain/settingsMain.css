@@ -16,6 +16,7 @@
 .rightCardStyle{
   width:50%; 
 }
+
 .txt-style{
   width:70%;
 }
@@ -25,6 +26,7 @@
   width: 100%;
   justify-content: flex-end; 
 }
+
 .number-of-hours-sec{
   display: flex;
   justify-content: flex-end; 
@@ -35,7 +37,6 @@
   display: flex;
   width: 100%;
 }
-
 
 .leftCLineWtgle{
   width:50%;
@@ -88,6 +89,7 @@
 .general-inp-num {
   width: 12%;
 }
+
 .general-inp-num-hours {
   width: 4%;
   margin-top: -1%;

@@ -95,7 +95,7 @@ This Flow Remove Any Resource Permission Set and Permission Set Licence</descrip
         <connector>
             <targetReference>Check_IF_Records_exists</targetReference>
         </connector>
-        <filterLogic>(1 AND 2) OR (1 AND 3) OR (1 AND 4) OR (1 AND 5) OR (1 AND 5) OR (1 AND 6)</filterLogic>
+        <filterLogic>(1 AND 2) OR (1 AND 3) OR (1 AND 4) OR (1 AND 5) OR (1 AND 5) OR (1 AND 6) OR (1 AND 7)</filterLogic>
         <filters>
             <field>AssigneeId</field>
             <operator>EqualTo</operator>
@@ -138,6 +138,13 @@ This Flow Remove Any Resource Permission Set and Permission Set Licence</descrip
                 <elementReference>$Setup.FSK_FSL_Starter_Kit__c.Resource_Permissions_ID__c</elementReference>
             </value>
         </filters>
+        <filters>
+            <field>PermissionSetId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Setup.FSK_FSL_Starter_Kit__c.Community_Dispatcher_Permission__c</elementReference>
+            </value>
+        </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
         <object>PermissionSetAssignment</object>
         <queriedFields>Id</queriedFields>
@@ -152,7 +159,7 @@ This Flow Remove Any Resource Permission Set and Permission Set Licence</descrip
         <connector>
             <targetReference>Check_if_Licenses_Assignment_Exists</targetReference>
         </connector>
-        <filterLogic>(1 AND 2) OR (1 AND 3) OR (1 AND 4)</filterLogic>
+        <filterLogic>(1 AND 2) OR (1 AND 3) OR (1 AND 4) OR (1 AND 5)</filterLogic>
         <filters>
             <field>AssigneeId</field>
             <operator>EqualTo</operator>
@@ -179,6 +186,13 @@ This Flow Remove Any Resource Permission Set and Permission Set Licence</descrip
             <operator>EqualTo</operator>
             <value>
                 <elementReference>$Setup.FSK_FSL_Starter_Kit__c.Mobile_PSL_ID__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>PermissionSetLicenseId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Setup.FSK_FSL_Starter_Kit__c.Community_Dispatcher_License__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
