@@ -4,8 +4,9 @@
             "path": "force-app",
             "default": true,
             "package": "Salesforce Field Service Starter Kit",
-            "versionName": "ver 1.0.2",
-            "versionNumber": "1.0.0.NEXT",
+            "versionName": "SFS Starter Kit V1.11",
+            "versionNumber": "3.5.0.NEXT",
+            "ancestorVersion": "3.4.0.0",
             "dependencies": [
               {
                  "subscriberPackageVersionId" : "04t3y000001yoTW"

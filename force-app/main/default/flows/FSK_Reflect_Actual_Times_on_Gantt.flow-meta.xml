@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
     <decisions>
         <description>Identify if the action updates start time or end time</description>
         <name>Start_Or_End</name>
@@ -28,6 +29,11 @@
     </decisions>
     <description>This flow sets the actual times on the service appointments Scheduled field in order to reflect the actual times on the Gantt</description>
     <formulas>
+        <name>EndToUpset</name>
+        <dataType>DateTime</dataType>
+        <expression>If({!MobileTimes}, {!Mobile_End_Time}, {!NOW})</expression>
+    </formulas>
+    <formulas>
         <name>NewScheduledEndOnStartEvent</name>
         <dataType>DateTime</dataType>
         <expression>IF(ISBLANK({!RecordDurationInMinutes}), {!RecordSchedEndTime}, (NOW()+({!RecordDurationInMinutes}/1440)))</expression>
@@ -38,6 +44,11 @@
         <dataType>DateTime</dataType>
         <expression>NOW()</expression>
     </formulas>
+    <formulas>
+        <name>StartToUpset</name>
+        <dataType>DateTime</dataType>
+        <expression>IF({!MobileTimes}, {!Mobile_Start_Time}, {!NOW})</expression>
+    </formulas>
     <interviewLabel>Reflect Actual Times on Gantt {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
     <label>Reflect Actual Times on Gantt</label>
@@ -45,6 +56,12 @@
         <name>BuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -57,12 +74,13 @@
     <recordLookups>
         <name>Get_Service_Appointment</name>
         <label>Get Service Appointment</label>
-        <locationX>390</locationX>
+        <locationX>392</locationX>
         <locationY>50</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Set_Planned_Date</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -72,8 +90,24 @@
         </filters>
         <object>ServiceAppointment</object>
         <outputAssignments>
+            <assignToReference>Mobile_End_Time</assignToReference>
+            <field>FSK_Mobile_End_Time__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>Mobile_Start_Time</assignToReference>
+            <field>FSK_Mobile_Start_Time__c</field>
+        </outputAssignments>
+        <outputAssignments>
             <assignToReference>RecordDurationInMinutes</assignToReference>
-            <field>FSL__Duration_In_Minutes__c</field>
+            <field>DurationInMinutes</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>Mobile_End_Time</assignToReference>
+            <field>FSK_Mobile_End_Time__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>Mobile_Start_Time</assignToReference>
+            <field>FSK_Mobile_Start_Time__c</field>
         </outputAssignments>
         <outputAssignments>
             <assignToReference>RecordSchedEndTime</assignToReference>
@@ -88,8 +122,9 @@
         <description>Set the value of the Actual Start on the Scheduled Start in order to reflect it on the Gantt</description>
         <name>Set_Actual_End_on_Scheduled_End</name>
         <label>Set Actual End on Scheduled End</label>
-        <locationX>752</locationX>
-        <locationY>242</locationY>
+        <locationX>753</locationX>
+        <locationY>317</locationY>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -100,7 +135,7 @@
         <inputAssignments>
             <field>SchedEndTime</field>
             <value>
-                <elementReference>NOW</elementReference>
+                <elementReference>EndToUpset</elementReference>
             </value>
         </inputAssignments>
         <object>ServiceAppointment</object>
@@ -109,8 +144,9 @@
         <description>Set the value of the Actual Start on the Scheduled Start in order to reflect it on the Gantt</description>
         <name>Set_Actual_Start_on_Scheduled_Start</name>
         <label>Set Actual Start on Scheduled Start</label>
-        <locationX>944</locationX>
-        <locationY>47</locationY>
+        <locationX>1430</locationX>
+        <locationY>50</locationY>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -127,7 +163,7 @@
         <inputAssignments>
             <field>SchedStartTime</field>
             <value>
-                <elementReference>NOW</elementReference>
+                <elementReference>StartToUpset</elementReference>
             </value>
         </inputAssignments>
         <object>ServiceAppointment</object>
@@ -141,6 +177,7 @@
         <connector>
             <targetReference>Start_Or_End</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -177,6 +214,30 @@
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Mobile_End_Time</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Mobile_Start_Time</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>MobileTimes</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
     </variables>
     <variables>
         <name>RecordDurationInMinutes</name>

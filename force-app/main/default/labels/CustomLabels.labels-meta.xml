@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>FSK_Settings_Page_Error_Response</fullName>
+        <categories>FSK</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FSK Settings Page Error Response</shortDescription>
+        <value>Settings page failed to save!</value>
+    </labels>
+    <labels>
+        <fullName>FSK_Settings_Page_Success_Response</fullName>
+        <categories>FSK</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FSK Settings Page Success Response</shortDescription>
+        <value>Settings were saved!</value>
+    </labels>
+</CustomLabels>
