@@ -156,6 +156,28 @@
         </value>
     </constants>
     <decisions>
+        <name>Check_Feature_is_Active</name>
+        <label>Check Feature is Active</label>
+        <locationX>666</locationX>
+        <locationY>67</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Active</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Is_Active</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_SA</targetReference>
+            </connector>
+            <label>Active</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Check_is_Status_Triggers_Time_Capturing</name>
         <label>Check is Status Triggers Time Capturing</label>
         <locationX>843</locationX>
@@ -302,6 +324,21 @@
     </processMetadataValues>
     <processType>FieldServiceMobile</processType>
     <recordLookups>
+        <name>Check_Starter_Kit_Settings</name>
+        <label>Check Starter Kit Settings</label>
+        <locationX>487</locationX>
+        <locationY>68</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Feature_is_Active</targetReference>
+        </connector>
+        <object>FSK_FSL_Starter_Kit__c</object>
+        <outputAssignments>
+            <assignToReference>Is_Active</assignToReference>
+            <field>Mobile_Status_Satiation__c</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordLookups>
         <name>Get_SA</name>
         <label>Get SA</label>
         <locationX>674</locationX>
@@ -424,7 +461,7 @@
         <locationX>50</locationX>
         <locationY>50</locationY>
         <connector>
-            <targetReference>Get_SA</targetReference>
+            <targetReference>Check_Starter_Kit_Settings</targetReference>
         </connector>
     </start>
     <status>Active</status>
@@ -448,6 +485,13 @@
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>Is_Active</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>Service_Appointment</name>

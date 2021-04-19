@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
     <assignments>
         <name>Set_Account_Name_as_Label</name>
         <label>Set Account Name as Label</label>
@@ -203,6 +204,7 @@ LEFT({!AccountName} + &apos; - &apos; + {!WorkTypeName},255))</expression>
         <connector>
             <targetReference>Check_Related_Records</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -225,6 +227,7 @@ LEFT({!AccountName} + &apos; - &apos; + {!WorkTypeName},255))</expression>
         <connector>
             <targetReference>Check_if_Collection_not_Null</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>ParentRecordId</field>
             <operator>EqualTo</operator>
@@ -246,6 +249,7 @@ LEFT({!AccountName} + &apos; - &apos; + {!WorkTypeName},255))</expression>
         <connector>
             <targetReference>Get_Work_Type_Name</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -272,6 +276,7 @@ LEFT({!AccountName} + &apos; - &apos; + {!WorkTypeName},255))</expression>
         <connector>
             <targetReference>Get_Account_Name</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>

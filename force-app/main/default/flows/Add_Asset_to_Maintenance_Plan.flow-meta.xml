@@ -4,8 +4,8 @@
     <decisions>
         <name>Check_if_Maintenance_Plan_Exists</name>
         <label>Check if Maintenance Plan Exists</label>
-        <locationX>1063</locationX>
-        <locationY>260</locationY>
+        <locationX>314</locationX>
+        <locationY>734</locationY>
         <defaultConnector>
             <targetReference>Check_if_Asset_Does_Not_Already_Related_to_Maintenance_Plan</targetReference>
         </defaultConnector>
@@ -20,14 +20,14 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
-            <label>Maintenance Plan invalid or Not Exists</label>
+            <label>The Maintenance Plan does not exist or is invalid</label>
         </rules>
     </decisions>
     <decisions>
         <name>Check_Parent_Type</name>
         <label>Check Parent Type</label>
-        <locationX>436</locationX>
-        <locationY>150</locationY>
+        <locationX>314</locationX>
+        <locationY>158</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Parent_is_Work_Order</name>
@@ -63,8 +63,8 @@
     <decisions>
         <name>Verify_Asset_is_Valid</name>
         <label>Verify Asset is Valid</label>
-        <locationX>1434</locationX>
-        <locationY>271</locationY>
+        <locationX>512</locationX>
+        <locationY>974</locationY>
         <defaultConnectorLabel>Asset Invalid</defaultConnectorLabel>
         <rules>
             <name>Asset_is_Valid</name>
@@ -89,6 +89,7 @@
             <label>Asset is Valid</label>
         </rules>
     </decisions>
+    <description>The account maintenance plan is updated with the installed asset after a service appointment has been completed. This flow template is part of the Field Service Starter Kit Package and it is triggered by a Field Service Starter Kit process.</description>
     <formulas>
         <name>Calculate_First_Maintenance_Date</name>
         <dataType>Date</dataType>
@@ -111,7 +112,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -122,10 +123,11 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordCreates>
+        <description>Add Asset to Maintenance Plan</description>
         <name>Add_Asset_to_Maintenance_Plan</name>
-        <label>Add Asset to Maintenance Plan</label>
-        <locationX>1718</locationX>
-        <locationY>261</locationY>
+        <label>Create a Maintenance Asset record</label>
+        <locationX>380</locationX>
+        <locationY>1094</locationY>
         <inputAssignments>
             <field>AssetId</field>
             <value>
@@ -148,10 +150,11 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
+        <description>Check if Asset Does Not Already Related to Maintenance Plan</description>
         <name>Check_if_Asset_Does_Not_Already_Related_to_Maintenance_Plan</name>
-        <label>Check if Asset Does Not Already Related to Maintenance Plan</label>
-        <locationX>1241</locationX>
-        <locationY>271</locationY>
+        <label>Get Asset if already related to the Maintenance Plan</label>
+        <locationX>512</locationX>
+        <locationY>854</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Verify_Asset_is_Valid</targetReference>
@@ -180,8 +183,8 @@
     <recordLookups>
         <name>Find_Valid_Maintenance_Plan</name>
         <label>Find Valid Maintenance Plan</label>
-        <locationX>885</locationX>
-        <locationY>256</locationY>
+        <locationX>314</locationX>
+        <locationY>614</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Check_if_Maintenance_Plan_Exists</targetReference>
@@ -217,8 +220,8 @@
     <recordLookups>
         <name>Get_Work_Order</name>
         <label>Get Work Order</label>
-        <locationX>653</locationX>
-        <locationY>150</locationY>
+        <locationX>50</locationX>
+        <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Find_Valid_Maintenance_Plan</targetReference>
@@ -244,8 +247,8 @@
     <recordLookups>
         <name>Get_Work_Order_Account</name>
         <label>Get Work Order Account</label>
-        <locationX>646</locationX>
-        <locationY>360</locationY>
+        <locationX>314</locationX>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Find_Valid_Maintenance_Plan</targetReference>
@@ -267,8 +270,8 @@
     <recordLookups>
         <name>Get_Work_Order_Line_item</name>
         <label>Get Work Order Line item</label>
-        <locationX>440</locationX>
-        <locationY>360</locationY>
+        <locationX>314</locationX>
+        <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Work_Order_Account</targetReference>
@@ -292,8 +295,8 @@
         </outputAssignments>
     </recordLookups>
     <start>
-        <locationX>60</locationX>
-        <locationY>130</locationY>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Check_Parent_Type</targetReference>
         </connector>

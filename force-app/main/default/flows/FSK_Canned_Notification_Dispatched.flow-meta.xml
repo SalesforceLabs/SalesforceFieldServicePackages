@@ -3,10 +3,11 @@
     <actionCalls>
         <name>Dispatched_Notification</name>
         <label>Dispatched Notification</label>
-        <locationX>1418</locationX>
-        <locationY>50</locationY>
+        <locationX>314</locationX>
+        <locationY>638</locationY>
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>customNotifTypeId</name>
             <value>
@@ -41,10 +42,11 @@
     <actionCalls>
         <name>Emergency_Notification</name>
         <label>Emergency Notification</label>
-        <locationX>1283</locationX>
-        <locationY>278</locationY>
+        <locationX>50</locationX>
+        <locationY>638</locationY>
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>customNotifTypeId</name>
             <value>
@@ -79,9 +81,9 @@
     <apiVersion>50.0</apiVersion>
     <assignments>
         <name>Add_Recepients</name>
-        <label>Add Recepients</label>
-        <locationX>780</locationX>
-        <locationY>57</locationY>
+        <label>Set Notification Variables and Add Recepients</label>
+        <locationX>182</locationX>
+        <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>Recepients</assignToReference>
             <operator>Add</operator>
@@ -123,9 +125,9 @@
     </assignments>
     <decisions>
         <name>Check_Dispatched_Type</name>
-        <label>Check Dispatched Type</label>
-        <locationX>960</locationX>
-        <locationY>59</locationY>
+        <label>Check if Emergency Dispatch</label>
+        <locationX>182</locationX>
+        <locationY>518</locationY>
         <defaultConnector>
             <targetReference>Dispatched_Notification</targetReference>
         </defaultConnector>
@@ -146,32 +148,31 @@
             <label>Emergency</label>
         </rules>
     </decisions>
+    <description>When the Service Appointment status changes to a value that maps to the Dispatched Status Category, a custom notification is sent.  An alternative notification will be sent for an emergency.
+This flow template is part of the Field Service Starter Kit Package and is triggered by a Field Service Starter Kit process.</description>
     <formulas>
         <name>DispatchedNotificationBodyMergedFields</name>
         <dataType>String</dataType>
-        <expression>&apos;Hi  &apos; &amp; {!Service_Resource_Name}
-&amp; &apos;. you have been assigned to a service appointment: &apos;
-&amp; {!Service_Appointment_Number} &amp; &apos; check your calendar for more details&apos;</expression>
+        <expression>{!Service_Appointment_Number} &amp; &apos; has been assigned to you&apos;</expression>
     </formulas>
     <formulas>
         <name>DispatchedNotificationTitleMergedFields</name>
         <dataType>String</dataType>
-        <expression>{!Service_Appointment_Number} &amp; &apos; has been dispatched to you.&apos;</expression>
+        <expression>{!Service_Resource_Name}</expression>
     </formulas>
     <formulas>
         <name>EmergencyNotificationBodyMergedFields</name>
         <dataType>String</dataType>
-        <expression>{!Service_Resource_Name} &amp; &apos;, you have been assigned to an emergency!!! please check your calendar for &apos;
-&amp; {!Service_Appointment_Number} &amp; &apos; to get more details. the response is needed ASAP!&apos;</expression>
+        <expression>&apos;Attend to &apos; &amp; {!Service_Appointment_Number} &amp; &apos; ASAP&apos;</expression>
     </formulas>
     <formulas>
         <name>EmergencyNotificationTitleMergedFields</name>
         <dataType>String</dataType>
-        <expression>&apos;*** Emergency!***   Attention: &apos; &amp; {!Service_Appointment_Subject}</expression>
+        <expression>&apos;* Emergency! *   Attention: &apos; &amp; {!Service_Appointment_Subject}</expression>
     </formulas>
     <interviewLabel>Canned Notification {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Canned Notification Dispatched</label>
+    <label>Dispatch Notifications</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -181,7 +182,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -194,8 +195,8 @@
     <recordLookups>
         <name>Get_Assigned_Resource</name>
         <label>Get Assigned Resource</label>
-        <locationX>459</locationX>
-        <locationY>58</locationY>
+        <locationX>182</locationX>
+        <locationY>158</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Service_Resource</targetReference>
@@ -217,8 +218,8 @@
     <recordLookups>
         <name>Get_Service_Resource</name>
         <label>Get Service Resource</label>
-        <locationX>635</locationX>
-        <locationY>57</locationY>
+        <locationX>182</locationX>
+        <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Add_Recepients</targetReference>
@@ -242,8 +243,8 @@
         </outputAssignments>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Assigned_Resource</targetReference>
         </connector>

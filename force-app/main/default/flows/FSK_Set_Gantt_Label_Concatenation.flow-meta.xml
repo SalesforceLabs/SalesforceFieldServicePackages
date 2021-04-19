@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
     <assignments>
         <name>Set_Account_as_Label</name>
         <label>Set Account as Label</label>
-        <locationX>933</locationX>
-        <locationY>326</locationY>
+        <locationX>50</locationX>
+        <locationY>638</locationY>
         <assignmentItems>
             <assignToReference>GanttLabelValueToSet</assignToReference>
             <operator>Assign</operator>
@@ -19,8 +20,8 @@
     <assignments>
         <name>Set_Both_Fields_in_the_label</name>
         <label>Set Both Fields in the label</label>
-        <locationX>1002</locationX>
-        <locationY>65</locationY>
+        <locationX>842</locationX>
+        <locationY>638</locationY>
         <assignmentItems>
             <assignToReference>GanttLabelValueToSet</assignToReference>
             <operator>Assign</operator>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Set_Work_Type_as_Label</name>
         <label>Set Work Type as Label</label>
-        <locationX>1083</locationX>
-        <locationY>767</locationY>
+        <locationX>314</locationX>
+        <locationY>638</locationY>
         <assignmentItems>
             <assignToReference>GanttLabelValueToSet</assignToReference>
             <operator>Assign</operator>
@@ -51,8 +52,8 @@
     <decisions>
         <name>Check_Related_Records</name>
         <label>Check Related Records</label>
-        <locationX>766</locationX>
-        <locationY>57</locationY>
+        <locationX>446</locationX>
+        <locationY>518</locationY>
         <defaultConnector>
             <targetReference>Set_Both_Fields_in_the_label</targetReference>
         </defaultConnector>
@@ -138,6 +139,12 @@
         </value>
     </processMetadataValues>
     <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
         <name>OriginBuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
@@ -147,12 +154,13 @@
     <recordLookups>
         <name>Get_Account_Name</name>
         <label>Get Account Name</label>
-        <locationX>532</locationX>
-        <locationY>52</locationY>
+        <locationX>446</locationX>
+        <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Work_Type_Name</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -169,12 +177,13 @@
     <recordLookups>
         <name>Get_Service_Appointment</name>
         <label>Get Service Appointment</label>
-        <locationX>390</locationX>
-        <locationY>51</locationY>
+        <locationX>446</locationX>
+        <locationY>158</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Account_Name</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -195,12 +204,13 @@
     <recordLookups>
         <name>Get_Work_Type_Name</name>
         <label>Get Work Type Name</label>
-        <locationX>654</locationX>
-        <locationY>52</locationY>
+        <locationX>446</locationX>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Check_Related_Records</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -217,8 +227,9 @@
     <recordUpdates>
         <name>Set_Gantt_Label</name>
         <label>Set Gantt Label</label>
-        <locationX>1273</locationX>
-        <locationY>58</locationY>
+        <locationX>446</locationX>
+        <locationY>854</locationY>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -235,8 +246,8 @@
         <object>ServiceAppointment</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>320</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Service_Appointment</targetReference>
         </connector>

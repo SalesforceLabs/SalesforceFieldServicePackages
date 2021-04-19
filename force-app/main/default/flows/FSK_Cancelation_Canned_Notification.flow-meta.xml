@@ -2,11 +2,12 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
         <name>Notify_Resource_about_Appointment_Cancelation</name>
-        <label>Notify Resource about Appointment Cancelation</label>
-        <locationX>942</locationX>
-        <locationY>629</locationY>
+        <label>Notify Resource about SA Cancellation</label>
+        <locationX>50</locationX>
+        <locationY>1151</locationY>
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>customNotifTypeId</name>
             <value>
@@ -41,9 +42,9 @@
     <apiVersion>50.0</apiVersion>
     <assignments>
         <name>Add_user_Id_to_Collection</name>
-        <label>Add user Id to Collection</label>
-        <locationX>1145</locationX>
-        <locationY>629</locationY>
+        <label>Assignment of Notifications Variables</label>
+        <locationX>50</locationX>
+        <locationY>1031</locationY>
         <assignmentItems>
             <assignToReference>Recipient_Collection</assignToReference>
             <operator>Add</operator>
@@ -72,8 +73,8 @@
     <decisions>
         <name>Check_Service_Appointment_Return_Values</name>
         <label>Check Service Appointment Return Values</label>
-        <locationX>1132</locationX>
-        <locationY>117</locationY>
+        <locationX>182</locationX>
+        <locationY>671</locationY>
         <defaultConnectorLabel>Invalid Service Appointment Returned</defaultConnectorLabel>
         <rules>
             <name>Valid_Service_Appointment_Returened</name>
@@ -88,14 +89,14 @@
             <connector>
                 <targetReference>Get_Custom_Notification_Id</targetReference>
             </connector>
-            <label>Valid Service Appointment Returened</label>
+            <label>Valid Service Appointment Returned</label>
         </rules>
     </decisions>
     <decisions>
         <name>Is_Feature_Active</name>
         <label>Is Feature Active</label>
-        <locationX>756</locationX>
-        <locationY>118</locationY>
+        <locationX>380</locationX>
+        <locationY>431</locationY>
         <defaultConnectorLabel>Feature Inactive</defaultConnectorLabel>
         <rules>
             <name>Feature_is_Active</name>
@@ -110,22 +111,19 @@
             <connector>
                 <targetReference>Get_Related_Service_Appointment</targetReference>
             </connector>
-            <label>Feature is Active</label>
+            <label>Feature is active</label>
         </rules>
     </decisions>
+    <description>When a Service Appointment status changes to a value that maps to the canceled Status Category, a custom notification is sent. This flow template is part of the Field Service Starter Kit Package and is triggered by a Field Service Starter Kit process.</description>
     <formulas>
         <name>NotificationBodyMergedFields</name>
         <dataType>String</dataType>
-        <expression>{!Get_Related_Service_Appointment.AppointmentNumber} &amp; &apos; is canceled. &apos;
-&amp; IF(ISBLANK({!Get_Related_Service_Appointment.Account.Name}), &quot;&quot;, {!Get_Related_Service_Appointment.Account.Name})
-&amp; IF(OR(ISBLANK({!Get_Related_Service_Appointment.Account.Name}),
-ISBLANK({!Get_Related_Service_Appointment.Subject})), &quot;&quot;,&apos; - &apos;)
-&amp;IF(ISBLANK({!Get_Related_Service_Appointment.Subject}), &quot;&quot;, {!Get_Related_Service_Appointment.Subject})</expression>
+        <expression>{!Get_Related_Service_Appointment.AppointmentNumber} &amp; &apos; has been cancelled and removed from your schedule&apos;</expression>
     </formulas>
     <formulas>
         <name>NotificationTitleMergedFields</name>
         <dataType>String</dataType>
-        <expression>{!Get_Related_Service_Appointment.AppointmentNumber} &amp;&quot;has been canceled&quot;</expression>
+        <expression>&apos;Cancellation Alert&apos;</expression>
     </formulas>
     <formulas>
         <name>NOW</name>
@@ -134,7 +132,7 @@ ISBLANK({!Get_Related_Service_Appointment.Subject})), &quot;&quot;,&apos; - &apo
     </formulas>
     <interviewLabel>Cancelation_Canned_Notification {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Cancelation_Canned_Notification</label>
+    <label>Cancellation Notification</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -144,7 +142,7 @@ ISBLANK({!Get_Related_Service_Appointment.Subject})), &quot;&quot;,&apos; - &apo
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -156,9 +154,9 @@ ISBLANK({!Get_Related_Service_Appointment.Subject})), &quot;&quot;,&apos; - &apo
     <processType>AutoLaunchedFlow</processType>
     <recordLookups>
         <name>Check_if_Feature_is_Active</name>
-        <label>Check if Feature is Active</label>
-        <locationX>613</locationX>
-        <locationY>116</locationY>
+        <label>Check if the feature is active</label>
+        <locationX>380</locationX>
+        <locationY>311</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Is_Feature_Active</targetReference>
@@ -187,8 +185,8 @@ ISBLANK({!Get_Related_Service_Appointment.Subject})), &quot;&quot;,&apos; - &apo
     <recordLookups>
         <name>Get_Custom_Notification_Id</name>
         <label>Get Custom Notification Id</label>
-        <locationX>1143</locationX>
-        <locationY>311</locationY>
+        <locationX>50</locationX>
+        <locationY>791</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Recipient_Id</targetReference>
@@ -210,8 +208,8 @@ ISBLANK({!Get_Related_Service_Appointment.Subject})), &quot;&quot;,&apos; - &apo
     <recordLookups>
         <name>Get_Recipient_Id</name>
         <label>Get Recipient Id</label>
-        <locationX>1145</locationX>
-        <locationY>481</locationY>
+        <locationX>50</locationX>
+        <locationY>911</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Add_user_Id_to_Collection</targetReference>
@@ -232,9 +230,9 @@ ISBLANK({!Get_Related_Service_Appointment.Subject})), &quot;&quot;,&apos; - &apo
     </recordLookups>
     <recordLookups>
         <name>Get_Related_Service_Appointment</name>
-        <label>Get Related Service Appointment</label>
-        <locationX>969</locationX>
-        <locationY>118</locationY>
+        <label>Get Service Appointment</label>
+        <locationX>182</locationX>
+        <locationY>551</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Check_Service_Appointment_Return_Values</targetReference>
@@ -259,8 +257,8 @@ ISBLANK({!Get_Related_Service_Appointment.Subject})), &quot;&quot;,&apos; - &apo
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>254</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Check_if_Feature_is_Active</targetReference>
         </connector>

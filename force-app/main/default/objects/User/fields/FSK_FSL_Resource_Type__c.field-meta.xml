@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>FSK_FSL_Resource_Type__c</fullName>
+    <description>A Field Service Starter Kit package field: 
+When an admin creates or updates user records, the SFS Resource Type field on the user object allows the admin to assign permission sets to the user and determine whether a Service Resource record should be created and associated to the user as well.</description>
     <externalId>false</externalId>
-    <label>FSL Resource Type</label>
+    <inlineHelpText>A Field Service Starter Kit package field: 
+When an admin creates or updates user records, the SFS Resource Type field on the user object allows the admin to assign permission sets to the user and determine whether a Service Resource record should be created and associated to the user as well.</inlineHelpText>
+    <label>SFS Resource Type</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Picklist</type>
@@ -28,12 +32,12 @@
             <value>
                 <fullName>Resource_Dispatcher_Mobile</fullName>
                 <default>false</default>
-                <label>Resource &amp; Dispatcher (With Mobile) </label>
+                <label>Resource &amp; Dispatcher (With Mobile)</label>
             </value>
             <value>
                 <fullName>Resource_Dispatcher</fullName>
                 <default>false</default>
-                <label>Resource &amp; Dispatcher (Without Mobile) </label>
+                <label>Resource &amp; Dispatcher (Without Mobile)</label>
             </value>
             <value>
                 <fullName>Community</fullName>

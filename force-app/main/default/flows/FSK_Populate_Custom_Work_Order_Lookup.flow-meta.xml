@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
     <description>this flow populate the package lookup to Work Order on the Service Appointment</description>
     <interviewLabel>Populate Custom Work Order Lookup {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
@@ -26,6 +27,7 @@
         <connector>
             <targetReference>Populate_Work_Order</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -45,6 +47,7 @@
         <label>Populate Work Order</label>
         <locationX>542</locationX>
         <locationY>58</locationY>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
