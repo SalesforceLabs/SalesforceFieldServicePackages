@@ -38,7 +38,7 @@
         <defaultConnectorLabel>Incorrect Record Values</defaultConnectorLabel>
         <rules>
             <name>Correct_Values</name>
-            <conditionLogic>1 OR (2 AND 3)</conditionLogic>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>RecordActualStart</leftValueReference>
                 <operator>LessThan</operator>
@@ -54,7 +54,7 @@
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>RecordActualStart</leftValueReference>
+                <leftValueReference>RecordActualEnd</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
@@ -105,8 +105,7 @@
             <label>Correct Values</label>
         </rules>
     </decisions>
-    <description>This flow is part of the FSL Starter Kit.
-It contains all the processes relates to the Service Appointment Object</description>
+    <description>Updates to the Status of the Service Appointment cause the Actual Start, Actual End, and Actual Duration fields to be updated with the accurate time and duration. This flow template is part of the Field Service Starter Kit Package and it is being triggered by a Field Service Starter Kit process.</description>
     <formulas>
         <name>Actual_End_for_Fixed_Start</name>
         <dataType>DateTime</dataType>
@@ -136,11 +135,6 @@ It contains all the processes relates to the Service Appointment Object</descrip
         <scale>2</scale>
     </formulas>
     <formulas>
-        <name>EmptyDate</name>
-        <dataType>DateTime</dataType>
-        <expression>DATETIMEVALUE(&quot;&quot;)</expression>
-    </formulas>
-    <formulas>
         <description>This formula returns the current time as date/time</description>
         <name>NOW</name>
         <dataType>DateTime</dataType>
@@ -149,7 +143,7 @@ It contains all the processes relates to the Service Appointment Object</descrip
     <interviewLabel>This flow is part of FSL Starter Kit.
 This flow sets the actual start and actual end time according to custom setting object &apos;Actual Times Capturing&apos;</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Actual Times Capturing</label>
+    <label>FSSK Update Actual Time Fields</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

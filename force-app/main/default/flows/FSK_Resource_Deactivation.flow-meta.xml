@@ -2,10 +2,39 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>50.0</apiVersion>
     <decisions>
+        <name>Check_Feature_is_Active</name>
+        <label>Check Feature is Active</label>
+        <locationX>611</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Inactive</defaultConnectorLabel>
+        <rules>
+            <name>Active</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SettingsResDeAct.Remove_Licenses_on_Deactivation__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>SettingsResDeAct</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Permission_Set_Assignments</targetReference>
+            </connector>
+            <label>Active</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Check_if_Licenses_Assignment_Exists</name>
         <label>Check if Licenses Assignment Exists</label>
-        <locationX>1319</locationX>
-        <locationY>173</locationY>
+        <locationX>182</locationX>
+        <locationY>1031</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Licenses_Assigned_to_Users</name>
@@ -25,9 +54,9 @@
     </decisions>
     <decisions>
         <name>Check_IF_Records_exists</name>
-        <label>Check IF Records exists</label>
-        <locationX>651</locationX>
-        <locationY>171</locationY>
+        <label>Check If Records exist</label>
+        <locationX>380</locationX>
+        <locationY>671</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Records_Exists</name>
@@ -42,14 +71,14 @@
             <connector>
                 <targetReference>Delete_Permission_Set_Assignments</targetReference>
             </connector>
-            <label>Records Exists</label>
+            <label>Records Exist</label>
         </rules>
     </decisions>
-    <description>This flow is part of the Field Service Starter Kit.
-This Flow Remove Any Resource Permission Set and Permission Set Licence</description>
+    <description>In the event that an admin deactivates a Service Resource, the flow removes all the Field Service permission set licenses and permission sets from the related user record.
+This Record-Triggered Flow template is part of the Field Service Starter Kit Package.</description>
     <interviewLabel>FSK Resource Deactivation {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Resource Deactivation</label>
+    <label>FSSK Resource Deactivation</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -59,7 +88,7 @@ This Flow Remove Any Resource Permission Set and Permission Set Licence</descrip
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -71,31 +100,45 @@ This Flow Remove Any Resource Permission Set and Permission Set Licence</descrip
     <processType>AutoLaunchedFlow</processType>
     <recordDeletes>
         <name>Delete_Licenses_Assignment</name>
-        <label>Delete Licenses Assignment</label>
-        <locationX>1591</locationX>
-        <locationY>166</locationY>
+        <label>Delete License Assignments</label>
+        <locationX>50</locationX>
+        <locationY>1151</locationY>
         <inputReference>Get_Permission_Set_License_Assignments</inputReference>
     </recordDeletes>
     <recordDeletes>
         <name>Delete_Permission_Set_Assignments</name>
         <label>Delete Permission Set Assignments</label>
-        <locationX>895</locationX>
-        <locationY>173</locationY>
+        <locationX>182</locationX>
+        <locationY>791</locationY>
         <connector>
             <targetReference>Get_Permission_Set_License_Assignments</targetReference>
         </connector>
         <inputReference>Get_Permission_Set_Assignments</inputReference>
     </recordDeletes>
     <recordLookups>
+        <name>Get_FSSK_Custom_Setting_record</name>
+        <label>Get FSSK Custom Setting record</label>
+        <locationX>611</locationX>
+        <locationY>311</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Feature_is_Active</targetReference>
+        </connector>
+        <object>FSK_FSL_Starter_Kit__c</object>
+        <outputReference>SettingsResDeAct</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Remove_Licenses_on_Deactivation__c</queriedFields>
+    </recordLookups>
+    <recordLookups>
         <name>Get_Permission_Set_Assignments</name>
         <label>Get Permission Set Assignments</label>
-        <locationX>501</locationX>
-        <locationY>170</locationY>
+        <locationX>380</locationX>
+        <locationY>551</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Check_IF_Records_exists</targetReference>
         </connector>
-        <filterLogic>(1 AND 2) OR (1 AND 3) OR (1 AND 4) OR (1 AND 5) OR (1 AND 5) OR (1 AND 6) OR (1 AND 7)</filterLogic>
+        <filterLogic>(1 AND 2) OR (1 AND 3) OR (1 AND 4) OR (1 AND 5) OR (1 AND 6) OR (1 AND 7)</filterLogic>
         <filters>
             <field>AssigneeId</field>
             <operator>EqualTo</operator>
@@ -153,8 +196,8 @@ This Flow Remove Any Resource Permission Set and Permission Set Licence</descrip
     <recordLookups>
         <name>Get_Permission_Set_License_Assignments</name>
         <label>Get Permission Set License Assignments</label>
-        <locationX>1155</locationX>
-        <locationY>173</locationY>
+        <locationX>182</locationX>
+        <locationY>911</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Check_if_Licenses_Assignment_Exists</targetReference>
@@ -201,10 +244,10 @@ This Flow Remove Any Resource Permission Set and Permission Set Licence</descrip
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>53</locationX>
-        <locationY>93</locationY>
+        <locationX>485</locationX>
+        <locationY>0</locationY>
         <connector>
-            <targetReference>Get_Permission_Set_Assignments</targetReference>
+            <targetReference>Get_FSSK_Custom_Setting_record</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -225,5 +268,13 @@ This Flow Remove Any Resource Permission Set and Permission Set Licence</descrip
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SettingsResDeAct</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>FSK_FSL_Starter_Kit__c</objectType>
     </variables>
 </Flow>

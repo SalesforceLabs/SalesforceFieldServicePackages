@@ -3,8 +3,8 @@
     <assignments>
         <name>Set_Current_Mobile_Time_stamp_For_End</name>
         <label>Set Current Mobile Time stamp For End</label>
-        <locationX>1165</locationX>
-        <locationY>1339</locationY>
+        <locationX>578</locationX>
+        <locationY>1310</locationY>
         <assignmentItems>
             <assignToReference>Service_Appointment.FSK_Mobile_End_Time__c</assignToReference>
             <operator>Assign</operator>
@@ -19,8 +19,8 @@
     <assignments>
         <name>Set_Current_Mobile_Time_stamp_For_Start</name>
         <label>Set Current Mobile Time stamp For Start</label>
-        <locationX>653</locationX>
-        <locationY>1366</locationY>
+        <locationX>314</locationX>
+        <locationY>1310</locationY>
         <assignmentItems>
             <assignToReference>Service_Appointment.FSK_Mobile_Start_Time__c</assignToReference>
             <operator>Assign</operator>
@@ -35,8 +35,8 @@
     <assignments>
         <name>Set_Status_Cannot_Complete</name>
         <label>Set Status Cannot Complete</label>
-        <locationX>305</locationX>
-        <locationY>1141</locationY>
+        <locationX>578</locationX>
+        <locationY>878</locationY>
         <assignmentItems>
             <assignToReference>Service_Appointment.Status</assignToReference>
             <operator>Assign</operator>
@@ -51,8 +51,8 @@
     <assignments>
         <name>Set_Status_Complete</name>
         <label>Set Status Complete</label>
-        <locationX>523</locationX>
-        <locationY>897</locationY>
+        <locationX>314</locationX>
+        <locationY>878</locationY>
         <assignmentItems>
             <assignToReference>Service_Appointment.Status</assignToReference>
             <operator>Assign</operator>
@@ -67,8 +67,8 @@
     <assignments>
         <name>Set_Status_In_Progress</name>
         <label>Set Status In Progress</label>
-        <locationX>1267</locationX>
-        <locationY>666</locationY>
+        <locationX>50</locationX>
+        <locationY>758</locationY>
         <assignmentItems>
             <assignToReference>Service_Appointment.Status</assignToReference>
             <operator>Assign</operator>
@@ -82,7 +82,7 @@
     </assignments>
     <choices>
         <name>chComplete</name>
-        <choiceText>Complete</choiceText>
+        <choiceText>Completed</choiceText>
         <dataType>String</dataType>
         <value>
             <elementReference>stComplet</elementReference>
@@ -98,7 +98,7 @@
     </choices>
     <choices>
         <name>chIncomplete</name>
-        <choiceText>Cannot Complete Job</choiceText>
+        <choiceText>Cannot Complete</choiceText>
         <dataType>String</dataType>
         <value>
             <elementReference>stIncomplete</elementReference>
@@ -158,8 +158,8 @@
     <decisions>
         <name>Check_Feature_is_Active</name>
         <label>Check Feature is Active</label>
-        <locationX>669</locationX>
-        <locationY>67</locationY>
+        <locationX>974</locationX>
+        <locationY>278</locationY>
         <defaultConnector>
             <targetReference>Feature_Inactive_Screen</targetReference>
         </defaultConnector>
@@ -190,8 +190,8 @@
     <decisions>
         <name>Check_is_Status_Triggers_Time_Capturing</name>
         <label>Check is Status Triggers Time Capturing</label>
-        <locationX>843</locationX>
-        <locationY>1014</locationY>
+        <locationX>578</locationX>
+        <locationY>1190</locationY>
         <defaultConnector>
             <targetReference>Update_Values</targetReference>
         </defaultConnector>
@@ -230,8 +230,8 @@
     <decisions>
         <name>Completion_Decision</name>
         <label>Completion Decision</label>
-        <locationX>195</locationX>
-        <locationY>840</locationY>
+        <locationX>578</locationX>
+        <locationY>758</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Complete</name>
@@ -259,7 +259,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Incompletion_text</targetReference>
+                <targetReference>Set_Status_Cannot_Complete</targetReference>
             </connector>
             <label>Incomplete</label>
         </rules>
@@ -267,8 +267,8 @@
     <decisions>
         <name>Status_Based_Decision</name>
         <label>Status Based Decision</label>
-        <locationX>664</locationX>
-        <locationY>463</locationY>
+        <locationX>578</locationX>
+        <locationY>518</locationY>
         <defaultConnector>
             <targetReference>Default_Debug</targetReference>
         </defaultConnector>
@@ -304,9 +304,11 @@
             <label>In Progress</label>
         </rules>
     </decisions>
+    <description>This Field Service Mobile flow allow FS mobile users tp update the status of their service appointments while adhering to the permitted status flow. Time is captured based on a status definition and feeds that time to the Field Service Starter Kit Status Based Flows. This flow must be enabled if you want to use the Automatic Updates to the Actual Start/End Fields or Scheduled Start/End Fields and you need offline support. This means if you don&apos;t enable it, and the mobile user is offline, instead of recording the time of the action, it will record the time the sync took place.
+The feature uses two fields from the Starter Kit Package to store the time when the job began and the time when the technician completed the job. These fields are the Mobile Start Time and Mobile End Time.</description>
     <interviewLabel>Field Service Mobile Status Transition {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Field Service Mobile Status Transition (Requires Read All Custom Settings Permission)</label>
+    <label>FSSK Field Service Mobile Status Transition</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -316,7 +318,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -329,8 +331,8 @@
     <recordLookups>
         <name>Get_Preferences</name>
         <label>Get Preferences</label>
-        <locationX>428</locationX>
-        <locationY>68</locationY>
+        <locationX>974</locationX>
+        <locationY>158</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Check_Feature_is_Active</targetReference>
@@ -345,8 +347,8 @@
     <recordLookups>
         <name>Get_SA</name>
         <label>Get SA</label>
-        <locationX>674</locationX>
-        <locationY>285</locationY>
+        <locationX>578</locationX>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Status_Based_Decision</targetReference>
@@ -370,22 +372,22 @@
     <recordUpdates>
         <name>Update_Values</name>
         <label>Update Values</label>
-        <locationX>844</locationX>
-        <locationY>1484</locationY>
+        <locationX>578</locationX>
+        <locationY>1526</locationY>
         <inputReference>Service_Appointment</inputReference>
     </recordUpdates>
     <runInMode>DefaultMode</runInMode>
     <screens>
         <name>Default_Debug</name>
         <label>Default Debug</label>
-        <locationX>1002</locationX>
-        <locationY>294</locationY>
-        <allowBack>true</allowBack>
+        <locationX>1106</locationX>
+        <locationY>638</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <fields>
             <name>dsp2</name>
-            <fieldText>&lt;p&gt;Status = {!Service_Appointment.Status}&lt;/p&gt;&lt;p&gt;ID = {!Id}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;This action does not support this appointment status&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -394,44 +396,24 @@
     <screens>
         <name>Feature_Inactive_Screen</name>
         <label>Feature Inactive Screen</label>
-        <locationX>1081</locationX>
-        <locationY>74</locationY>
+        <locationX>1370</locationX>
+        <locationY>398</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>dsp2_0</name>
-            <fieldText>&lt;p&gt;This feature is inactive!&lt;/p&gt;&lt;p&gt;Contact your System Administrator for more information.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;This feature is not active.&lt;/p&gt;&lt;p&gt;Contact your System Administrator for more information about this Field Service Starter Kit feature.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Incompletion_text</name>
-        <label>Incompletion text</label>
-        <locationX>357</locationX>
-        <locationY>947</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <connector>
-            <targetReference>Set_Status_Cannot_Complete</targetReference>
-        </connector>
-        <fields>
-            <name>txtIncompleteReason</name>
-            <fieldText>Please add the reason for incompletion.</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
         <name>Job_Completion</name>
-        <label>Job Completion</label>
-        <locationX>383</locationX>
-        <locationY>462</locationY>
+        <label>Set Status from In Progress</label>
+        <locationX>578</locationX>
+        <locationY>638</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -443,7 +425,7 @@
             <choiceReferences>chComplete</choiceReferences>
             <choiceReferences>chIncomplete</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>Please set the completion status of the task</fieldText>
+            <fieldText>Select the next Status Transition</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>true</isRequired>
         </fields>
@@ -453,8 +435,8 @@
     <screens>
         <name>Set_Status_from_Dispatched</name>
         <label>Set Status from Dispatched</label>
-        <locationX>1023</locationX>
-        <locationY>666</locationY>
+        <locationX>50</locationX>
+        <locationY>638</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -462,15 +444,10 @@
             <targetReference>Set_Status_In_Progress</targetReference>
         </connector>
         <fields>
-            <name>txtNextStatus</name>
-            <fieldText>&lt;p&gt;Select the next status transition.&lt;/p&gt;&lt;p&gt;Optional - Add job notes.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>Transition_to_next_status_DSP</name>
             <choiceReferences>chInProg</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>Transition to next status</fieldText>
+            <fieldText>Select the next Status Transition</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>true</isRequired>
         </fields>
@@ -478,8 +455,8 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>848</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Preferences</targetReference>
         </connector>

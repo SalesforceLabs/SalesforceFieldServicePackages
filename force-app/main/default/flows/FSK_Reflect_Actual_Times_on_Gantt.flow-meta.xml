@@ -2,11 +2,43 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>49.0</apiVersion>
     <decisions>
+        <name>Check_if_Planned_Dates_Populated</name>
+        <label>Check if Planned Dates Populated</label>
+        <locationX>50</locationX>
+        <locationY>398</locationY>
+        <defaultConnector>
+            <targetReference>Set_Planned_Date</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Populated</defaultConnectorLabel>
+        <rules>
+            <name>Populated</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Planned_Start</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Planned_End</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Actual_Start_on_Scheduled_Start</targetReference>
+            </connector>
+            <label>Populated</label>
+        </rules>
+    </decisions>
+    <decisions>
         <description>Identify if the action updates start time or end time</description>
         <name>Start_Or_End</name>
         <label>Start Or End</label>
-        <locationX>743</locationX>
-        <locationY>52</locationY>
+        <locationX>226</locationX>
+        <locationY>278</locationY>
         <defaultConnector>
             <targetReference>Set_Actual_End_on_Scheduled_End</targetReference>
         </defaultConnector>
@@ -22,12 +54,12 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Set_Actual_Start_on_Scheduled_Start</targetReference>
+                <targetReference>Check_if_Planned_Dates_Populated</targetReference>
             </connector>
             <label>Is Start Time</label>
         </rules>
     </decisions>
-    <description>This flow sets the actual times on the service appointments Scheduled field in order to reflect the actual times on the Gantt</description>
+    <description>Automatically update Scheduled Start and Scheduled End fields on the Gantt chart to reflect the start and end time of a service appointment as reported by a field employee. The original schedule values are copied into the fields &apos;Planned Scheduled Start&apos; and &apos;Planned Scheduled End&apos; introduced in the Starter Kit package. This flow template is part of the Field Service Starter Kit Package and it is triggered by a Field Service Starter Kit process.</description>
     <formulas>
         <name>EndToUpset</name>
         <dataType>DateTime</dataType>
@@ -51,7 +83,7 @@
     </formulas>
     <interviewLabel>Reflect Actual Times on Gantt {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Reflect Actual Times on Gantt</label>
+    <label>FSSK Update Scheduled Time Fields</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -61,7 +93,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -74,11 +106,11 @@
     <recordLookups>
         <name>Get_Service_Appointment</name>
         <label>Get Service Appointment</label>
-        <locationX>392</locationX>
-        <locationY>50</locationY>
+        <locationX>226</locationX>
+        <locationY>158</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Set_Planned_Date</targetReference>
+            <targetReference>Start_Or_End</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -90,14 +122,6 @@
         </filters>
         <object>ServiceAppointment</object>
         <outputAssignments>
-            <assignToReference>Mobile_End_Time</assignToReference>
-            <field>FSK_Mobile_End_Time__c</field>
-        </outputAssignments>
-        <outputAssignments>
-            <assignToReference>Mobile_Start_Time</assignToReference>
-            <field>FSK_Mobile_Start_Time__c</field>
-        </outputAssignments>
-        <outputAssignments>
             <assignToReference>RecordDurationInMinutes</assignToReference>
             <field>DurationInMinutes</field>
         </outputAssignments>
@@ -108,6 +132,14 @@
         <outputAssignments>
             <assignToReference>Mobile_Start_Time</assignToReference>
             <field>FSK_Mobile_Start_Time__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>Planned_End</assignToReference>
+            <field>FSK_Planned_Scheduled_End__c</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>Planned_Start</assignToReference>
+            <field>FSK_Planned_Scheduled_Start__c</field>
         </outputAssignments>
         <outputAssignments>
             <assignToReference>RecordSchedEndTime</assignToReference>
@@ -122,8 +154,8 @@
         <description>Set the value of the Actual Start on the Scheduled Start in order to reflect it on the Gantt</description>
         <name>Set_Actual_End_on_Scheduled_End</name>
         <label>Set Actual End on Scheduled End</label>
-        <locationX>753</locationX>
-        <locationY>317</locationY>
+        <locationX>402</locationX>
+        <locationY>398</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -144,8 +176,8 @@
         <description>Set the value of the Actual Start on the Scheduled Start in order to reflect it on the Gantt</description>
         <name>Set_Actual_Start_on_Scheduled_Start</name>
         <label>Set Actual Start on Scheduled Start</label>
-        <locationX>1430</locationX>
-        <locationY>50</locationY>
+        <locationX>50</locationX>
+        <locationY>734</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -172,10 +204,10 @@
         <description>Setting the planned dates field to avoid data loss</description>
         <name>Set_Planned_Date</name>
         <label>Set Planned Date</label>
-        <locationX>536</locationX>
-        <locationY>50</locationY>
+        <locationX>138</locationX>
+        <locationY>518</locationY>
         <connector>
-            <targetReference>Start_Or_End</targetReference>
+            <targetReference>Set_Actual_Start_on_Scheduled_Start</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -200,8 +232,8 @@
         <object>ServiceAppointment</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>100</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Service_Appointment</targetReference>
         </connector>
@@ -238,6 +270,20 @@
         <value>
             <booleanValue>false</booleanValue>
         </value>
+    </variables>
+    <variables>
+        <name>Planned_End</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Planned_Start</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>RecordDurationInMinutes</name>

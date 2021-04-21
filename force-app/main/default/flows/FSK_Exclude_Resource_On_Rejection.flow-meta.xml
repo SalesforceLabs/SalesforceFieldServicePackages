@@ -4,8 +4,8 @@
     <assignments>
         <name>Add_To_Collection</name>
         <label>Add To Collection</label>
-        <locationX>880</locationX>
-        <locationY>931</locationY>
+        <locationX>270</locationX>
+        <locationY>974</locationY>
         <assignmentItems>
             <assignToReference>Resources_to_Exclude</assignToReference>
             <operator>Add</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Set_Collection_Record</name>
         <label>Set Collection Record</label>
-        <locationX>879</locationX>
-        <locationY>791</locationY>
+        <locationX>270</locationX>
+        <locationY>854</locationY>
         <assignmentItems>
             <assignToReference>Resource_Preference_Loop_Helper.PreferenceType</assignToReference>
             <operator>Assign</operator>
@@ -50,8 +50,8 @@
     <assignments>
         <name>Set_Parent_to_WO_Id</name>
         <label>Set Parent to WO Id</label>
-        <locationX>601</locationX>
-        <locationY>73</locationY>
+        <locationX>138</locationX>
+        <locationY>278</locationY>
         <assignmentItems>
             <assignToReference>Work_Order_Id</assignToReference>
             <operator>Assign</operator>
@@ -67,8 +67,8 @@
         <description>Validate that no Crew or Crew Member has any preference on this work order</description>
         <name>Check_related_preference</name>
         <label>Check related preference</label>
-        <locationX>1238</locationX>
-        <locationY>471</locationY>
+        <locationX>182</locationX>
+        <locationY>1310</locationY>
         <defaultConnector>
             <targetReference>Service_Appointment_Handler</targetReference>
         </defaultConnector>
@@ -92,8 +92,8 @@
     <decisions>
         <name>Check_Service_Appointment_Parent_Record_Type</name>
         <label>Check Service Appointment Parent Record Type</label>
-        <locationX>429</locationX>
-        <locationY>70</locationY>
+        <locationX>402</locationX>
+        <locationY>158</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Parent_is_Work_Order</name>
@@ -129,8 +129,8 @@
     <decisions>
         <name>Organization_uses_Crews</name>
         <label>Organization uses Crews</label>
-        <locationX>868</locationX>
-        <locationY>83</locationY>
+        <locationX>402</locationX>
+        <locationY>494</locationY>
         <defaultConnector>
             <targetReference>Get_Assigned_Resource</targetReference>
         </defaultConnector>
@@ -148,14 +148,14 @@
             <connector>
                 <targetReference>Get_Assigned_Resources</targetReference>
             </connector>
-            <label>Crew is Enable</label>
+            <label>Crew is Enabled</label>
         </rules>
     </decisions>
     <decisions>
         <name>Values_Are_Valid</name>
         <label>Values Are Valid</label>
-        <locationX>1519</locationX>
-        <locationY>73</locationY>
+        <locationX>622</locationX>
+        <locationY>854</locationY>
         <defaultConnector>
             <targetReference>Service_Appointment_Handler</targetReference>
         </defaultConnector>
@@ -190,14 +190,15 @@
             <label>Valid Values</label>
         </rules>
     </decisions>
+    <description>The flow creates a resource preference record of type Excluded for the assigned resource in the event of a service appointment rejection. The flow unschedules the Service Appointment and deletes the assigned resource record by setting the Service Appointment Status to None. This flow template is part of the Field Service Starter Kit Package and is triggered by a Field Service Starter Kit process.</description>
     <interviewLabel>Exclude Resource On Rejection {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Exclude Resource On Rejection</label>
+    <label>FSSK Exclude Resource On Rejection</label>
     <loops>
         <name>Prepare_to_Exclude_Assigned_Resources</name>
         <label>Prepare to Exclude Assigned Resources</label>
-        <locationX>881</locationX>
-        <locationY>593</locationY>
+        <locationX>182</locationX>
+        <locationY>734</locationY>
         <collectionReference>Assigned_Service_Resources</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -216,7 +217,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -229,8 +230,8 @@
     <recordCreates>
         <name>Exclude_Assigned_Resource</name>
         <label>Exclude Assigned Resource</label>
-        <locationX>1691</locationX>
-        <locationY>68</locationY>
+        <locationX>490</locationX>
+        <locationY>974</locationY>
         <connector>
             <targetReference>Remove_Assigned_Resource</targetReference>
         </connector>
@@ -258,8 +259,8 @@
     <recordCreates>
         <name>Exclude_Assigned_Service_Resources</name>
         <label>Exclude Assigned Service Resources</label>
-        <locationX>1585</locationX>
-        <locationY>598</locationY>
+        <locationX>50</locationX>
+        <locationY>1430</locationY>
         <connector>
             <targetReference>Service_Appointment_Handler</targetReference>
         </connector>
@@ -268,8 +269,8 @@
     <recordDeletes>
         <name>Remove_Assigned_Resource</name>
         <label>Remove Assigned Resource</label>
-        <locationX>1684</locationX>
-        <locationY>233</locationY>
+        <locationX>490</locationX>
+        <locationY>1094</locationY>
         <connector>
             <targetReference>Service_Appointment_Handler</targetReference>
         </connector>
@@ -278,8 +279,8 @@
     <recordLookups>
         <name>Get_Assigned_Resource</name>
         <label>Get Assigned Resource</label>
-        <locationX>1143</locationX>
-        <locationY>74</locationY>
+        <locationX>622</locationX>
+        <locationY>614</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Related_Resource_Preferences</targetReference>
@@ -300,8 +301,8 @@
     <recordLookups>
         <name>Get_Assigned_Resources</name>
         <label>Get Assigned Resources</label>
-        <locationX>879</locationX>
-        <locationY>414</locationY>
+        <locationX>182</locationX>
+        <locationY>614</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Prepare_to_Exclude_Assigned_Resources</targetReference>
@@ -323,8 +324,8 @@
     <recordLookups>
         <name>Get_Related_Resource_Preferences</name>
         <label>Get Related Resource Preferences</label>
-        <locationX>1369</locationX>
-        <locationY>71</locationY>
+        <locationX>622</locationX>
+        <locationY>734</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Values_Are_Valid</targetReference>
@@ -353,8 +354,8 @@
     <recordLookups>
         <name>Get_Related_Resources_Preferances</name>
         <label>Get Related Resources Preferances</label>
-        <locationX>1166</locationX>
-        <locationY>601</locationY>
+        <locationX>182</locationX>
+        <locationY>1190</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Check_related_preference</targetReference>
@@ -376,7 +377,7 @@
     <recordLookups>
         <name>Get_WOLI_Parent_Work_Order</name>
         <label>Get WOLI Parent Work Order</label>
-        <locationX>439</locationX>
+        <locationX>402</locationX>
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -406,8 +407,8 @@
     <recordUpdates>
         <name>Service_Appointment_Handler</name>
         <label>Service Appointment Handler</label>
-        <locationX>1583</locationX>
-        <locationY>376</locationY>
+        <locationX>402</locationX>
+        <locationY>1742</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -431,8 +432,8 @@
         <object>ServiceAppointment</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>276</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Check_Service_Appointment_Parent_Record_Type</targetReference>
         </connector>

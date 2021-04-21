@@ -3,9 +3,9 @@
     <apiVersion>49.0</apiVersion>
     <assignments>
         <name>Adding_Value_to_Crew_Counter</name>
-        <label>Adding Value to Crew Counter</label>
-        <locationX>1204</locationX>
-        <locationY>31</locationY>
+        <label>Increase crew counter</label>
+        <locationX>402</locationX>
+        <locationY>638</locationY>
         <assignmentItems>
             <assignToReference>CrewCounter</assignToReference>
             <operator>Add</operator>
@@ -26,9 +26,9 @@
     </assignments>
     <assignments>
         <name>Adding_Value_to_Resource_Counter</name>
-        <label>Adding Value to Resource Counter</label>
-        <locationX>1227</locationX>
-        <locationY>176</locationY>
+        <label>Increase crew counter</label>
+        <locationX>666</locationX>
+        <locationY>638</locationY>
         <assignmentItems>
             <assignToReference>ResourceCounter</assignToReference>
             <operator>Add</operator>
@@ -50,8 +50,8 @@
     <decisions>
         <name>Check_Type</name>
         <label>Check Type</label>
-        <locationX>841</locationX>
-        <locationY>338</locationY>
+        <locationX>666</locationX>
+        <locationY>518</locationY>
         <defaultConnector>
             <targetReference>Count_Related_Resources</targetReference>
         </defaultConnector>
@@ -90,8 +90,8 @@
     <decisions>
         <name>How_to_Update</name>
         <label>How to Update</label>
-        <locationX>381</locationX>
-        <locationY>413</locationY>
+        <locationX>314</locationX>
+        <locationY>950</locationY>
         <defaultConnector>
             <targetReference>Set_Assign_Service_Resource_To_Be_Blank</targetReference>
         </defaultConnector>
@@ -134,14 +134,16 @@
             <label>Only One Service Resource</label>
         </rules>
     </decisions>
+    <description>This flow populates the Field Service Starter Kit&apos;s custom Assigned Service Resource field with the ID of the assigned resource.
+This flow template is part of the Field Service Starter Kit Package and is triggered by a Field Service Starter Kit process</description>
     <interviewLabel>FSK Set Assign Resource On Service Appointment {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>FSK Set Assign Service Resource On Service Appointment</label>
+    <label>FSSK Populate Custom Assigned Service Resource Lookup</label>
     <loops>
         <name>Count_Related_Resources</name>
-        <label>Count Related Resources</label>
-        <locationX>654</locationX>
-        <locationY>66</locationY>
+        <label>Count Assigned Resources</label>
+        <locationX>314</locationX>
+        <locationY>278</locationY>
         <collectionReference>Get_All_Service_Resources_Related_Service_Appointment</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -158,6 +160,12 @@
         </value>
     </processMetadataValues>
     <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
         <name>OriginBuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
@@ -166,9 +174,9 @@
     <processType>AutoLaunchedFlow</processType>
     <recordLookups>
         <name>Get_All_Service_Resources_Related_Service_Appointment</name>
-        <label>Get All Service Resources Related Service Appointment</label>
-        <locationX>525</locationX>
-        <locationY>68</locationY>
+        <label>Get All Assigned Resources</label>
+        <locationX>314</locationX>
+        <locationY>158</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Count_Related_Resources</targetReference>
@@ -190,8 +198,8 @@
     <recordLookups>
         <name>Get_Assigned_Resources_Types</name>
         <label>Get Assigned Resources Types</label>
-        <locationX>821</locationX>
-        <locationY>155</locationY>
+        <locationX>666</locationX>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Check_Type</targetReference>
@@ -213,8 +221,8 @@
     <recordUpdates>
         <name>Set_Assign_Service_Resource_To_Be_Blank</name>
         <label>Set Assign Service Resource To Be Blank</label>
-        <locationX>207</locationX>
-        <locationY>660</locationY>
+        <locationX>578</locationX>
+        <locationY>1070</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -226,7 +234,7 @@
         <inputAssignments>
             <field>FSSK__FSK_Assigned_Service_Resource__c</field>
             <value>
-                <stringValue/>
+                <stringValue></stringValue>
             </value>
         </inputAssignments>
         <object>ServiceAppointment</object>
@@ -234,8 +242,8 @@
     <recordUpdates>
         <name>Set_Crew_on_Service_Appointment</name>
         <label>Set Crew on Service Appointment</label>
-        <locationX>800</locationX>
-        <locationY>526</locationY>
+        <locationX>50</locationX>
+        <locationY>1070</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -255,8 +263,8 @@
     <recordUpdates>
         <name>Set_Resource_On_Service_Appointment</name>
         <label>Set Resource On Service Appointment</label>
-        <locationX>400</locationX>
-        <locationY>711</locationY>
+        <locationX>314</locationX>
+        <locationY>1070</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -274,8 +282,8 @@
         <object>ServiceAppointment</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_All_Service_Resources_Related_Service_Appointment</targetReference>
         </connector>

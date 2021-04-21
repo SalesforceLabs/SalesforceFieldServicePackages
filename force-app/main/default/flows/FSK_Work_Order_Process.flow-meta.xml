@@ -19,6 +19,7 @@
         <locationY>200</locationY>
         <actionName>FSSK__FSK_Update_Work_Order_Child_Records</actionName>
         <actionType>flow</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <processMetadataValues>
                 <name>dataType</name>
@@ -47,7 +48,7 @@
             <processMetadataValues>
                 <name>objectType</name>
                 <value>
-                    <stringValue/>
+                    <stringValue></stringValue>
                 </value>
             </processMetadataValues>
             <processMetadataValues>
@@ -88,10 +89,10 @@
             <connector>
                 <targetReference>myRule_1_A1</targetReference>
             </connector>
-            <label>Check chanes</label>
+            <label>Check changes</label>
         </rules>
     </decisions>
-    <description>This Process Builder is part of FSL Starter Kit. It uses a listener to changes on the parent record</description>
+    <description>This Process Template is part of the Field Service Starter Kit package</description>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
@@ -109,9 +110,9 @@
 (ISCHANGED({!myVariable_current.AccountId})
 || ISCHANGED({!myVariable_current.WorkTypeId}))</expression>
     </formulas>
-    <interviewLabel>FSK_Work_Order_Process-2_InterviewLabel</interviewLabel>
+    <interviewLabel>FSK_Work_Order_Process-3_InterviewLabel</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>FSK Work Order Process</label>
+    <label>FSSK Work Order Process</label>
     <processMetadataValues>
         <name>ObjectType</name>
         <value>
