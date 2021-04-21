@@ -132,7 +132,7 @@
     </formulas>
     <interviewLabel>Cancelation_Canned_Notification {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Cancellation Notification</label>
+    <label>FSSK Cancellation Notification</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

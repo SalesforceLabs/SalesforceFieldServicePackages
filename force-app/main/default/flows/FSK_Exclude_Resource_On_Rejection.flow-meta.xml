@@ -193,7 +193,7 @@
     <description>The flow creates a resource preference record of type Excluded for the assigned resource in the event of a service appointment rejection. The flow unschedules the Service Appointment and deletes the assigned resource record by setting the Service Appointment Status to None. This flow template is part of the Field Service Starter Kit Package and is triggered by a Field Service Starter Kit process.</description>
     <interviewLabel>Exclude Resource On Rejection {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Exclude Resource On Rejection</label>
+    <label>FSSK Exclude Resource On Rejection</label>
     <loops>
         <name>Prepare_to_Exclude_Assigned_Resources</name>
         <label>Prepare to Exclude Assigned Resources</label>

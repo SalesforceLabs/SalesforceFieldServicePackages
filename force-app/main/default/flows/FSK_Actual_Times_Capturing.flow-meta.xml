@@ -143,7 +143,7 @@
     <interviewLabel>This flow is part of FSL Starter Kit.
 This flow sets the actual start and actual end time according to custom setting object &apos;Actual Times Capturing&apos;</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Update Actual Time Fields</label>
+    <label>FSSK Update Actual Time Fields</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

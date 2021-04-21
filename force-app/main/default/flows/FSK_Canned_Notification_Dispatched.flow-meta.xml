@@ -172,7 +172,7 @@ This flow template is part of the Field Service Starter Kit Package and is trigg
     </formulas>
     <interviewLabel>Canned Notification {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Dispatch Notifications</label>
+    <label>FSSK Dispatch Notifications</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

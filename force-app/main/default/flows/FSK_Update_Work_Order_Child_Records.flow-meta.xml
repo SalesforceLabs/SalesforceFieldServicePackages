@@ -160,7 +160,8 @@
             <label>Both Blank</label>
         </rules>
     </decisions>
-    <description>This flow is part of the FSL Starter Kit. Used to set catch changes on the Parent Work Order and update all related Service Appointments.</description>
+    <description>When a parent work order&apos;s Account or Work Type changes, the Service Appointment Gantt Label field automatically updates to reflect the new values.
+This flow template is part of the Field Service Starter Kit Package and is triggered by a Field Service Starter Kit process.</description>
     <formulas>
         <name>LabelConcatenation</name>
         <dataType>String</dataType>
@@ -170,7 +171,7 @@ LEFT({!AccountName} + &apos; - &apos; + {!WorkTypeName},255))</expression>
     </formulas>
     <interviewLabel>Work Order Process {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Update Work Order Child Records</label>
+    <label>FSSK Update Gantt Label when Work Order is updated</label>
     <loops>
         <name>Set_New_Gantt_Label</name>
         <label>Set New Gantt Label</label>
@@ -186,6 +187,12 @@ LEFT({!AccountName} + &apos; - &apos; + {!WorkTypeName},255))</expression>
         <name>BuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>

@@ -122,7 +122,8 @@
             <label>Both Blank</label>
         </rules>
     </decisions>
-    <description>This flow is part of FSL Starter Kit managed package and use to concatenate fields on the &apos;Gantt Label&apos; field. In order to change the field that the process uses and/or the concatenation structure, clone the flow and edit the variable (resource) &apos;Concatenation&apos;.</description>
+    <description>With this flow, the Gantt Label field is automatically populated with the customer name and work type.
+This flow template is part of the Field Service Starter Kit Package and it is triggered by a Field Service Starter Kit process.</description>
     <formulas>
         <name>Concatenation</name>
         <dataType>String</dataType>
@@ -131,7 +132,7 @@
     </formulas>
     <interviewLabel>Set Gantt Label Concatenation {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Set Gantt Label Concatenation</label>
+    <label>FSSK Automatically set the Gantt Label field</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

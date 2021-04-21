@@ -83,7 +83,7 @@
     </formulas>
     <interviewLabel>Reflect Actual Times on Gantt {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Update Scheduled Time Fields</label>
+    <label>FSSK Update Scheduled Time Fields</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

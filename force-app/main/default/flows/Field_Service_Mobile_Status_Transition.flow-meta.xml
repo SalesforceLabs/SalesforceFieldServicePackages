@@ -308,7 +308,7 @@
 The feature uses two fields from the Starter Kit Package to store the time when the job began and the time when the technician completed the job. These fields are the Mobile Start Time and Mobile End Time.</description>
     <interviewLabel>Field Service Mobile Status Transition {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Field Service Mobile Status Transition</label>
+    <label>FSSK Field Service Mobile Status Transition</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

@@ -102,7 +102,7 @@
     </formulas>
     <interviewLabel>Add Asset to Maintenance Plan {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Add Asset to Maintenance Plan</label>
+    <label>FSSK Add Asset to Maintenance Plan</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

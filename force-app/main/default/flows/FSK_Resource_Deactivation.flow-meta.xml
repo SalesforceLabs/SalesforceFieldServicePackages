@@ -78,7 +78,7 @@
 This Record-Triggered Flow template is part of the Field Service Starter Kit Package.</description>
     <interviewLabel>FSK Resource Deactivation {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Resource Deactivation</label>
+    <label>FSSK Resource Deactivation</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
