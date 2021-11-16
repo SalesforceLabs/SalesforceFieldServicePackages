@@ -9,7 +9,6 @@ sfdx force:package:version:create -p 0Ho4W00000000FJSAY --installationkeybypass 
 
 # Example:
 # New package version is created:
-# dev@0.2.0-21
+# Salesforce Field Service Starter Kit@4.0.1-2
 
-# Installation link:https://login.salesforce.com/packaging/installPackage.apexp?p0=04t69000001hVY7AAM
-# Password: 12345
+# Installation link:https://login.salesforce.com/packaging/installPackage.apexp?p0=04t4W0000038V0UQAU
