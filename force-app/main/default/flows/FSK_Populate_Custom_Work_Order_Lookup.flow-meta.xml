@@ -1,6 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>49.0</apiVersion>
+    <assignments>
+        <name>Set_WO_Lookup</name>
+        <label>Set WO Lookup</label>
+        <locationX>352</locationX>
+        <locationY>326</locationY>
+        <assignmentItems>
+            <assignToReference>SA_to_Update.FSK_Work_Order__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ParentId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SA_to_Update.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Populate_The_Lookup</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_WOLI_Lookup</name>
+        <label>Set WOLI Lookup</label>
+        <locationX>616</locationX>
+        <locationY>326</locationY>
+        <assignmentItems>
+            <assignToReference>SA_to_Update.FSK_Work_Order_Line_Item__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ParentId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SA_to_Update.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>RecordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Populate_The_Lookup</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Check_Parent_Type</name>
+        <label>Check Parent Type</label>
+        <locationX>616</locationX>
+        <locationY>206</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>The_Parent_is_WO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Parent_is_WO</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_WO_Lookup</targetReference>
+            </connector>
+            <label>The Parent is WO</label>
+        </rules>
+        <rules>
+            <name>The_Parent_is_WOLI</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Parent_is_WO</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_WOLI_Lookup</targetReference>
+            </connector>
+            <label>The Parent is WOLI</label>
+        </rules>
+    </decisions>
     <description>This flow populates the Field Service Starter Kit&apos;s custom Work Order field with the appointment parent ID.
 This flow template is part of the Field Service Starter Kit Package and is triggered by a Field Service Starter Kit process.</description>
     <interviewLabel>Populate Custom Work Order Lookup {!$Flow.CurrentDateTime}</interviewLabel>
@@ -25,59 +108,38 @@ This flow template is part of the Field Service Starter Kit Package and is trigg
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
-    <recordLookups>
-        <name>Get_Service_Appointment</name>
-        <label>Get Service Appointment</label>
-        <locationX>390</locationX>
-        <locationY>58</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Populate_Work_Order</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>RecordId</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>ServiceAppointment</object>
-        <queriedFields>Id</queriedFields>
-        <queriedFields>ParentRecordId</queriedFields>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
     <recordUpdates>
-        <description>Set the parent Work Order value as the value of the package custom lookup</description>
-        <name>Populate_Work_Order</name>
-        <label>Populate Work Order</label>
-        <locationX>542</locationX>
-        <locationY>58</locationY>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>RecordId</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>FSK_Work_Order__c</field>
-            <value>
-                <elementReference>Get_Service_Appointment.ParentRecordId</elementReference>
-            </value>
-        </inputAssignments>
-        <object>ServiceAppointment</object>
+        <name>Populate_The_Lookup</name>
+        <label>Populate The Lookup</label>
+        <locationX>616</locationX>
+        <locationY>542</locationY>
+        <inputReference>SA_to_Update</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>490</locationX>
+        <locationY>48</locationY>
         <connector>
-            <targetReference>Get_Service_Appointment</targetReference>
+            <targetReference>Check_Parent_Type</targetReference>
         </connector>
     </start>
     <status>Active</status>
+    <variables>
+        <name>Parent_is_WO</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>true</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <name>ParentId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <description>This variable stores the service appointment ID</description>
         <name>RecordId</name>
@@ -85,5 +147,13 @@ This flow template is part of the Field Service Starter Kit Package and is trigg
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>SA_to_Update</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>ServiceAppointment</objectType>
     </variables>
 </Flow>
