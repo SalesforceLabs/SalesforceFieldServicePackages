@@ -4,6 +4,7 @@ public with sharing class FSK_TimeZoneAction {
         TimeZoneActionInput input = inputList[0];
         TimeZoneActionOutput output = new TimeZoneActionOutput();
         output.dateOutput = getDate(input.dt, input.timeZone);
+        output.timeOutput = getTime(input.dt, input.timeZone);
         output.dateString = input.dt.format(input.dateFormat, input.timeZone);
         output.timeString = input.dt.format(input.timeFormat, input.timeZone);
 
@@ -15,6 +16,11 @@ public with sharing class FSK_TimeZoneAction {
     private static Date getDate(Datetime dt, String timeZoneName) {
         Datetime newDt = convertTZtoGMT(dt, timeZoneName);
         return newDt.dateGmt();
+    }
+
+    public static Time getTime(Datetime dt, String timeZoneName) {
+        Datetime newDt = convertTZtoGMT(dt, timeZoneName);
+        return newDt.timeGmt();
     }
 
     private static Datetime convertTZtoGMT(Datetime dt, String timeZoneName) {
@@ -51,6 +57,9 @@ public with sharing class FSK_TimeZoneAction {
     public class TimeZoneActionOutput {
         @InvocableVariable(label='Date' required=true)
         public Date dateOutput;
+
+        @InvocableVariable(label='Time' required=true)
+        public Time timeOutput;
 
         @InvocableVariable(label='Date String' required=true)
         public String dateString;
