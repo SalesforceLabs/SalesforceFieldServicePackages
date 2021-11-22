@@ -1,15 +1,16 @@
 public with sharing class FSK_TimeZoneAction {
     @InvocableMethod(label='Convert Time Zone' description='Converts a Datetime according to the given time zone' category='Account')
     public static List<TimeZoneActionOutput> convertTimeZone(List<TimeZoneActionInput> inputList) {
-        TimeZoneActionInput input = inputList[0];
-        TimeZoneActionOutput output = new TimeZoneActionOutput();
-        output.dateOutput = getDate(input.dt, input.timeZone);
-        output.timeOutput = getTime(input.dt, input.timeZone);
-        output.dateString = input.dt.format(input.dateFormat, input.timeZone);
-        output.timeString = input.dt.format(input.timeFormat, input.timeZone);
-
         List<TimeZoneActionOutput> outputList = new List<TimeZoneActionOutput>();
-        outputList.add(output);
+        for(TimeZoneActionInput input : inputList) {
+            TimeZoneActionOutput output = new TimeZoneActionOutput();
+            output.dateOutput = getDate(input.dt, input.timeZone);
+            output.timeOutput = getTime(input.dt, input.timeZone);
+            output.dateString = input.dt.format(input.dateFormat, input.timeZone);
+            output.timeString = input.dt.format(input.timeFormat, input.timeZone);
+
+            outputList.add(output);
+        }
         return outputList;
     }
 
