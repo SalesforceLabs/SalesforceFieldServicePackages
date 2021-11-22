@@ -4,21 +4,23 @@
             "path": "force-app",
             "default": true,
             "package": "Salesforce Field Service Starter Kit",
-            "versionName": "SFS Starter Kit V1.10",
-            "versionNumber":"3.4.0.NEXT",
-            "ancestorVersion": "3.3.0.0",
+            "versionName": "SFS Starter Kit V2",
+            "versionNumber": "4.0.1.NEXT",
+            "ancestorVersion": "4.0.0.0",
             "dependencies": [
-              {
-                 "subscriberPackageVersionId" : "04t3y000001yoTW"
-               }
+                {
+                    "subscriberPackageVersionId": "04t3y000001yoTW"
+                }
             ]
         }
-      ],
+    ],
     "namespace": "FSSK",
     "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "50.0",
+    "sourceApiVersion": "52.0",
     "packageAliases": {
         "Salesforce Field Service Starter Kit": "0Ho4W00000000FJSAY",
-        "Salesforce Field Service Starter Kit@1.0.0-2": "04t4W000002fR46QAE"
+        "Salesforce Field Service Starter Kit@1.0.0-2": "04t4W000002fR46QAE",
+        "Salesforce Field Service Starter Kit@4.0.1-1": "04t4W0000038V0PQAU",
+        "Salesforce Field Service Starter Kit@4.0.1-2": "04t4W0000038V0UQAU"
     }
 }

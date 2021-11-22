@@ -17,19 +17,11 @@
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
-    "communitiesSettings": {
-      "enableNetworksEnabled": true
+    "mobileSettings": {
+      "enableS1EncryptedStoragePref2": false
     },
     "fieldServiceSettings": {
       "fieldServiceOrgPref": true
-    },
-    "securitySettings": {
-      "passwordPolicies": {
-        "enableSetPasswordInApi": true
-      }
-    },
-    "mobileSettings": {
-      "enableS1EncryptedStoragePref2": false
     }
   }
 }

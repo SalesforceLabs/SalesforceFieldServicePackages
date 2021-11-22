@@ -2,13 +2,13 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>FSK_User_Type_Is_Not_Standard</fullName>
     <active>true</active>
-    <description>Prevent selecting Standard User option for user type Community</description>
+    <description>A Field Service Starter Kit package validation rule.
+The validation rules prevent the admin from selecting the Contractor Dispatcher (Community Dispatcher) value if the user record is not of a community type.</description>
     <errorConditionFormula>AND($Setup.FSK_FSL_Starter_Kit__c.Create_FSL_Resource_From_User__c,
 NOT(TEXT(Profile.UserType) = &apos;Standard&apos;),
 LEN(TEXT(FSK_FSL_Resource_Type__c)) &gt; 1,
 NOT(CONTAINS(TEXT(FSK_FSL_Resource_Type__c), &apos;Community&apos;))
 )</errorConditionFormula>
     <errorDisplayField>FSK_FSL_Resource_Type__c</errorDisplayField>
-    <errorMessage>You need a Standard User In Order to create FSL User (either Resource or Technician)
-Please select a Community User or choose another value</errorMessage>
+    <errorMessage>FSSK Package: This SFS Resource Type value should only be used for users with a Salesforce user license</errorMessage>
 </ValidationRule>

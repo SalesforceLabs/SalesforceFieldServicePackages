@@ -19,6 +19,7 @@
         <locationY>200</locationY>
         <actionName>FSSK__FSK_Set_Assign_Service_Resource_On_Service_Appointment</actionName>
         <actionType>flow</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <processMetadataValues>
                 <name>dataType</name>
@@ -47,7 +48,7 @@
             <processMetadataValues>
                 <name>objectType</name>
                 <value>
-                    <stringValue/>
+                    <stringValue></stringValue>
                 </value>
             </processMetadataValues>
             <processMetadataValues>
@@ -62,6 +63,7 @@
             </value>
         </inputParameters>
     </actionCalls>
+    <apiVersion>49.0</apiVersion>
     <decisions>
         <processMetadataValues>
             <name>index</name>
@@ -87,15 +89,15 @@
             <connector>
                 <targetReference>myRule_1_A1</targetReference>
             </connector>
-            <label>Should Set Assign Resource</label>
+            <label>Should Set Assigned Resource</label>
         </rules>
     </decisions>
-    <description>This Process Builder is part of FSL Starter Kit. It&apos;s Sets The Assign Resource on Service Appointment Custom Lookup</description>
+    <description>This Process Template is part of the Field Service Starter Kit package</description>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>$Setup.FSK_FSL_Starter_Kit__c.Assign_Resource_On_Service_Appointment__c
+                <stringValue>$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Assign_Resource_On_Service_Appointment__c
 &amp;&amp;
 (ISPICKVAL([AssignedResource].ServiceAppointment.StatusCategory, &apos;Scheduled&apos;)
 
@@ -104,14 +106,15 @@
         </processMetadataValues>
         <name>formula_myRule_1</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Assign_Resource_On_Service_Appointment__c}
+        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Assign_Resource_On_Service_Appointment__c}
 &amp;&amp;
 (ISPICKVAL({!myVariable_current.ServiceAppointment.StatusCategory}, &apos;Scheduled&apos;)
 
 || ISPICKVAL({!myVariable_current.ServiceAppointment.StatusCategory}, &apos;Dispatched&apos;))</expression>
     </formulas>
     <interviewLabel>FSK_Set_Assign_Resource_On_Service_Appointment-2_InterviewLabel</interviewLabel>
-    <label>FSK Set Assign Resource On Service Appointment</label>
+    <isTemplate>true</isTemplate>
+    <label>FSSK Assigned Resource Process</label>
     <processMetadataValues>
         <name>ObjectType</name>
         <value>

@@ -2,15 +2,11 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>FSK_User_Type_Is_Not_Community</fullName>
     <active>true</active>
-    <description>Preventing selection for community user type for standard user</description>
+    <description>A Field Service Starter Kit validation rule:
+The validation rule ensures that the admin can only select the Contractor Dispatcher (Community Dispatcher) value if the user record is of community type.</description>
     <errorConditionFormula>AND($Setup.FSK_FSL_Starter_Kit__c.Create_FSL_Resource_From_User__c,
-OR(
-TEXT(Profile.UserType) = &apos;CspLitePortal&apos;,
-TEXT(Profile.UserType) = &apos;PowerPartner&apos;,
-TEXT(Profile.UserType) = &apos;CustomerSuccess&apos;,
-TEXT(Profile.UserType) = &apos;PowerCustomerSuccess&apos;),
+ISBLANK(ContactId),
 ISPICKVAL(FSK_FSL_Resource_Type__c, &apos;Community&apos;))</errorConditionFormula>
     <errorDisplayField>FSK_FSL_Resource_Type__c</errorDisplayField>
-    <errorMessage>You need a Community User In Order to create Community Dispatcher.
-Please select a Community User or choose another value</errorMessage>
+    <errorMessage>FSSK Package: This SFS Resource Type value should only be used for community user records</errorMessage>
 </ValidationRule>

@@ -2,7 +2,8 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>FSK_User_Creation_Feature_Inactive</fullName>
     <active>true</active>
-    <description>Preventing value change if the feature inactive.</description>
+    <description>A Field Service Starter Kit package validation rule:
+The validation rule prevents the insertion of new records if the SFS Resource Type field is filled out but the Field Service users automation feature is not turned on.</description>
     <errorConditionFormula>IF(AND(NOT($Setup.FSK_FSL_Starter_Kit__c.Create_FSL_Resource_From_User__c),
 			ISNEW(),
 			OR(TEXT(FSK_FSL_Resource_Type__c) == NULL,
@@ -14,6 +15,5 @@
 	   false)
 )</errorConditionFormula>
     <errorDisplayField>FSK_FSL_Resource_Type__c</errorDisplayField>
-    <errorMessage>You cannot change the field value.
-The Feature is inactive, please activate the feature via custom settings or &apos;FSK Properties Selection&apos; screen flow</errorMessage>
+    <errorMessage>FSSK Package: SFS Resource Type should only be used when the Field Service users automation feature in the Field Service Starter Kit Package is activated</errorMessage>
 </ValidationRule>

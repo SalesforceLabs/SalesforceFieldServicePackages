@@ -1,0 +1,10 @@
+<aura:component
+  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable" access="global">
+  <lightning:workspaceAPI aura:id="workspace" />
+  <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+  <div>
+    <c:settingsMain/>
+  </div>
+
+</aura:component>
