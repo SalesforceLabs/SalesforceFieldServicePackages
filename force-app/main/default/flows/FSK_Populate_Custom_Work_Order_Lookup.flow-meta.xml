@@ -4,8 +4,8 @@
     <assignments>
         <name>Set_WO_Lookup</name>
         <label>Set WO Lookup</label>
-        <locationX>352</locationX>
-        <locationY>326</locationY>
+        <locationX>292</locationX>
+        <locationY>396</locationY>
         <assignmentItems>
             <assignToReference>SA_to_Update.FSK_Work_Order__c</assignToReference>
             <operator>Assign</operator>
@@ -27,8 +27,8 @@
     <assignments>
         <name>Set_WOLI_Lookup</name>
         <label>Set WOLI Lookup</label>
-        <locationX>616</locationX>
-        <locationY>326</locationY>
+        <locationX>625</locationX>
+        <locationY>402</locationY>
         <assignmentItems>
             <assignToReference>SA_to_Update.FSK_Work_Order_Line_Item__c</assignToReference>
             <operator>Assign</operator>
@@ -63,6 +63,13 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>Should_Populate_WO</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Set_WO_Lookup</targetReference>
             </connector>
@@ -76,6 +83,13 @@
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Should_Populate_WOLI</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -112,7 +126,7 @@ This flow template is part of the Field Service Starter Kit Package and is trigg
         <name>Populate_The_Lookup</name>
         <label>Populate The Lookup</label>
         <locationX>616</locationX>
-        <locationY>542</locationY>
+        <locationY>671</locationY>
         <inputReference>SA_to_Update</inputReference>
     </recordUpdates>
     <start>
@@ -155,5 +169,19 @@ This flow template is part of the Field Service Starter Kit Package and is trigg
         <isInput>true</isInput>
         <isOutput>true</isOutput>
         <objectType>ServiceAppointment</objectType>
+    </variables>
+    <variables>
+        <name>Should_Populate_WO</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Should_Populate_WOLI</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
     </variables>
 </Flow>
