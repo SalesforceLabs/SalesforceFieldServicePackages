@@ -104,9 +104,6 @@
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
-        <value>
-            <elementReference>NOW</elementReference>
-        </value>
     </variables>
     <variables>
         <name>TEXT_Converted_Date</name>
