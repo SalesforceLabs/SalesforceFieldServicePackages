@@ -246,6 +246,18 @@
             <targetReference>Convert_Scheduled_End_Time</targetReference>
         </connector>
         <flowName>Convert_Date_Time_Flow</flowName>
+        <inputAssignments>
+            <name>Date_Time_to_Convert</name>
+            <value>
+                <elementReference>$Record.SchedStartTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>TimeZone</name>
+            <value>
+                <elementReference>Get_Operating_Hours.TimeZone</elementReference>
+            </value>
+        </inputAssignments>
         <outputAssignments>
             <assignToReference>DATE_Converted_Scheduled_Start_Date</assignToReference>
             <name>DATE_Converted_Date</name>
