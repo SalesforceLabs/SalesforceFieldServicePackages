@@ -29,7 +29,7 @@
         <inputParameters>
             <name>timeZone</name>
             <value>
-                <elementReference>Date_Time_to_Convert</elementReference>
+                <elementReference>TimeZone</elementReference>
             </value>
         </inputParameters>
         <outputParameters>
