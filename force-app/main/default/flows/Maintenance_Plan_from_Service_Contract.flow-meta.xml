@@ -463,6 +463,13 @@
                 <booleanValue>false</booleanValue>
             </value>
         </filters>
+        <filters>
+            <field>AssetId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
         <object>ContractLineItem</object>
         <outputAssignments>
             <assignToReference>VAR_Service_Contract_Line_Item_Ids</assignToReference>
@@ -722,6 +729,20 @@
                 <elementReference>recordId</elementReference>
             </value>
         </filters>
+        <filters>
+            <field>AssetId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Part_of_Maintenance_Plan__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
         <object>ContractLineItem</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -773,8 +794,8 @@
     <recordLookups>
         <name>Get_Service_Contract</name>
         <label>Get Service Contract</label>
-        <locationX>1126</locationX>
-        <locationY>665</locationY>
+        <locationX>1127</locationX>
+        <locationY>666</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Main_Screen</targetReference>
@@ -820,14 +841,14 @@
     <screens>
         <name>Line_Items_Not_Exists</name>
         <label>Line Items Not Exists</label>
-        <locationX>1448</locationX>
-        <locationY>379</locationY>
+        <locationX>1471</locationX>
+        <locationY>457</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>Line_Items_Not_Exists_Text_Message</name>
-            <fieldText>&lt;p&gt;It seems like there are no contract line items related to this contract record.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;It seems like there are no contract line items related to this contract record, or none of the related contract line items assign with an asset, or the contract line items are part of a maintenance plan.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
