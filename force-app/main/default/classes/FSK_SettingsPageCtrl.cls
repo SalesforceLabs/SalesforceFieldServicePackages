@@ -31,6 +31,11 @@ public with sharing class FSK_SettingsPageCtrl {
         skObj.cancelationNotification  = sk.Cancelation_Notification__c;
 
         //Third section General
+        skObj.cancelChildSaOnWoCancellation = sk.Cancel_Child_SA_on_WO_Cancelation__c; 
+        skObj.serviceAppointmentParentStructure = sk.Service_Appointment_Parent_Structure__c; 
+        skObj.showTimesInDifferentTimezone = sk.Show_Scheduled_Times_in_Different_TZ__c; 
+        skObj.populateWoliLookup = sk.Populate_Work_Order_Line_Item_Lookup__c; 
+
         skObj.daysUntilFirstMain  = sk.Days_Until_First_Maintenance__c;
         skObj.successfulAssetInstallation = sk.Successful_Asset_Installation_Status__c;
 
@@ -83,6 +88,10 @@ public with sharing class FSK_SettingsPageCtrl {
             skToSave.Mobile_Status_Satiation__c =  skWrapperObj.mobileStatusSatiation;
             skToSave.Successful_Asset_Installation_Status__c =  skWrapperObj.successfulAssetInstallation;
 
+            skToSave.Cancel_Child_SA_on_WO_Cancelation__c = skWrapperObj.cancelChildSaOnWoCancellation;
+            skToSave.Service_Appointment_Parent_Structure__c = skWrapperObj.serviceAppointmentParentStructure;
+            skToSave.Show_Scheduled_Times_in_Different_TZ__c = skWrapperObj.showTimesInDifferentTimezone;
+            skToSave.Populate_Work_Order_Line_Item_Lookup__c = skWrapperObj.populateWoliLookup;
             skToSave.Add_Asset_to_Maintenance_Plan__c =  skWrapperObj.addAssetToMaintenancePlan;
             skToSave.Create_FSL_Resource_From_User__c =  skWrapperObj.createFSLResourceFromUser;
             skToSave.Excluded_SR_on_SA_Rejection__c =  skWrapperObj.excludedSROnSARejection;

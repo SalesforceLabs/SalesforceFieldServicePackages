@@ -218,6 +218,87 @@
                 <div  class="slds-col slds-size_2-of-3 slds-p-left_x-large">
                     <div class="slds-p-horizontal_x-large">
                         <div class="cLine">
+
+                            <div class="slds-p-around_small featureSettingRowStyle">
+                                <div class="leftCLineGeneral">
+                                    <lightning-input  
+                                        checked={cancelChildSaOnWoCancellation}
+                                        class="cb"
+                                        type="checkbox" 
+                                        label="Delete Service Appointments on Work Order cancellation"
+                                        onchange={onChangeCancelChildSaOnWoCancellation}>
+                                    </lightning-input>
+                                </div>
+                                <div class="lgc-bg">
+                                        <lightning-helptext 
+                                        content="TBD">
+                                        </lightning-helptext>                                    
+                                </div>
+                            </div>
+
+                            <fieldset class="slds-form-element slds-form_horizontal slds-p-right_small">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__row slds-p-left_large featureSettingRowStyle">
+                                        <div class="leftCLine slds-form-element">
+                                            <label class="slds-form-element__label">Select completion / installation status:</label>
+                                            <div class="slds-form-element__control slds-size_4-of-5">
+                                                <lightning-combobox
+                                                    name="progress"
+                                                    label=""
+                                                    disabled={isServiceAppointmentParentStructureDisabled}
+                                                    value={serviceAppointmentParentStructure}
+                                                    placeholder="Select Service Appointment structure"
+                                                    options={serviceAppointmentParentStructureOptions}
+                                                    onchange={onChangeServiceAppointmentParentStructrue}
+                                                    variant="label-hidden">
+                                                </lightning-combobox>
+                                            </div>
+                                        </div>
+                                        <div style={rightCLine} class="lgc-bg">
+                                            <lightning-helptext
+                                            content="TBD">
+                                            </lightning-helptext>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div  class="slds-p-around_small cLineStyle ">
+            
+                                <div class="leftCLine">
+        
+                                    <lightning-input   checked={showTimesInDifferentTimezone}
+                                                        class="cb"
+                                                        type="checkbox" 
+                                                        label="Show scheduled times in customer time zone"
+                                                        onchange={onChangeShowTimesInDifferentTimezone}>
+                                    </lightning-input>
+                                </div>
+                                <div style={rightCLine} class="lgc-bg">
+                                    <lightning-helptext
+                                    content="TBD">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+
+                            <div  class="slds-p-around_small cLineStyle ">
+            
+                                <div class="leftCLine">
+        
+                                    <lightning-input   checked={populateWoliLookup}
+                                                        class="cb"
+                                                        type="checkbox" 
+                                                        label="Set custom Work Order Line Item lookup field to the Serivce Appointment's Parent ID"
+                                                        onchange={onChangePopulateWoliLookup}>
+                                    </lightning-input>
+                                </div>
+                                <div style={rightCLine} class="lgc-bg">
+                                    <lightning-helptext
+                                    content="TBD">
+                                    </lightning-helptext>
+                                </div>
+                            </div>
+
                             <div class="slds-p-around_small featureSettingRowStyle">
                                 <div class="leftCLineGeneral">
                                     <lightning-input  
