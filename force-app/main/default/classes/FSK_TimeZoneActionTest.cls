@@ -43,9 +43,6 @@ public with sharing class FSK_TimeZoneActionTest {
 
             System.assertEquals('01/10/2021', output.dateString);
             System.assertEquals('12:00:00', output.timeString);
-
-            System.assertNotEquals(null, output.dateString);
-            System.assertNotEquals(null, output.timeString);
         }
     }
 
@@ -81,9 +78,6 @@ public with sharing class FSK_TimeZoneActionTest {
 
             System.assertEquals('02/10/2021', output.dateString);
             System.assertEquals('01:00:00', output.timeString);
-
-            System.assertNotEquals(null, output.dateString);
-            System.assertNotEquals(null, output.timeString);
         }
     }
 }
