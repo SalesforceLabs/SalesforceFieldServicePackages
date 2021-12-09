@@ -45,6 +45,11 @@ export default class SettingsMain extends LightningElement {
     @track cbx_nm_Dis_3;
 
     //General
+    @track cancelChildSaOnWoCancellation = false;
+    @track serviceAppointmentParentStructure = '';
+    @track showTimesInDifferentTimezone = false;
+    @track populateWoliLookup = false;
+
     @track num_of_h_g;
     @track num_of_d_inp_Dis;
 
@@ -161,6 +166,10 @@ export default class SettingsMain extends LightningElement {
         this.fl_cb_mn_3 = this.sk_cs_settings.cancelationNotification;
 
         //General 
+        this.cancelChildSaOnWoCancellation = this.sk_cs_settings.cancelChildSaOnWoCancellation;
+        this.serviceAppointmentParentStructure = this.sk_cs_settings.serviceAppointmentParentStructure;
+        this.showTimesInDifferentTimezone = this.sk_cs_settings.showTimesInDifferentTimezone;
+        this.populateWoliLookup = this.sk_cs_settings.populateWoliLookup;
         this.num_of_days_g = this.sk_cs_settings.daysUntilFirstMain;
         this.cb_g__1 = this.sk_cs_settings.addAssetToMaintenancePlan;
         this.cb_g__2 = this.sk_cs_settings.createFSLResourceFromUser;
@@ -193,6 +202,10 @@ export default class SettingsMain extends LightningElement {
         this.sk_cs_settings_2.daysUntilFirstMain = this.num_of_days_g;
         this.sk_cs_settings_2.successfulAssetInstallation = this.g_status_selected;
 
+        this.sk_cs_settings_2.cancelChildSaOnWoCancellation = this.cancelChildSaOnWoCancellation;
+        this.sk_cs_settings_2.serviceAppointmentParentStructure = this.serviceAppointmentParentStructure;
+        this.sk_cs_settings_2.showTimesInDifferentTimezone = this.showTimesInDifferentTimezone;
+        this.sk_cs_settings_2.populateWoliLookup = this.populateWoliLookup;
         this.sk_cs_settings_2.addAssetToMaintenancePlan = this.cb_g__1;
         this.sk_cs_settings_2.createFSLResourceFromUser = this.cb_g__2;
         this.sk_cs_settings_2.excludedSROnSARejection = this.cb_g__3;
@@ -279,6 +292,44 @@ export default class SettingsMain extends LightningElement {
     }
 
     //General
+
+    onChangeCancelChildSaOnWoCancellation() {
+        this.cancelChildSaOnWoCancellation = !this.cancelChildSaOnWoCancellation;
+    }
+
+    get serviceAppointmentParentStructureOptions() {
+        return [
+            {
+                value: "WO",
+                label: "Service Appointment Child of Work Order"
+            },
+            {
+                value: "WOLI",
+                label: "Service Appointment Child of Work Order Line Item"
+            },
+            {
+                value: "Both",
+                label: "Service Appointment Child of Both WO and WOLI"
+            },
+        ];
+    }
+
+    get isServiceAppointmentParentStructureDisabled() {
+        return !this.cancelChildSaOnWoCancellation;
+    }
+
+    onChangeServiceAppointmentParentStructrue(event) {
+        this.serviceAppointmentParentStructure = event.detail.value;
+    }
+
+    onChangeShowTimesInDifferentTimezone() {
+        this.showTimesInDifferentTimezone = !this.showTimesInDifferentTimezone;
+    }
+
+    onChangePopulateWoliLookup() {
+        this.populateWoliLookup = !this.populateWoliLookup;
+    }
+
     onG1ChecboxChange(){
         this.cb_g__1 = !this.cb_g__1;
         if(this.cb_g__1 == true ){

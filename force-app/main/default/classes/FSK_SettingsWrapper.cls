@@ -22,6 +22,10 @@ public with sharing class FSK_SettingsWrapper {
     @AuraEnabled public Decimal daysUntilFirstMain {get;set;}
     @AuraEnabled public String successfulAssetInstallation {get;set;}
 
+    @AuraEnabled public boolean cancelChildSaOnWoCancellation {get;set;}
+    @AuraEnabled public String serviceAppointmentParentStructure {get;set;}
+    @AuraEnabled public boolean showTimesInDifferentTimezone {get;set;}
+    @AuraEnabled public boolean populateWoliLookup {get;set;}
     @AuraEnabled public boolean addAssetToMaintenancePlan {get;set;}
     @AuraEnabled public boolean createFSLResourceFromUser {get;set;}
     @AuraEnabled public boolean excludedSROnSARejection {get;set;}
@@ -51,6 +55,11 @@ public with sharing class FSK_SettingsWrapper {
         this.daysUntilFirstMain= 0;
         this.successfulAssetInstallation = '';
 
+
+        this.cancelChildSaOnWoCancellation = false;
+        this.serviceAppointmentParentStructure = '';
+        this.showTimesInDifferentTimezone = false;
+        this.populateWoliLookup = false;
         this.addAssetToMaintenancePlan = false;
         this.createFSLResourceFromUser = false;
         this.excludedSROnSARejection = false;
