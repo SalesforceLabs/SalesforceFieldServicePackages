@@ -5,7 +5,7 @@
             "default": true,
             "package": "Salesforce Field Service Starter Kit",
             "versionName": "SFS Starter Kit V2",
-            "versionNumber": "4.0.1.NEXT",
+            "versionNumber": "4.2.0.NEXT",
             "ancestorVersion": "4.0.0.0",
             "dependencies": [
                 {
@@ -23,6 +23,8 @@
         "Salesforce Field Service Starter Kit@4.0.1-1": "04t4W0000038V0PQAU",
         "Salesforce Field Service Starter Kit@4.0.1-2": "04t4W0000038V0UQAU",
         "Salesforce Field Service Starter Kit@4.0.1-3": "04t4W0000038VAeQAM",
-        "Salesforce Field Service Starter Kit@4.0.1-4": "04t4W0000038VB8QAM"
+        "Salesforce Field Service Starter Kit@4.0.1-4": "04t4W0000038VB8QAM",
+        "Salesforce Field Service Starter Kit@4.1.0-3": "04t4W0000038VS4QAM",
+        "Salesforce Field Service Starter Kit@4.2.0-1": "04t4W0000038VY7QAM"
     }
 }
