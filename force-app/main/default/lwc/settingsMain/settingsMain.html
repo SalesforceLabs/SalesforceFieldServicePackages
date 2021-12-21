@@ -215,89 +215,130 @@
                         <b>General Flows</b>
                     </h2>
                 </div>
-                <div  class="slds-col slds-size_2-of-3 slds-p-left_x-large">
+                <div class="slds-col slds-size_2-of-3 slds-p-left_x-large">
                     <div class="slds-p-horizontal_x-large">
+                        <div  class="slds-p-around_small  cLineStyle">
+            
+                            <div class="leftCLine">
+                                <lightning-input   checked={cb_g__5}
+                                                    class="cb"
+                                                    type="checkbox"
+                                                    label="Set a custom Work Order field to the Serivce Appointment's Parent ID"
+                                                    onchange={onG5ChecboxChange}>
+                                </lightning-input>
+                            </div>
+                            <div style={rightCLine} class="lgc-bg">
+                                <lightning-helptext
+                                content="Sets a custom Work Order lookup field to the parent ID if the parent is a work order.">
+                            </lightning-helptext>
+                            </div>
+                        </div>
+
+                        <div  class="slds-p-around_small cLineStyle ">
+            
+                            <div class="leftCLine">
+    
+                                <lightning-input   checked={populateWoliLookup}
+                                                    class="cb"
+                                                    type="checkbox" 
+                                                    label="Set a custom Work Order Line Item field to the service appointment's parent ID"
+                                                    onchange={onChangePopulateWoliLookup}>
+                                </lightning-input>
+                            </div>
+                            <div style={rightCLine} class="lgc-bg">
+                                <lightning-helptext
+                                content="Sets a custom Work Order Line Item lookup field to the parent ID if the parent is a work order line item.">
+                                </lightning-helptext>
+                            </div>
+                        </div>
+
+                        <div  class="slds-p-around_small  cLineStyle">
+            
+                            <div class="leftCLine">
+                                <lightning-input   checked={cb_g__4}
+                                                    class="cb"
+                                                    type="checkbox" 
+                                                    label="Populate the custom Service Resource Lookup field on the Service Appointment Record"
+                                                    onchange={onG4ChecboxChange}>
+                                </lightning-input>
+                            </div>
+                            <div style={rightCLine} class="lgc-bg">
+                                <lightning-helptext
+                                content="This flow copies the Service Resource ID from the Assigned Resources related list to a new lookup field on the Service Appointment object.">
+                            </lightning-helptext>
+                            </div>
+                        </div>
+
+                        <div  class="slds-p-around_small  cLineStyle">
+            
+                            <div class="leftCLine">
+                                <lightning-input   checked={cb_g__6}
+                                                    class="cb"
+                                                    type="checkbox"
+                                                    label="Automatically set the Gantt Label field"
+                                                    onchange={onG6ChecboxChange}>
+                                </lightning-input>
+                            </div>
+                            <div style={rightCLine} class="lgc-bg">
+                                <lightning-helptext 
+                                content="Auto Set Gantt Label value by concatenation of the Account and Work Type fields. You can change the concatenation string and change the Gantt Label text via the Flow definition in the Salesforce Setup menu.">
+                            </lightning-helptext>
+                            </div>
+                        </div>
+
+                        <div  class="slds-p-around_small cLineStyle ">
+            
+                            <div class="leftCLine">
+    
+                                <lightning-input   checked={showTimesInDifferentTimezone}
+                                                    class="cb"
+                                                    type="checkbox" 
+                                                    label="Calculate the Scheduled in Local Time field"
+                                                    onchange={onChangeShowTimesInDifferentTimezone}>
+                                </lightning-input>
+                            </div>
+                            <div style={rightCLine} class="lgc-bg">
+                                <lightning-helptext
+                                content="Sets a new custom text field's value to the scheduled start and schedule end times of a service appointment in the local time zone. Local time is calculated using the service territory's time zone.">
+                                </lightning-helptext>
+                            </div>
+                        </div>
+
+                        <div  class="slds-p-around_small cLineStyle ">
+            
+                            <div class="leftCLine">
+
+                                <lightning-input   checked={cb_g__2}
+                                                    class="cb"
+                                                    type="checkbox" 
+                                                    label="Field Service users automation"
+                                                    onchange={onG2ChecboxChange}>
+                                </lightning-input>
+                            </div>
+                            <div style={rightCLine} class="lgc-bg">
+                                <lightning-helptext
+                                content="Automatically assign relevant permissions to the user based on their Field Service role and automatically create a service resource record as needed">
+                                </lightning-helptext>
+                            </div>
+                        </div>
+
+                        <div  class="slds-p-around_small  cLineStyle">
+                            <div class="leftCLine">
+                                <lightning-input   checked={cb_g__7}
+                                                    class="cb"
+                                                    type="checkbox"
+                                                    label="Service Resource deactivation automation"
+                                                    onchange={onG7ChecboxChange}>
+                                </lightning-input>
+                            </div>
+                            <div style={rightCLine} class="lgc-bg">
+                                <lightning-helptext 
+                                content="This flow removes all Field Service permission set licenses and all relevant permission sets from the associated user record upon Service Resource deactivation.">
+                            </lightning-helptext>
+                            </div>
+                        </div>
+
                         <div class="cLine">
-
-                            <div class="slds-p-around_small featureSettingRowStyle">
-                                <div class="leftCLineGeneral">
-                                    <lightning-input  
-                                        checked={cancelChildSaOnWoCancellation}
-                                        class="cb"
-                                        type="checkbox" 
-                                        label="Delete Service Appointments on Work Order cancellation"
-                                        onchange={onChangeCancelChildSaOnWoCancellation}>
-                                    </lightning-input>
-                                </div>
-                                <div class="lgc-bg">
-                                        <lightning-helptext 
-                                        content="TBD">
-                                        </lightning-helptext>                                    
-                                </div>
-                            </div>
-
-                            <fieldset class="slds-form-element slds-form_horizontal slds-p-right_small">
-                                <div class="slds-form-element__control">
-                                    <div class="slds-form-element__row slds-p-left_large featureSettingRowStyle">
-                                        <div class="leftCLine slds-form-element">
-                                            <label class="slds-form-element__label">Select which Service Appointment to cancel</label>
-                                            <div class="slds-form-element__control slds-size_4-of-5">
-                                                <lightning-combobox
-                                                    name="progress"
-                                                    label=""
-                                                    disabled={isServiceAppointmentParentStructureDisabled}
-                                                    value={serviceAppointmentParentStructure}
-                                                    placeholder="Select Service Appointment structure"
-                                                    options={serviceAppointmentParentStructureOptions}
-                                                    onchange={onChangeServiceAppointmentParentStructrue}
-                                                    variant="label-hidden">
-                                                </lightning-combobox>
-                                            </div>
-                                        </div>
-                                        <div style={rightCLine} class="lgc-bg">
-                                            <lightning-helptext
-                                            content="TBD">
-                                            </lightning-helptext>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <div  class="slds-p-around_small cLineStyle ">
-            
-                                <div class="leftCLine">
-        
-                                    <lightning-input   checked={showTimesInDifferentTimezone}
-                                                        class="cb"
-                                                        type="checkbox" 
-                                                        label="Show scheduled times in customer time zone"
-                                                        onchange={onChangeShowTimesInDifferentTimezone}>
-                                    </lightning-input>
-                                </div>
-                                <div style={rightCLine} class="lgc-bg">
-                                    <lightning-helptext
-                                    content="TBD">
-                                    </lightning-helptext>
-                                </div>
-                            </div>
-
-                            <div  class="slds-p-around_small cLineStyle ">
-            
-                                <div class="leftCLine">
-        
-                                    <lightning-input   checked={populateWoliLookup}
-                                                        class="cb"
-                                                        type="checkbox" 
-                                                        label="Set custom Work Order Line Item lookup field to the Serivce Appointment's Parent ID"
-                                                        onchange={onChangePopulateWoliLookup}>
-                                    </lightning-input>
-                                </div>
-                                <div style={rightCLine} class="lgc-bg">
-                                    <lightning-helptext
-                                    content="TBD">
-                                    </lightning-helptext>
-                                </div>
-                            </div>
 
                             <div class="slds-p-around_small featureSettingRowStyle">
                                 <div class="leftCLineGeneral">
@@ -365,24 +406,55 @@
                                 </div>
                             </fieldset>
                         </div>
-        
-                        <div  class="slds-p-around_small cLineStyle ">
-            
-                            <div class="leftCLine">
 
-                                <lightning-input   checked={cb_g__2}
-                                                    class="cb"
-                                                    type="checkbox" 
-                                                    label="Field Service users automation"
-                                                    onchange={onG2ChecboxChange}>
-                                </lightning-input>
+                        <div class="cLine">
+
+                            <div class="slds-p-around_small featureSettingRowStyle">
+                                <div class="leftCLineGeneral">
+                                    <lightning-input  
+                                        checked={cancelChildSaOnWoCancellation}
+                                        class="cb"
+                                        type="checkbox" 
+                                        label="Cancel Service Appointments when Work Order is canceled"
+                                        onchange={onChangeCancelChildSaOnWoCancellation}>
+                                    </lightning-input>
+                                </div>
+                                <div class="lgc-bg">
+                                        <lightning-helptext 
+                                        content="Sets the status of all child service appointments to Canceled if the parent Work Order status is set to Canceled. Select if the flow looks for service appointments only under the Work Order or also under its children Work Order Line Items.">
+                                        </lightning-helptext>                                    
+                                </div>
                             </div>
-                            <div style={rightCLine} class="lgc-bg">
-                                <lightning-helptext
-                                content="Automatically assign relevant permissions to the user based on their Field Service role and automatically create a service resource record as needed">
-                                </lightning-helptext>
+
+                            <fieldset class="slds-form-element slds-form_horizontal slds-p-right_small">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__row slds-p-left_large featureSettingRowStyle">
+                                        <div class="leftCLine slds-form-element">
+                                            <label class="slds-form-element__label">Record used as the parent of the Service Appointment</label>
+                                            <div class="slds-form-element__control slds-size_4-of-5">
+                                                <lightning-combobox
+                                                    name="progress"
+                                                    label=""
+                                                    disabled={isServiceAppointmentParentStructureDisabled}
+                                                    value={serviceAppointmentParentStructure}
+                                                    placeholder="Where to find Service Appointments"
+                                                    options={serviceAppointmentParentStructureOptions}
+                                                    onchange={onChangeServiceAppointmentParentStructrue}
+                                                    variant="label-hidden">
+                                                </lightning-combobox>
+                                            </div>
+                                        </div>
+                                        <div style={rightCLine} class="lgc-bg">
+                                            <lightning-helptext
+                                            content="Controls the logic of the flow and the way it queries records. For improved efficiency, set the flow to only look for Service Appointemnts under a Work Order.">
+                                            </lightning-helptext>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
                             </div>
-                        </div>
+                            
+        
                         <div  class="slds-p-around_small cLineStyle" >
             
                             <div class="leftCLine">
@@ -399,69 +471,7 @@
                             </lightning-helptext>
                             </div>
                         </div>
-                        <div  class="slds-p-around_small  cLineStyle">
-            
-                            <div class="leftCLine">
-                                <lightning-input   checked={cb_g__4}
-                                                    class="cb"
-                                                    type="checkbox" 
-                                                    label="Populate the custom Service Resource Lookup field on the Service Appointment Record"
-                                                    onchange={onG4ChecboxChange}>
-                                </lightning-input>
-                            </div>
-                            <div style={rightCLine} class="lgc-bg">
-                                <lightning-helptext
-                                content="This flow copies the Service Resource ID from the Assigned Resources related list to a new lookup field on the Service Appointment object.">
-                            </lightning-helptext>
-                            </div>
-                        </div>
-                        <div  class="slds-p-around_small  cLineStyle">
-            
-                            <div class="leftCLine">
-                                <lightning-input   checked={cb_g__5}
-                                                    class="cb"
-                                                    type="checkbox"
-                                                    label="Set a custom Work Order lookup field to the Service Appointment's Parent ID"
-                                                    onchange={onG5ChecboxChange}>
-                                </lightning-input>
-                            </div>
-                            <div style={rightCLine} class="lgc-bg">
-                                <lightning-helptext
-                                content="This flow populates a custom Work Order lookup field with the parent ID if the parent is a Work Order.">
-                            </lightning-helptext>
-                            </div>
-                        </div>
-                        <div  class="slds-p-around_small  cLineStyle">
-            
-                            <div class="leftCLine">
-                                <lightning-input   checked={cb_g__6}
-                                                    class="cb"
-                                                    type="checkbox"
-                                                    label="Automatically set the Gantt Label field"
-                                                    onchange={onG6ChecboxChange}>
-                                </lightning-input>
-                            </div>
-                            <div style={rightCLine} class="lgc-bg">
-                                <lightning-helptext 
-                                content="Auto Set Gantt Label value by concatenation of the Account and Work Type fields. You can change the concatenation string and change the Gantt Label text via the Flow definition in the Salesforce Setup menu.">
-                            </lightning-helptext>
-                            </div>
-                        </div>
-                        <div  class="slds-p-around_small  cLineStyle">
-                            <div class="leftCLine">
-                                <lightning-input   checked={cb_g__7}
-                                                    class="cb"
-                                                    type="checkbox"
-                                                    label="Service Resource deactivation automation"
-                                                    onchange={onG7ChecboxChange}>
-                                </lightning-input>
-                            </div>
-                            <div style={rightCLine} class="lgc-bg">
-                                <lightning-helptext 
-                                content="This flow removes all Field Service permission set licenses and all relevant permission sets from the associated user record upon Service Resource deactivation.">
-                            </lightning-helptext>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="slds-p-horizontal_medium"  style={rightCardStyle}>
                     </div>

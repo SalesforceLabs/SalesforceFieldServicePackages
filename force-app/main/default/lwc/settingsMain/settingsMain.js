@@ -301,15 +301,15 @@ export default class SettingsMain extends LightningElement {
         return [
             {
                 value: "WO",
-                label: "Service Appointment Child of Work Order"
+                label: "Parent is always a Work Order"
             },
             {
                 value: "WOLI",
-                label: "Service Appointment Child of Work Order Line Item"
+                label: "Parent is always a Work Order Line Item"
             },
             {
                 value: "Both",
-                label: "Service Appointment Child of Both WO and WOLI"
+                label: "Parent is either a Work Order or a Work Order Line Item"
             },
         ];
     }
