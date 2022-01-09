@@ -309,7 +309,7 @@
     </assignments>
     <choices>
         <name>ch_All_Contract_Line_Items</name>
-        <choiceText>Add all contact line items to a maintenance plan</choiceText>
+        <choiceText>Add all contract line items</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>all</stringValue>
@@ -333,7 +333,7 @@
     </choices>
     <choices>
         <name>ch_Select_Specific_Contract_Line_Items</name>
-        <choiceText>Select specific contract line items</choiceText>
+        <choiceText>Select contract line item to add</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>specific</stringValue>
@@ -832,7 +832,7 @@
         <allowPause>false</allowPause>
         <fields>
             <name>Error_Message</name>
-            <fieldText>&lt;p&gt;Oops... Looks like something wend wrong&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Oops, something went wrong.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -840,7 +840,7 @@
     </screens>
     <screens>
         <name>Line_Items_Not_Exists</name>
-        <label>Line Items Not Exists</label>
+        <label>No line items to add</label>
         <locationX>1464</locationX>
         <locationY>497</locationY>
         <allowBack>true</allowBack>
@@ -848,7 +848,7 @@
         <allowPause>true</allowPause>
         <fields>
             <name>Line_Items_Not_Exists_Text_Message</name>
-            <fieldText>&lt;p&gt;It seems like there are no contract line items related to this contract record, or none of the related contract line items assign with an asset, or the contract line items are part of a maintenance plan.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;There are no service contract line items that meet your selection. Either there are no line items associated with an asset or these line items are already part of an existing maintenance plan.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -871,7 +871,7 @@
             <choiceReferences>ch_Existing_MP</choiceReferences>
             <dataType>String</dataType>
             <defaultSelectedChoiceReference>ch_Create_New_MP</defaultSelectedChoiceReference>
-            <fieldText>Which Maintenance Plan</fieldText>
+            <fieldText>Maintenance Plan</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
         </fields>
@@ -923,7 +923,7 @@
             <choiceReferences>ch_Select_Specific_Contract_Line_Items</choiceReferences>
             <dataType>String</dataType>
             <defaultSelectedChoiceReference>ch_All_Contract_Line_Items</defaultSelectedChoiceReference>
-            <fieldText>Line Items to Add</fieldText>
+            <fieldText>Line Items</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
         </fields>
@@ -950,7 +950,7 @@
     </screens>
     <screens>
         <name>Maintenance_Plan_Attributes</name>
-        <label>Maintenance Plan Attributes</label>
+        <label>Create New Maintenance Plan</label>
         <locationX>867</locationX>
         <locationY>1056</locationY>
         <allowBack>true</allowBack>
@@ -961,7 +961,7 @@
         </connector>
         <fields>
             <name>Description_Title</name>
-            <fieldText>&lt;h3&gt;&lt;span style=&quot;background-color: rgb(243, 242, 242); font-size: 16px; color: rgb(62, 62, 60);&quot;&gt;Description&lt;/span&gt;&lt;/h3&gt;</fieldText>
+            <fieldText>&lt;h3&gt;&lt;span style=&quot;color: rgb(62, 62, 60); font-size: 16px; background-color: rgb(243, 242, 242);&quot;&gt;New Maintenance Plan&lt;/span&gt;&lt;/h3&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1130,6 +1130,7 @@
                     </defaultValue>
                     <fieldText>Work Order Generation Method</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <helpText>&lt;p&gt;Specify how work orders are generated when more than one asset is associated with the maintenance plan.&lt;/p&gt;</helpText>
                     <isRequired>false</isRequired>
                 </fields>
                 <fields>
@@ -1140,6 +1141,7 @@
                     </defaultValue>
                     <fieldText>Frequency</fieldText>
                     <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;The unit of frequency for the time between the plan’s works orders.&lt;/p&gt;</helpText>
                     <isRequired>true</isRequired>
                     <scale>0</scale>
                 </fields>
@@ -1152,6 +1154,7 @@
                     </defaultValue>
                     <fieldText>Frequency Type</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <helpText>&lt;p&gt;The number of days before the work order’s suggested service date in which the service appointment can be scheduled.&lt;/p&gt;</helpText>
                     <isRequired>true</isRequired>
                 </fields>
                 <fields>
@@ -1159,6 +1162,7 @@
                     <dataType>Number</dataType>
                     <fieldText>Maintenance Window Start (Days)</fieldText>
                     <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;The number of days before the work order’s suggested service date in which the service appointment can be scheduled.&lt;/p&gt;</helpText>
                     <isRequired>false</isRequired>
                     <scale>0</scale>
                 </fields>
@@ -1167,6 +1171,7 @@
                     <dataType>Number</dataType>
                     <fieldText>Maintenance Window End (Days)</fieldText>
                     <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;The number of days after the work order’s suggested service date in which the service appointment can be scheduled.&lt;/p&gt;</helpText>
                     <isRequired>false</isRequired>
                     <scale>0</scale>
                 </fields>
@@ -1187,6 +1192,7 @@
                     <dataType>String</dataType>
                     <fieldText>Service Appointment Generation Method</fieldText>
                     <fieldType>DropdownBox</fieldType>
+                    <helpText>&lt;p&gt;Specify how service appointments are generated when more than one asset is associated with the maintenance plan and work order generation method is One work order line item per asset.&lt;/p&gt;</helpText>
                     <isRequired>false</isRequired>
                 </fields>
                 <fields>
@@ -1197,6 +1203,7 @@
                     </defaultValue>
                     <fieldText>Generation Timeframe</fieldText>
                     <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;The time in advance that work orders are generated in each batch. The unit is specified in Generation Timeframe Type.&lt;/p&gt;</helpText>
                     <isRequired>true</isRequired>
                     <scale>0</scale>
                 </fields>
@@ -1219,6 +1226,7 @@
                     </defaultValue>
                     <fieldText>Date of the first work order in the next batch</fieldText>
                     <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;The suggested date of service for the work order in the next batch generated. The value is updated after each batch is generated.&lt;/p&gt;</helpText>
                     <isRequired>true</isRequired>
                 </fields>
                 <inputParameters>
@@ -1263,6 +1271,7 @@
                     <dataType>Boolean</dataType>
                     <fieldText>Auto-generate work orders</fieldText>
                     <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;Define whether work orders are generated automatically. This rule disables the ability to manually generate work orders.&lt;/p&gt;</helpText>
                     <isRequired>true</isRequired>
                 </fields>
                 <fields>
@@ -1270,6 +1279,7 @@
                     <dataType>Number</dataType>
                     <fieldText>Generation Horizon (Days)</fieldText>
                     <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;Set the number of days before the Date of the first work order in the next batch on which work order batches are generated.&lt;/p&gt;</helpText>
                     <isRequired>false</isRequired>
                     <scale>0</scale>
                 </fields>
@@ -1289,6 +1299,7 @@
                     <dataType>Boolean</dataType>
                     <fieldText>Generate new batch upon completion</fieldText>
                     <fieldType>InputField</fieldType>
+                    <helpText>&lt;p&gt;Specify whether to generate the new batch on completion of the last work order in the previous batch.&lt;/p&gt;</helpText>
                     <isRequired>true</isRequired>
                 </fields>
                 <inputParameters>
