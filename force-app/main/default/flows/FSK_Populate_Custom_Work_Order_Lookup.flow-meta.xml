@@ -98,11 +98,10 @@
             <label>The Parent is WOLI</label>
         </rules>
     </decisions>
-    <description>This flow populates the Field Service Starter Kit&apos;s custom Work Order field with the appointment parent ID.
-This flow template is part of the Field Service Starter Kit Package and is triggered by a Field Service Starter Kit process.</description>
+    <description>FSSK Set Custom Work Order and Work Order Line Item Lookups</description>
     <interviewLabel>Populate Custom Work Order Lookup {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>FSSK Populate Custom Work Order Lookup</label>
+    <label>FSSK Set Custom Work Order and Work Order Line Item Lookups</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

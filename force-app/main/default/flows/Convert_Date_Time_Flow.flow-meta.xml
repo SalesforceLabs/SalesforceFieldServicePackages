@@ -46,6 +46,7 @@
         </outputParameters>
     </actionCalls>
     <apiVersion>53.0</apiVersion>
+    <description>This is a *Field Service Starter Kit package flow. The Convert Scheduled Times To Territory Time Zone flow consumes this flow to support calculating the Scheduled in Local Time field.</description>
     <formulas>
         <name>NOW</name>
         <dataType>DateTime</dataType>
@@ -53,7 +54,7 @@
     </formulas>
     <interviewLabel>Convert Date Time Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Convert Date Time Flow</label>
+    <label>FSSK Convert a Date Time field to a specific time zone</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

@@ -3,7 +3,7 @@
     <fullName>Part_of_Maintenance_Plan__c</fullName>
     <defaultValue>false</defaultValue>
     <externalId>false</externalId>
-    <label>Part of Maintenance Plan</label>
+    <label>Is Part of Maintenance Plan</label>
     <trackHistory>false</trackHistory>
     <type>Checkbox</type>
 </CustomField>

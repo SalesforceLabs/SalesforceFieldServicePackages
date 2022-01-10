@@ -4,10 +4,9 @@
     <externalId>false</externalId>
     <formula>Asset.Product2.Name &amp;&quot; - &quot;&amp;Asset.Name</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <label>Line Item Details</label>
+    <label>Asset Details</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <type>Text</type>
     <unique>false</unique>
 </CustomField>
- 
