@@ -217,9 +217,10 @@
             <label>Should Support</label>
         </rules>
     </decisions>
+    <description>Sets the status of all child service appointments to Canceled if the parent Work Order status is set to Canceled. The flow looks for service appointments under the Work Order or also under its children Work Order Line Items. This flow template is part of the Field Service Starter Kit Package.</description>
     <interviewLabel>Cancel All Related Service Appointment on Work Order Cancellation {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Cancel All Related Service Appointment on Work Order Cancellation</label>
+    <label>FSSK Cancel Service Appointments when Work Order is canceled</label>
     <loops>
         <name>Change_All_Service_Appointment_Status_to_be_Cancelled</name>
         <label>Change All Service Appointment Status to be Cancelled</label>

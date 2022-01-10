@@ -444,6 +444,7 @@
             <label>Create Maintenance Plan</label>
         </rules>
     </decisions>
+    <description>Creates or updates a Maintenance Plan from a Service Contract by adding Service Contract Line Items as Asset Maintenance records to the Maintenace Plan. This flow template is part of the Field Service Starter Kit Package and is triggered by the Add Line Items to Maintenance Plan button on the service contract record.</description>
     <dynamicChoiceSets>
         <name>Ch_Service_Contract_Line_Items</name>
         <dataType>String</dataType>
@@ -523,7 +524,7 @@
     </formulas>
     <interviewLabel>Maintenance Plan from Service Contract {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
-    <label>Maintenance Plan from Service Contract</label>
+    <label>FSSK Add Service Contract Line Items to Maintenance Plan</label>
     <loops>
         <name>Set_All_Line_Items</name>
         <label>Set All Line Items</label>

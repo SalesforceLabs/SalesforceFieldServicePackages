@@ -105,7 +105,7 @@
         </processMetadataValues>
         <name>formula_myRule_1</name>
         <dataType>Boolean</dataType>
-        <expression>{!$Setup.FSSK__FSK_FSL_Starter_Kit__c.FSSK__Set_Gantt_Label__c}
+        <expression>{!$Setup.FSK_FSL_Starter_Kit__c.Set_Gantt_Label__c}
 &amp;&amp;
 (ISCHANGED({!myVariable_current.AccountId})
 || ISCHANGED({!myVariable_current.WorkTypeId}))</expression>
