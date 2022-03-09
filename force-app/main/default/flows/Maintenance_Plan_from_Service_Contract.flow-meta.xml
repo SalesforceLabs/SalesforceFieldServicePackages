@@ -206,20 +206,6 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>Temp_Maintenance_Plan_Record.Frequency</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>MP_Frequency</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>Temp_Maintenance_Plan_Record.FrequencyType</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>MP_Frequency_Type</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
             <assignToReference>Temp_Maintenance_Plan_Record.GenerationHorizon</assignToReference>
             <operator>Assign</operator>
             <value>
@@ -481,14 +467,6 @@
         <valueField>Id</valueField>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
-        <name>Frequency_Type_Picklist</name>
-        <dataType>Picklist</dataType>
-        <displayField xsi:nil="true"/>
-        <object xsi:nil="true"/>
-        <picklistField>FrequencyType</picklistField>
-        <picklistObject>MaintenancePlan</picklistObject>
-    </dynamicChoiceSets>
-    <dynamicChoiceSets>
         <name>Generation_Timeframe_Type_Picklist</name>
         <dataType>Picklist</dataType>
         <displayField xsi:nil="true"/>
@@ -628,18 +606,6 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Frequency</field>
-            <value>
-                <elementReference>Temp_Maintenance_Plan_Record.Frequency</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>FrequencyType</field>
-            <value>
-                <elementReference>Temp_Maintenance_Plan_Record.FrequencyType</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
             <field>GenerationHorizon</field>
             <value>
                 <elementReference>Temp_Maintenance_Plan_Record.GenerationHorizon</elementReference>
@@ -775,8 +741,6 @@
         <queriedFields>EndDate</queriedFields>
         <queriedFields>DoesAutoGenerateWorkOrders</queriedFields>
         <queriedFields>DoesGenerateUponCompletion</queriedFields>
-        <queriedFields>Frequency</queriedFields>
-        <queriedFields>FrequencyType</queriedFields>
         <queriedFields>GenerationHorizon</queriedFields>
         <queriedFields>GenerationTimeframeType</queriedFields>
         <queriedFields>GenerationTimeframe</queriedFields>
@@ -1133,30 +1097,6 @@
                     <fieldType>DropdownBox</fieldType>
                     <helpText>&lt;p&gt;Specify how work orders are generated when more than one asset is associated with the maintenance plan.&lt;/p&gt;</helpText>
                     <isRequired>false</isRequired>
-                </fields>
-                <fields>
-                    <name>MP_Frequency</name>
-                    <dataType>Number</dataType>
-                    <defaultValue>
-                        <numberValue>1.0</numberValue>
-                    </defaultValue>
-                    <fieldText>Frequency</fieldText>
-                    <fieldType>InputField</fieldType>
-                    <helpText>&lt;p&gt;The unit of frequency for the time between the plan’s works orders.&lt;/p&gt;</helpText>
-                    <isRequired>true</isRequired>
-                    <scale>0</scale>
-                </fields>
-                <fields>
-                    <name>MP_Frequency_Type</name>
-                    <choiceReferences>Frequency_Type_Picklist</choiceReferences>
-                    <dataType>String</dataType>
-                    <defaultValue>
-                        <stringValue>Months</stringValue>
-                    </defaultValue>
-                    <fieldText>Frequency Type</fieldText>
-                    <fieldType>DropdownBox</fieldType>
-                    <helpText>&lt;p&gt;The number of days before the work order’s suggested service date in which the service appointment can be scheduled.&lt;/p&gt;</helpText>
-                    <isRequired>true</isRequired>
                 </fields>
                 <fields>
                     <name>MP_Maintenance_Window_Start_Days</name>
