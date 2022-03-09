@@ -3,7 +3,7 @@
 echo " "
 echo "Creating a package version..."
 
-sfdx force:package:version:create -p 0Ho4W00000000FJSAY --installationkeybypass -v asperii@admin.fssk -f config/project-scratch-def.json --json -w 40 --skipvalidation
+sfdx force:package:version:create -p 0Ho4W00000000FJSAY --installationkeybypass -v asperii@admin.fssk -f config/project-scratch-def.json --json -w 40
 
 # sh scripts/bash/createPackageVersion.sh
 
