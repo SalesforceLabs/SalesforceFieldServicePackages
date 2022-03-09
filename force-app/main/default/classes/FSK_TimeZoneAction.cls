@@ -1,6 +1,6 @@
-public with sharing class FSK_TimeZoneAction {
+global with sharing class FSK_TimeZoneAction {
     @InvocableMethod(label='Convert Time Zone' description='Converts a Datetime according to the given time zone' category='Account')
-    public static List<TimeZoneActionOutput> convertTimeZone(List<TimeZoneActionInput> inputList) {
+    global static List<TimeZoneActionOutput> convertTimeZone(List<TimeZoneActionInput> inputList) {
         List<TimeZoneActionOutput> outputList = new List<TimeZoneActionOutput>();
         for(TimeZoneActionInput input : inputList) {
             TimeZoneActionOutput output = new TimeZoneActionOutput();
@@ -41,32 +41,32 @@ public with sharing class FSK_TimeZoneAction {
         return offsetInMinute;
     }
 
-    public class TimeZoneActionInput {
+    global class TimeZoneActionInput {
         @InvocableVariable(label='Datetime' required=true)
-        public Datetime dt;
+        global Datetime dt;
 
         @InvocableVariable(label='Time Zone' required=true)
-        public String timeZone;
+        global String timeZone;
 
         @InvocableVariable(label='Date Format' required=true)
-        public String dateFormat;
+        global String dateFormat;
 
         @InvocableVariable(label='Time Format' required=true)
-        public String timeFormat;
+        global String timeFormat;
     }
 
-    public class TimeZoneActionOutput {
+    global class TimeZoneActionOutput {
         @InvocableVariable(label='Date' required=true)
-        public Date dateOutput;
+        global Date dateOutput;
 
         @InvocableVariable(label='Time' required=true)
-        public Time timeOutput;
+        global Time timeOutput;
 
         @InvocableVariable(label='Date String' required=true)
-        public String dateString;
+        global String dateString;
 
         @InvocableVariable(label='Time String' required=true)
-        public String timeString;
+        global String timeString;
     }
 }
 
