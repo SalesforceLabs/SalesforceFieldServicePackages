@@ -3,6 +3,9 @@ echo " "
 echo "Creating scratch org..."
 sfdx force:org:create -s -a $1 -f config/project-scratch-def.json -d 30 -v $2
 echo " "
+echo "Installing FSL Spring 2022 236.0.47 package version..."
+sfdx force:package:install --package 04t3y000001Df7B -w 10 -s AllUsers -r
+echo " "
 echo "Pushing source to scratch org..."
 sfdx config:set restDeploy=false
 sfdx force:source:push
