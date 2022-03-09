@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
-    <activeVersionNumber>2</activeVersionNumber>
-    <description>Creates or updates a Maintenance Plan from a Service Contract by adding Service Contract Line Items as Asset Maintenance records to the Maintenace Plan. This flow template is part of the Field Service Starter Kit Package and is triggered by the Add Line Items to Maintenance Plan button on the service contract record.</description>
-    <masterLabel>FSSK Add Service Contract Line Items to Maintenance Plan</masterLabel>
-</FlowDefinition>

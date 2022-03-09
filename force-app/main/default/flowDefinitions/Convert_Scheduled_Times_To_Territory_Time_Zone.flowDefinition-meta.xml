@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
-    <activeVersionNumber>1</activeVersionNumber>
-    <description>Sets the Field Service Starter Kit&apos;s custom Scheduled in Local Time field to a text that includes the scheduled start and scheduled end of a service appointment in the local time zone. This flow template is part of the Field Service Starter Kit Package.</description>
-    <masterLabel>FSSK Calculate the Scheduled in Local Time field</masterLabel>
-</FlowDefinition>

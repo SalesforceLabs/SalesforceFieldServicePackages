@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
-    <activeVersionNumber>1</activeVersionNumber>
-    <description>This is a *Field Service Starter Kit package flow. The Convert Scheduled Times To Territory Time Zone flow consumes this flow to support calculating the Scheduled in Local Time field.</description>
-    <masterLabel>FSSK Convert a Date Time field to a specific time zone</masterLabel>
-</FlowDefinition>

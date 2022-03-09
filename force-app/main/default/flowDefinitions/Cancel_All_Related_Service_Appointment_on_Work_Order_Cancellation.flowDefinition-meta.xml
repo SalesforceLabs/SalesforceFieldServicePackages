@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
-    <activeVersionNumber>1</activeVersionNumber>
-    <description>Sets the status of all child service appointments to Canceled if the parent Work Order status is set to Canceled. The flow looks for service appointments under the Work Order or also under its children Work Order Line Items. This flow template is part of the Field Service Starter Kit Package.</description>
-    <masterLabel>FSSK Cancel Service Appointments when Work Order is canceled</masterLabel>
-</FlowDefinition>
