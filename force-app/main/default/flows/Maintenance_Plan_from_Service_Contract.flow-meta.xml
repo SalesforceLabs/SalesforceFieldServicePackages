@@ -435,7 +435,7 @@
         <name>Ch_Service_Contract_Line_Items</name>
         <dataType>String</dataType>
         <displayField>Line_Item_Details__c</displayField>
-        <filterLogic>1 AND (2 OR 3)</filterLogic>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>ServiceContractId</field>
             <operator>EqualTo</operator>
@@ -498,7 +498,7 @@
     <formulas>
         <name>USER_SELECT_ALL_LINE_ITEMS_OR_NOT</name>
         <dataType>Boolean</dataType>
-        <expression>IF({!Line_Items_to_Add} = &apos;all&apos;, true, false)</expression>
+        <expression>IF({!Line_Items_to_Add} = {!ch_All_Contract_Line_Items}, true, false)</expression>
     </formulas>
     <interviewLabel>Maintenance Plan from Service Contract {!$Flow.CurrentDateTime}</interviewLabel>
     <isTemplate>true</isTemplate>
@@ -688,7 +688,7 @@
         <connector>
             <targetReference>Check_if_there_are_Contract_Line_Items</targetReference>
         </connector>
-        <filterLogic>1 AND (2 OR 3)</filterLogic>
+        <filterLogic>and</filterLogic>
         <filters>
             <field>ServiceContractId</field>
             <operator>EqualTo</operator>
@@ -822,7 +822,7 @@
     <screens>
         <name>Main_Screen</name>
         <label>Main Screen</label>
-        <locationX>1125</locationX>
+        <locationX>1124</locationX>
         <locationY>812</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
