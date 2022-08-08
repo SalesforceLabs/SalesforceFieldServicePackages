@@ -11,4 +11,4 @@ sfdx force:package:version:create -p 0Ho4W00000000FJSAY --installationkeybypass 
 # New package version is created:
 # Salesforce Field Service Starter Kit@4.0.1-2
 
-# Installation link:https://login.salesforce.com/packaging/installPackage.apexp?p0=04t4W0000038V0UQAU
+# Installation link:https://login.salesforce.com/packaging/installPackage.apexp?p0=04t4W0000038Z3dQAE
